@@ -2,7 +2,7 @@ CC := cc
 CFLAGS := -Wall -Wextra -Werror -g -fsanitize=address
 
 MLX_LIB := -lglfw3
-MLXINCLUDE := -I ./MLX42/ -L ./MLX42
+MLXINCLUDE := -I ./MLX42/include -L ./MLX42
 AMLX := ./MLX42/libmlx42.a
 
 # MAC-specific linking
