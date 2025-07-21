@@ -6,11 +6,11 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:04:11 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/14 14:07:27 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/21 18:47:14 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/cub3d.h"
+#include "../include/cub3d.h"
 
 int	main(void)
 {
