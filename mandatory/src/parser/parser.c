@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.c                                            :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/14 14:04:11 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/21 19:16:23 by redadgh          ###   ########.fr       */
+/*   Created: 2025/07/21 19:16:35 by redadgh           #+#    #+#             */
+/*   Updated: 2025/07/21 19:17:34 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+// #include "../../include/cub3D.h"
 
-int	main(void)
+void	parser(void)
 {
-	printf("Hello World!\n");
-	return (EXIT_SUCCESS);
+	
 }
