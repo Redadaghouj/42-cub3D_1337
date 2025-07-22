@@ -1,23 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/14 14:04:34 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/22 04:23:41 by redadgh          ###   ########.fr       */
+/*   Created: 2025/07/21 18:54:37 by redadgh           #+#    #+#             */
+/*   Updated: 2025/07/22 04:22:59 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
-
-# include <stdio.h>
-# include "parsing.h"
-# include "rendering.h"
-
-# define EXIT_FAILURE 1
-# define EXIT_SUCCESS 0
+#ifndef PARSING_H
+# define PARSING_H
 
 #endif

@@ -20,15 +20,23 @@ MANDO_SRC := ${MANDO}/src
 MANDO_INC := ${MANDO}/include
 
 UTILS_PATH := ${MANDO_SRC}/utils
-PARSER_PATH := ${MANDO_SRC}/parser
+PARSING_PATH := ${MANDO_SRC}/parsing
+RENDERING_PATH := ${MANDO_SRC}/rendering
 
-# UTILS := ${UTILS_PATH}/ \
+UTILS := ${UTILS_PATH}/ft_strcmp.c \
 
-# PARSER := ${PARSER_PATH}/parser.c \
+PARSING := ${PARSING_PATH}/parsing.c \
+		   ${PARSING_PATH}/parsing_utils.c \
+
+RENDERING := ${RENDERING_PATH}/rendering.c \
+			 ${RENDERING_PATH}/rendering_utils.c \
+			 ${RENDERING_PATH}/raycasting.c \
 
 SRC := 	${UTILS} \
-		${PARSER} \
+		${PARSING} \
+		${RENDERING} \
 		${MANDO_SRC}/cub3D.c \
+		${MANDO_SRC}/cub3D_utils.c \
 
 OBJS := ${SRC:.c=.o}
 
