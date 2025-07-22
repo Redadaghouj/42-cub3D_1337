@@ -5,7 +5,7 @@ MLX_LIB := -lglfw3
 MLXINCLUDE := -I ./MLX42/include -L ./MLX42
 AMLX := ./MLX42/libmlx42.a
 
-# MAC-specific linking
+# MacOS-specific linking
 # MLX_FLAGS := -framework Cocoa -framework OpenGL -framework IOKit
 
 # Linux-specific linking
