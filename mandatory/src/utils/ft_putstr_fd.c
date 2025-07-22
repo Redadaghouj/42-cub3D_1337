@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/21 18:54:37 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/22 19:44:59 by redadgh          ###   ########.fr       */
+/*   Created: 2025/07/22 18:25:25 by redadgh           #+#    #+#             */
+/*   Updated: 2025/07/22 18:25:53 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "../../include/cub3D.h"
 
-# include <stdbool.h>
-
-# define ERR_BAD_EXTENSION "Error\nBad extension\n"
-
-/* PARSING */
-bool	validate_map(char *map_path);
-
-#endif
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (!s)
+		return ;
+	write(fd, s, ft_strlen(s));
+	s++;
+}

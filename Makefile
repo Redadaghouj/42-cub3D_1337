@@ -1,5 +1,5 @@
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS := -Wall -Wextra -Werror -fsanitize=address -g
 
 MLX_LIB := -lglfw3
 MLXINCLUDE := -I ./MLX42/include -L ./MLX42
@@ -24,6 +24,10 @@ PARSING_PATH := ${MANDO_SRC}/parsing
 RENDERING_PATH := ${MANDO_SRC}/rendering
 
 UTILS := ${UTILS_PATH}/ft_strcmp.c \
+		 ${UTILS_PATH}/ft_putstr_fd.c \
+		 ${UTILS_PATH}/ft_strlen.c \
+		 ${UTILS_PATH}/ft_strdup.c \
+		 ${UTILS_PATH}/gnl.c \
 
 PARSING := ${PARSING_PATH}/parsing.c \
 		   ${PARSING_PATH}/parsing_utils.c \
