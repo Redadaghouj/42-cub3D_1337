@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:28:47 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/23 21:29:41 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/23 21:47:21 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ unsigned int	is_id(char *line, int *i)
 
 bool	fill_id(unsigned int id_type, t_scene *scene, char *line)
 {
-	if (is_empty(line))
-		return (false);
-	else if (id_type == ID_NO && !scene->texture.north)
+	if (id_type == ID_NO && !scene->texture.north)
 		scene->texture.north = ft_strtrim(line);
 	else if (id_type == ID_SO && !scene->texture.south)
 		scene->texture.south = ft_strtrim(line);
