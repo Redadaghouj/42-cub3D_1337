@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.c                                            :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/14 14:04:11 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/23 19:38:54 by redadgh          ###   ########.fr       */
+/*   Created: 2025/07/23 17:23:36 by redadgh           #+#    #+#             */
+/*   Updated: 2025/07/23 17:24:31 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
 
-int	main(int argc, char *argv[])
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	t_scene	scene;
+	size_t	i;
 
-	if (argc != 2)
-		return (exit_with_error(ERR_USAGE));
-	else if (!validate_map(argv[1], &scene))
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	i = 0;
+	if (n == 0)
+		return (0);
+	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i] && i < n)
+	{
+		i++;
+	}
+	if (n == i)
+		return (0);
+	return ((unsigned char) s1[i] - (unsigned char) s2[i]);
 }

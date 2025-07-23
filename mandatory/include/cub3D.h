@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:04:34 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/23 02:57:10 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/23 19:22:43 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,9 @@ void	ft_putstr_fd(char *s, int fd);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strdup(const char *s);
 char	*gnl(int fd, int i);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char	*ft_substr(const char *s, unsigned int start, size_t len);
+char	*ft_strtrim(char *line);
+int		skip_leading_spaces(char *line); // UTILS -> ft_strtrim
 
 #endif

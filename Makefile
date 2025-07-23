@@ -24,13 +24,17 @@ PARSING_PATH := ${MANDO_SRC}/parsing
 RENDERING_PATH := ${MANDO_SRC}/rendering
 
 UTILS := ${UTILS_PATH}/ft_strcmp.c \
+		 ${UTILS_PATH}/ft_strncmp.c \
 		 ${UTILS_PATH}/ft_putstr_fd.c \
 		 ${UTILS_PATH}/ft_strlen.c \
 		 ${UTILS_PATH}/ft_strdup.c \
+		 ${UTILS_PATH}/ft_substr.c \
+		 ${UTILS_PATH}/ft_strtrim.c \
 		 ${UTILS_PATH}/gnl.c \
 
 PARSING := ${PARSING_PATH}/parsing.c \
 		   ${PARSING_PATH}/parsing_utils.c \
+		   ${PARSING_PATH}/identifiers_handling.c \
 
 RENDERING := ${RENDERING_PATH}/rendering.c \
 			 ${RENDERING_PATH}/rendering_utils.c \
