@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:04:34 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/22 19:57:49 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/23 02:57:10 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 
 # define EXIT_FAILURE 1
 # define EXIT_SUCCESS 0
-# define ERR_USAGE "Error\nUsage: ./cub3D ./path_to_the_map\n"
+# define ERR_USAGE "Error\nUsage: ./cub3D ./path_to_the_scene_file\n"
+
 
 /* UTILS */
 size_t	ft_strlen(const char *s);
