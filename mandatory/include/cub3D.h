@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:04:34 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/23 19:22:43 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/24 04:19:59 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # define EXIT_SUCCESS 0
 # define ERR_USAGE "Error\nUsage: ./cub3D ./path_to_the_scene_file\n"
 
-
 /* UTILS */
 size_t	ft_strlen(const char *s);
 void	ft_putstr_fd(char *s, int fd);
@@ -35,5 +34,9 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
 char	*ft_strtrim(char *line);
 int		skip_leading_spaces(char *line); // UTILS -> ft_strtrim
+char	**ft_split(char const *s, char c);
+void	*free_buffer(char **buffer); // UTILS -> ft_split
+int		ft_atoi(const char *nptr);
+int		ft_isdigit(int c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:16:35 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/23 21:31:42 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/24 03:30:17 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,6 @@ void	free_scene(t_scene *scene)
 		free(scene->texture.west);
 	if (scene->texture.east)
 		free(scene->texture.east);
-	if (scene->floor.value)
-		free(scene->floor.value);
-	if (scene->ceiling.value)
-		free(scene->ceiling.value);
 }
 
 bool	is_empty(char *line)

@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 18:54:37 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/23 21:33:28 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/24 04:21:19 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define TOTAL_IDS 6
 # define ERR_BAD_EXTENSION "Error\nBad extension\n"
 # define ERR_SCENE_PATH "Error\nInvalid or inaccessible scene file path\n"
-# define ERR_INVALID_ID "Error\nInvalid or unexpected identifier in scene file\n"
+# define ERR_INVALID_ID "Error\nInvalid identifier in scene\n"
 
 typedef struct s_texture
 {
@@ -31,10 +31,10 @@ typedef struct s_texture
 
 typedef struct s_color
 {
-	char	*value;
 	int		r;
 	int		g;
 	int		b;
+	int		is_set;
 }				t_color;
 
 typedef struct s_scene
@@ -68,5 +68,9 @@ char	*gnl_non_empty(int fd);
 
 /* IDENTIFIERS_HANDLING */
 bool	check_and_fill_ids(int fd, t_scene *scene, int *total_ids);
+
+/* RGB_HANDLING */
+bool	extract_rgb_color(t_scene *scene, char *line, unsigned int id_type);
+int		create_rgb(int r, int g, int b);
 
 #endif

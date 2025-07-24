@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/22 18:25:25 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/24 04:08:51 by redadgh          ###   ########.fr       */
+/*   Created: 2025/07/24 01:42:54 by redadgh           #+#    #+#             */
+/*   Updated: 2025/07/24 02:03:10 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3D.h"
-
-void	ft_putstr_fd(char *s, int fd)
+int	ft_atoi(const char *nptr)
 {
-	if (!s)
-		return ;
-	write(fd, s, ft_strlen(s));
-	s++;
+	int	i;
+	int	res;
+	int	prev_res;	
+
+	res = 0;
+	i = 0;
+	while (nptr[i] >= 48 && nptr[i] <= 57)
+	{
+		prev_res = res;
+		res = res * 10 + (nptr[i] - '0');
+		if (prev_res > res)
+			return (-1);
+		i++;
+	}
+	return (res);
 }

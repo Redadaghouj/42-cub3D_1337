@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/22 18:25:25 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/24 04:08:51 by redadgh          ###   ########.fr       */
+/*   Created: 2025/07/24 02:27:19 by redadgh           #+#    #+#             */
+/*   Updated: 2025/07/24 02:27:31 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3D.h"
-
-void	ft_putstr_fd(char *s, int fd)
+int	ft_isdigit(int c)
 {
-	if (!s)
-		return ;
-	write(fd, s, ft_strlen(s));
-	s++;
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }

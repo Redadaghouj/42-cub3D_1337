@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:16:35 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/23 21:34:09 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/24 04:05:21 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	print_ids(t_scene scene)
 	printf("SO = %s\n", scene.texture.south);
 	printf("WE = %s\n", scene.texture.west);
 	printf("EA = %s\n", scene.texture.east);
-	printf("F = %s\n", scene.floor.value);
-	printf("C = %s\n", scene.ceiling.value);
+	printf("F = %d,%d,%d\n", scene.floor.r, scene.floor.g, scene.floor.b);
+	printf("C = %d,%d,%d\n", scene.ceiling.r, scene.ceiling.g, scene.ceiling.b);
 }
 
 bool	check_extension(char *map_path)
@@ -40,8 +40,8 @@ int	init_scene(t_scene *scene)
 	scene->texture.south = NULL;
 	scene->texture.west = NULL;
 	scene->texture.east = NULL;
-	scene->floor.value = NULL;
-	scene->ceiling.value = NULL;
+	scene->floor.is_set = 0;
+	scene->ceiling.is_set = 0;
 	return (TOTAL_IDS);
 }
 
