@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 18:54:37 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/25 05:24:00 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/25 06:00:05 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 # include <fcntl.h>
 
 # define TOTAL_IDS 6
+# define ID_NORTH "NO "
+# define ID_SOUTH "SO "
+# define ID_WEST "WE "
+# define ID_EAST "EA "
+# define ID_FLOOR "F "
+# define ID_CEIL "C "
 # define ORIENTATIONS_CHARS "NSEW"
 # define TILE_CHARS "10 "
 # define ERR_BAD_EXTENSION "Error\nBad extension\n"

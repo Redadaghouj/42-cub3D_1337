@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:28:47 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/24 19:57:30 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/25 06:01:13 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@ unsigned int	bump_id(unsigned int id_type, int *i, int num)
 unsigned int	is_id(char *line, int *i)
 {
 	*i = skip_leading_spaces(line);
-	if (!ft_strncmp(line + *i, "NO ", 3))
-		return (bump_id(ID_NO, i, 3));
-	else if (!ft_strncmp(line + *i, "SO ", 3))
-		return (bump_id(ID_SO, i, 3));
-	else if (!ft_strncmp(line + *i, "WE ", 3))
-		return (bump_id(ID_WE, i, 3));
-	else if (!ft_strncmp(line + *i, "EA ", 3))
-		return (bump_id(ID_EA, i, 3));
-	else if (!ft_strncmp(line + *i, "F ", 2))
-		return (bump_id(ID_F, i, 2));
-	else if (!ft_strncmp(line + *i, "C ", 2))
-		return (bump_id(ID_C, i, 2));
+	if (!ft_strncmp(line + *i, ID_NORTH, ft_strlen(ID_NORTH)))
+		return (bump_id(ID_NO, i, ft_strlen(ID_NORTH)));
+	else if (!ft_strncmp(line + *i, ID_SOUTH, ft_strlen(ID_SOUTH)))
+		return (bump_id(ID_SO, i, ft_strlen(ID_SOUTH)));
+	else if (!ft_strncmp(line + *i, ID_WEST, ft_strlen(ID_WEST)))
+		return (bump_id(ID_WE, i, ft_strlen(ID_WEST)));
+	else if (!ft_strncmp(line + *i, ID_EAST, ft_strlen(ID_EAST)))
+		return (bump_id(ID_EA, i, ft_strlen(ID_EAST)));
+	else if (!ft_strncmp(line + *i, ID_FLOOR, ft_strlen(ID_FLOOR)))
+		return (bump_id(ID_F, i, ft_strlen(ID_FLOOR)));
+	else if (!ft_strncmp(line + *i, ID_CEIL, ft_strlen(ID_CEIL)))
+		return (bump_id(ID_C, i, ft_strlen(ID_CEIL)));
 	else
 		return (ID_INVALID);
 }
