@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:04:34 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/24 04:19:59 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/25 04:15:10 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ size_t	ft_strlen(const char *s);
 void	ft_putstr_fd(char *s, int fd);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strdup(const char *s);
-char	*gnl(int fd, int i);
+char	*get_next_line(int fd);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
 char	*ft_strtrim(char *line);
@@ -38,5 +38,6 @@ char	**ft_split(char const *s, char c);
 void	*free_buffer(char **buffer); // UTILS -> ft_split
 int		ft_atoi(const char *nptr);
 int		ft_isdigit(int c);
+char	*ft_strchr(const char *s, int c);
 
 #endif

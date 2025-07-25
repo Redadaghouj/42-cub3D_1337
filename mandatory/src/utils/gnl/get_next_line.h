@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.c                                            :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/14 14:04:11 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/25 05:19:41 by redadgh          ###   ########.fr       */
+/*   Created: 2024/11/15 10:24:27 by mdaghouj          #+#    #+#             */
+/*   Updated: 2025/07/25 05:24:10 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-int	main(int argc, char *argv[])
-{
-	t_scene		scene;
-	t_player	player;
+# include "../../../include/cub3D.h"
 
-	if (argc != 2)
-		return (exit_with_error(ERR_USAGE));
-	else if (!validate_scene(argv[1], &scene, &player))
-	{
-		free_scene(&scene);
-		return (EXIT_FAILURE);
-	}
-	free_scene(&scene);
-	return (EXIT_SUCCESS);
-}
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
+
+char	*get_next_line(int fd);
+int		check_line(int byte_read, char *buffer);
+char	*ft_strjoin(char *s1, char *s2);
+
+#endif

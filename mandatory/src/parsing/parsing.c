@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:16:35 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/24 04:05:21 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/25 05:27:09 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,28 @@ void	print_ids(t_scene scene)
 	printf("EA = %s\n", scene.texture.east);
 	printf("F = %d,%d,%d\n", scene.floor.r, scene.floor.g, scene.floor.b);
 	printf("C = %d,%d,%d\n", scene.ceiling.r, scene.ceiling.g, scene.ceiling.b);
+}
+
+void	print_map(char **map)
+{
+	int	i;
+	int	j;
+
+	if (!map)
+		return ;
+	i = 0;
+	printf("\n");
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			printf("%c", map[i][j]);
+			j++;
+		}
+		i++;
+		printf("\n");
+	}
 }
 
 bool	check_extension(char *map_path)
@@ -40,12 +62,13 @@ int	init_scene(t_scene *scene)
 	scene->texture.south = NULL;
 	scene->texture.west = NULL;
 	scene->texture.east = NULL;
+	scene->map = NULL;
 	scene->floor.is_set = 0;
 	scene->ceiling.is_set = 0;
 	return (TOTAL_IDS);
 }
 
-bool	validate_map(char *map_path, t_scene *scene)
+bool	validate_scene(char *map_path, t_scene *scene, t_player *player)
 {
 	int		fd;
 	int		total_ids;
@@ -55,9 +78,11 @@ bool	validate_map(char *map_path, t_scene *scene)
 		return (exit_with_error(ERR_SCENE_PATH));
 	if (!check_extension(map_path))
 		return (exit_with_error(ERR_BAD_EXTENSION));
-	if (!check_and_fill_ids(fd, scene, &total_ids))
+	if (!parse_identifiers(fd, scene, &total_ids))
 		return (exit_with_error(ERR_INVALID_ID));
+	if (!parse_map(fd, scene, player))
+		return (exit_with_error(ERR_INVALID_MAP));
 	print_ids(*scene);
-	free_scene(scene);
+	print_map(scene->map);
 	return (true);
 }

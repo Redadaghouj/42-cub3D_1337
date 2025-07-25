@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.c                                            :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/14 14:04:11 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/25 05:19:41 by redadgh          ###   ########.fr       */
+/*   Created: 2025/07/25 04:12:31 by redadgh           #+#    #+#             */
+/*   Updated: 2025/07/25 04:13:52 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include <stddef.h>
 
-int	main(int argc, char *argv[])
+char	*ft_strchr(const char *s, int c)
 {
-	t_scene		scene;
-	t_player	player;
-
-	if (argc != 2)
-		return (exit_with_error(ERR_USAGE));
-	else if (!validate_scene(argv[1], &scene, &player))
+	c = (unsigned char) c;
+	while (*s != '\0')
 	{
-		free_scene(&scene);
-		return (EXIT_FAILURE);
+		if (*s == c)
+			return ((char *) s);
+		s++;
 	}
-	free_scene(&scene);
-	return (EXIT_SUCCESS);
+	if (c == '\0')
+		return ((char *) s);
+	return (NULL);
 }

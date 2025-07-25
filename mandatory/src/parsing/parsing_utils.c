@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:16:35 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/24 03:30:17 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/25 00:13:57 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	free_scene(t_scene *scene)
 		free(scene->texture.west);
 	if (scene->texture.east)
 		free(scene->texture.east);
+	if (scene->map)
+		free_buffer(scene->map);
 }
 
 bool	is_empty(char *line)
@@ -45,7 +47,7 @@ bool	is_empty(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] != ' ' && line[i] != '\n')
+		if (line[i] != ' ')
 			return (false);
 		i++;
 	}
@@ -58,7 +60,7 @@ char	*gnl_non_empty(int fd)
 
 	while (true)
 	{
-		line = gnl(fd, 0);
+		line = get_next_line(fd);
 		if (!line)
 			return (NULL);
 		else if (!is_empty(line))

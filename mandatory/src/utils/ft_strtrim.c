@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 19:14:37 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/23 21:08:35 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/25 04:14:11 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	skip_trailing_spaces(char *line)
 {
 	int	end;
 
-	end = ft_strlen(line) - 2;
+	end = ft_strlen(line) - 1;
 	while (end > 0)
 	{
 		if (line[end] != ' ')

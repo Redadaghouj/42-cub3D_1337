@@ -33,12 +33,15 @@ UTILS := ${UTILS_PATH}/ft_strcmp.c \
 		 ${UTILS_PATH}/ft_split.c \
 		 ${UTILS_PATH}/ft_atoi.c \
 		 ${UTILS_PATH}/ft_isdigit.c \
-		 ${UTILS_PATH}/gnl.c \
+		 ${UTILS_PATH}/ft_strchr.c \
+		 ${UTILS_PATH}/gnl/get_next_line.c \
+		 ${UTILS_PATH}/gnl/get_next_line_utils.c \
 
 PARSING := ${PARSING_PATH}/parsing.c \
 		   ${PARSING_PATH}/parsing_utils.c \
-		   ${PARSING_PATH}/identifiers_handling.c \
-		   ${PARSING_PATH}/rgb_handling.c \
+		   ${PARSING_PATH}/parse_identifiers.c \
+		   ${PARSING_PATH}/parse_rgb.c \
+		   ${PARSING_PATH}/parse_map.c \
 
 RENDERING := ${RENDERING_PATH}/rendering.c \
 			 ${RENDERING_PATH}/rendering_utils.c \

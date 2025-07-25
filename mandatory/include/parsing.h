@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 18:54:37 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/24 04:21:19 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/25 05:24:00 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,20 @@
 # include <fcntl.h>
 
 # define TOTAL_IDS 6
+# define ORIENTATIONS_CHARS "NSEW"
+# define TILE_CHARS "10 "
 # define ERR_BAD_EXTENSION "Error\nBad extension\n"
 # define ERR_SCENE_PATH "Error\nInvalid or inaccessible scene file path\n"
 # define ERR_INVALID_ID "Error\nInvalid identifier in scene\n"
+# define ERR_INVALID_MAP "Error\nInvalid map format\n"
 
-typedef struct s_texture
+typedef struct s_texture_paths
 {
 	char	*north;
 	char	*south;
 	char	*west;
 	char	*east;
-}				t_texture;
+}				t_texture_paths;
 
 typedef struct s_color
 {
@@ -37,13 +40,20 @@ typedef struct s_color
 	int		is_set;
 }				t_color;
 
+typedef struct s_player
+{
+	double	pos_x;
+	double	pos_y;
+	char	orientation;			
+}				t_player;
+
 typedef struct s_scene
 {
-	t_texture	texture;
-	t_color		floor;
-	t_color		ceiling;
-	char		**map;
-}				t_scene;
+	t_texture_paths	texture;
+	t_color			floor;
+	t_color			ceiling;
+	char			**map;
+}					t_scene;
 
 typedef enum e_identifier_type
 {
@@ -57,7 +67,7 @@ typedef enum e_identifier_type
 }	t_id_type;
 
 /* PARSING */
-bool	validate_map(char *map_path, t_scene *scene);
+bool	validate_scene(char *map_path, t_scene *scene, t_player *player);
 
 /* PARSING UTILS */
 bool	exit_with_error(char *error_msg);
@@ -66,11 +76,14 @@ void	free_scene(t_scene *scene);
 bool	is_empty(char *line);
 char	*gnl_non_empty(int fd);
 
-/* IDENTIFIERS_HANDLING */
-bool	check_and_fill_ids(int fd, t_scene *scene, int *total_ids);
+/* PARSE_IDENTIFIERS */
+bool	parse_identifiers(int fd, t_scene *scene, int *total_ids);
 
-/* RGB_HANDLING */
-bool	extract_rgb_color(t_scene *scene, char *line, unsigned int id_type);
+/* PARSE_MAP */
+bool	parse_map(int fd, t_scene *scene, t_player *player);
+
+/* PARSE_RGB */
+bool	parse_rgb(t_scene *scene, char *line, unsigned int id_type);
 int		create_rgb(int r, int g, int b);
 
 #endif

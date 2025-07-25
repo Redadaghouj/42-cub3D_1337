@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rgb_handling.c                                     :+:      :+:    :+:   */
+/*   parse_rgb.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 03:05:03 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/24 04:19:34 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/24 19:57:13 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	clean_exit(char **buffer, char *line, bool exit_status)
 	return (exit_status);
 }
 
-void	store_rgb_color(unsigned int id_type, t_scene *scene, int rgb[])
+void	store_rgb(unsigned int id_type, t_scene *scene, int rgb[])
 {
 	if (id_type == ID_F)
 		scene->floor = (t_color){rgb[0], rgb[1], rgb[2], 1};
@@ -59,7 +59,7 @@ bool	is_valid_rgb_format(char *line)
 	return (comma_count == 2);
 }
 
-bool	extract_rgb_color(t_scene *scene, char *line, unsigned int id_type)
+bool	parse_rgb(t_scene *scene, char *line, unsigned int id_type)
 {
 	char	**buffer;
 	int		i;
@@ -78,7 +78,7 @@ bool	extract_rgb_color(t_scene *scene, char *line, unsigned int id_type)
 				return (clean_exit(buffer, line, false));
 			i++;
 		}
-		store_rgb_color(id_type, scene, rgb);
+		store_rgb(id_type, scene, rgb);
 		return (clean_exit(buffer, line, true));
 	}
 	free(line);

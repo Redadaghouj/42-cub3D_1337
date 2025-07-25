@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   identifiers_handling.c                             :+:      :+:    :+:   */
+/*   parse_identifiers.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:28:47 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/24 04:19:20 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/24 19:57:30 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ bool	fill_id(unsigned int id_type, t_scene *scene, char *line)
 	else if (id_type == ID_EA && !scene->texture.east)
 		scene->texture.east = trimmed;
 	else if (id_type == ID_F && !scene->floor.is_set)
-		return (extract_rgb_color(scene, trimmed, id_type));
+		return (parse_rgb(scene, trimmed, id_type));
 	else if (id_type == ID_C && !scene->ceiling.is_set)
-		return (extract_rgb_color(scene, trimmed, id_type));
+		return (parse_rgb(scene, trimmed, id_type));
 	else
 	{
 		free(trimmed);
@@ -64,7 +64,7 @@ bool	fill_id(unsigned int id_type, t_scene *scene, char *line)
 	return (true);
 }
 
-bool	check_and_fill_ids(int fd, t_scene *scene, int *total_ids)
+bool	parse_identifiers(int fd, t_scene *scene, int *total_ids)
 {
 	char			*line;
 	unsigned int	id_type;
