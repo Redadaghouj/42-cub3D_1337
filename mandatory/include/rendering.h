@@ -6,13 +6,13 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 04:23:18 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/23 01:36:11 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/26 22:15:31 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDERING_H
 # define RENDERING_H
 
-# include "../../MLX42/include/MLX42.h"
+# include "../../MLX42/include/MLX42/MLX42.h"
 
 #endif
