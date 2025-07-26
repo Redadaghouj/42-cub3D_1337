@@ -1,7 +1,0 @@
-/home/redadgh/Desktop/13/42-cub3D_1337/MLX42/build/CMakeFiles/mlx42.dir
-/home/redadgh/Desktop/13/42-cub3D_1337/MLX42/build/CMakeFiles/edit_cache.dir
-/home/redadgh/Desktop/13/42-cub3D_1337/MLX42/build/CMakeFiles/rebuild_cache.dir
-/home/redadgh/Desktop/13/42-cub3D_1337/MLX42/build/CMakeFiles/list_install_components.dir
-/home/redadgh/Desktop/13/42-cub3D_1337/MLX42/build/CMakeFiles/install.dir
-/home/redadgh/Desktop/13/42-cub3D_1337/MLX42/build/CMakeFiles/install/local.dir
-/home/redadgh/Desktop/13/42-cub3D_1337/MLX42/build/CMakeFiles/install/strip.dir
