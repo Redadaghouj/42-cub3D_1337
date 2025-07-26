@@ -6,63 +6,11 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 19:58:29 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/25 05:28:20 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/26 21:54:32 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
-
-char	**append_line_to_map(char **old_map, char *line, int old_len)
-{
-	int		i;
-	char	**new_map;
-
-	i = 0;
-	new_map = (char **)malloc(sizeof (char *) * (old_len + 2));
-	if (!new_map)
-	{
-		free_buffer(old_map);
-		return (NULL);
-	}
-	while (i < old_len)
-	{
-		new_map[i] = old_map[i];
-		i++;
-	}
-	new_map[i] = line;
-	new_map[i + 1] = NULL;
-	free(old_map);
-	return (new_map);
-}
-
-bool	validate_content_and_init_player(char **map, t_player *player)
-{
-	int		i;
-	int		j;
-	bool	player_found;
-
-	i = -1;
-	player_found = false;
-	while (map[++i])
-	{
-		j = -1;
-		while (map[i][++j])
-		{
-			if (ft_strchr(ORIENTATIONS_CHARS, map[i][j]))
-			{
-				if (player_found)
-					return (false);
-				player->orientation = map[i][j];
-				player->pos_y = i;
-				player->pos_x = j;
-				player_found = true;
-			}
-			else if (!ft_strchr(TILE_CHARS, map[i][j]))
-				return (false);
-		}
-	}
-	return (player_found);
-}
 
 bool	load_map(int fd, t_scene *scene)
 {
@@ -71,6 +19,8 @@ bool	load_map(int fd, t_scene *scene)
 
 	len = 0;
 	line = gnl_non_empty(fd);
+	if (!line)
+		return (false);
 	while (line)
 	{
 		scene->map = append_line_to_map(scene->map, line, len);
@@ -82,11 +32,71 @@ bool	load_map(int fd, t_scene *scene)
 	return (true);
 }
 
+bool	check_elems_player(char **map, t_player *player, bool seen_player)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (map[++i])
+	{
+		if (map[i][0] == '\0')
+			return (false);
+		j = -1;
+		while (map[i][++j])
+		{
+			if (ft_strchr(ORIENTATION_CHARS, map[i][j]))
+			{
+				if (seen_player)
+					return (false);
+				player->orientation = map[i][j];
+				player->pos_y = i;
+				player->pos_x = j;
+				seen_player = true;
+			}
+			else if (!ft_strchr(TILE_CHARS, map[i][j]))
+				return (false);
+		}
+	}
+	return (seen_player);
+}
+
+bool	is_map_enclosed(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (ft_strchr(VALID_MAP_CHARS, map[i][j]))
+			{
+				if (is_open(map, i, j, UP))
+					return (false);
+				if (is_open(map, i, j, DOWN))
+					return (false);
+				if (is_open(map, i, j, RIGHT))
+					return (false);
+				if (is_open(map, i, j, LEFT))
+					return (false);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (true);
+}
+
 bool	parse_map(int fd, t_scene *scene, t_player *player)
 {
 	if (!load_map(fd, scene))
 		return (false);
-	else if (!validate_content_and_init_player(scene->map, player))
+	else if (!check_elems_player(scene->map, player, false))
+		return (false);
+	else if (!is_map_enclosed(scene->map))
 		return (false);
 	return (true);
 }

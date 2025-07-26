@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 18:54:37 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/25 06:00:05 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/26 21:54:57 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@
 # define ID_EAST "EA "
 # define ID_FLOOR "F "
 # define ID_CEIL "C "
-# define ORIENTATIONS_CHARS "NSEW"
+# define WALKABLE_CHARS "0"
+# define ORIENTATION_CHARS "NSEW"
+# define VALID_MAP_CHARS "NSEW0"
 # define TILE_CHARS "10 "
 # define ERR_BAD_EXTENSION "Error\nBad extension\n"
 # define ERR_SCENE_PATH "Error\nInvalid or inaccessible scene file path\n"
@@ -72,10 +74,18 @@ typedef enum e_identifier_type
 	ID_INVALID
 }	t_id_type;
 
+typedef enum e_direction
+{
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+}	t_direction;
+
 /* PARSING */
 bool	validate_scene(char *map_path, t_scene *scene, t_player *player);
 
-/* PARSING UTILS */
+/* PARSING_UTILS */
 bool	exit_with_error(char *error_msg);
 bool	open_file(char *file_name, int *fd);
 void	free_scene(t_scene *scene);
@@ -91,5 +101,10 @@ bool	parse_map(int fd, t_scene *scene, t_player *player);
 /* PARSE_RGB */
 bool	parse_rgb(t_scene *scene, char *line, unsigned int id_type);
 int		create_rgb(int r, int g, int b);
+
+/* PARSE_MAP_UTILS */
+bool	is_in_bounds(char **map, int y, int x);
+bool	is_open(char **map, int y, int x, t_direction dir);
+char	**append_line_to_map(char **old_map, char *line, int old_len);
 
 #endif

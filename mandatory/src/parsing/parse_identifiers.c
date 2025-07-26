@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:28:47 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/25 06:01:13 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/26 21:53:15 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,5 @@ bool	parse_identifiers(int fd, t_scene *scene, int *total_ids)
 		(*total_ids)--;
 		free(line);
 	}
-	if (*total_ids)
-		free_scene(scene);
 	return (*total_ids == 0);
 }

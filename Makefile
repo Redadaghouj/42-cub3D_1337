@@ -11,8 +11,6 @@ AMLX := ./MLX42/libmlx42.a
 # Linux-specific linking
 MLX_FLAGS := -lglfw -ldl -lm -lX11 -lXrandr -lXcursor -lXi -lGL -pthread
 
-
-
 RM := rm -f
 NAME := cub3D
 MANDO := mandatory
@@ -42,6 +40,7 @@ PARSING := ${PARSING_PATH}/parsing.c \
 		   ${PARSING_PATH}/parse_identifiers.c \
 		   ${PARSING_PATH}/parse_rgb.c \
 		   ${PARSING_PATH}/parse_map.c \
+		   ${PARSING_PATH}/parse_map_utils.c \
 
 RENDERING := ${RENDERING_PATH}/rendering.c \
 			 ${RENDERING_PATH}/rendering_utils.c \

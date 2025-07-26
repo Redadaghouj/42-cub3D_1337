@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:16:35 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/25 05:27:09 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/25 18:19:06 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ bool	check_extension(char *map_path)
 	int		idx;
 
 	ext = ".cub";
-	idx = ft_strlen(map_path) - 4;
+	idx = ft_strlen(map_path) - ft_strlen(ext);
 	if (ft_strcmp(map_path + idx, ext) != 0)
 		return (false);
 	return (true);
