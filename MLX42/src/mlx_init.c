@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42/MLX42_Int.hh"
+#include "MLX42/MLX42_Int.h"
 
 //= Private =//
 
@@ -20,7 +20,7 @@ static void framebuffer_callback(GLFWwindow *window, int width, int height)
 	glViewport(0, 0, width, height);
 }
 
-static bool mlx_create_buffers(t_mlx* mlx)
+static bool mlx_create_buffers(mlx_t* mlx)
 {
 	mlx_ctx_t* mlxctx = mlx->context;
 
@@ -98,7 +98,7 @@ static uint32_t mlx_compile_shader(const char* code, int32_t type)
 	return (shader);
 }
 
-static bool mlx_init_render(t_mlx* mlx)
+static bool mlx_init_render(mlx_t* mlx)
 {
     uint32_t vshader = 0;
     uint32_t fshader = 0;
@@ -158,20 +158,20 @@ static bool mlx_init_render(t_mlx* mlx)
 
 // Default settings
 int32_t mlx_settings[MLX_SETTINGS_MAX] = {false, false, false, true, false};
-t_mlx_errno g_mlx_errno = MLX_SUCCESS;
+mlx_errno_t mlx_errno = MLX_SUCCESS;
 bool sort_queue = false;
 
-t_mlx* mlx_init(int32_t width, int32_t height, const char* title, bool resize)
+mlx_t* mlx_init(int32_t width, int32_t height, const char* title, bool resize)
 {
 	MLX_NONNULL(title);
 	MLX_ASSERT(width > 0, "Window width must be positive");
 	MLX_ASSERT(height > 0, "Window height must be positive");
 
 	bool init;
-	t_mlx* mlx;
+	mlx_t* mlx;
 	if (!(init = glfwInit()))
 		return ((void*)mlx_error(MLX_GLFWFAIL));
-	if (!(mlx = calloc(1, sizeof(t_mlx))))
+	if (!(mlx = calloc(1, sizeof(mlx_t))))
 		return ((void*)mlx_error(MLX_MEMFAIL));
 	if (!(mlx->context = calloc(1, sizeof(mlx_ctx_t))))
 		return (free(mlx), (void*)mlx_error(MLX_MEMFAIL));
@@ -210,7 +210,7 @@ t_mlx* mlx_init(int32_t width, int32_t height, const char* title, bool resize)
 	return (mlx);
 }
 
-void mlx_set_setting(t_mlx_settings setting, int32_t value)
+void mlx_set_setting(mlx_settings_t setting, int32_t value)
 {
 	MLX_ASSERT(setting >= 0 && setting < MLX_SETTINGS_MAX, "Invalid settings value");
 	mlx_settings[setting] = value;

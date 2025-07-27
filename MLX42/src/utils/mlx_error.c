@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42/MLX42_Int.hh"
+#include "MLX42/MLX42_Int.h"
 
 //= Private =//
 
@@ -40,18 +40,18 @@ static const char* mlx_errors[MLX_ERRMAX] = {
  * @param val The error value.
  * @return Always false 
  */
-bool mlx_error(t_mlx_errno val)
+bool mlx_error(mlx_errno_t val)
 {
-	g_mlx_errno = val;
+	mlx_errno = val;
 #ifndef NDEBUG
-	fprintf(stderr, "MLX42: %s", mlx_strerror(g_mlx_errno));
+	fprintf(stderr, "MLX42: %s", mlx_strerror(mlx_errno));
 #endif
 	return (false);
 }
 
 //= Public =//
 
-const char* mlx_strerror(t_mlx_errno val)
+const char* mlx_strerror(mlx_errno_t val)
 {
 	MLX_ASSERT(val >= 0, "Index must be positive");
 	MLX_ASSERT(val < MLX_ERRMAX, "Index out of bounds");

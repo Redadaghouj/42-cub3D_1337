@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42/MLX42_Int.hh"
+#include "MLX42/MLX42_Int.h"
 
 //= Public =//
 
-t_mlx_win_cursor_t* mlx_create_std_cursor(t_cursor type)
+mlx_win_cursor_t* mlx_create_std_cursor(cursor_t type)
 {
 	MLX_ASSERT(type >= MLX_CURSOR_ARROW && type < MLX_CURSOR_VRESIZE, "Invalid standard cursor type");
 
@@ -24,7 +24,7 @@ t_mlx_win_cursor_t* mlx_create_std_cursor(t_cursor type)
 	return ((void *)mlx_error(MLX_MEMFAIL));
 }
 
-t_mlx_win_cursor_t* mlx_create_cursor(t_mlx_texture* texture)
+mlx_win_cursor_t* mlx_create_cursor(mlx_texture_t* texture)
 {
 	MLX_NONNULL(texture);
 
@@ -40,14 +40,14 @@ t_mlx_win_cursor_t* mlx_create_cursor(t_mlx_texture* texture)
 	return ((void *)mlx_error(MLX_MEMFAIL));
 }
 
-void mlx_destroy_cursor(t_mlx_win_cursor_t* cursor)
+void mlx_destroy_cursor(mlx_win_cursor_t* cursor)
 {
 	MLX_NONNULL(cursor);
 
 	glfwDestroyCursor(cursor);
 }
 
-void mlx_set_cursor(t_mlx* mlx, t_mlx_win_cursor_t* cursor)
+void mlx_set_cursor(mlx_t* mlx, mlx_win_cursor_t* cursor)
 {
 	MLX_NONNULL(mlx);
 	MLX_NONNULL(cursor);
@@ -55,7 +55,7 @@ void mlx_set_cursor(t_mlx* mlx, t_mlx_win_cursor_t* cursor)
 	glfwSetCursor(mlx->window, cursor);
 }
 
-void mlx_set_cursor_mode(t_mlx* mlx, t_mouse_mode mode)
+void mlx_set_cursor_mode(mlx_t* mlx, mouse_mode_t mode)
 {
 	MLX_NONNULL(mlx);
 

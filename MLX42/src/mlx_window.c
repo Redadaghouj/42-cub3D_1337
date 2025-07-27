@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42/MLX42_Int.hh"
+#include "MLX42/MLX42_Int.h"
 
 //= Private =//
 
@@ -18,7 +18,7 @@
  * Recalculate the view projection matrix, used by images for screen pos
  * Reference: https://bit.ly/3KuHOu1 (Matrix View Projection)
  */
-void mlx_update_matrix(const t_mlx* mlx)
+void mlx_update_matrix(const mlx_t* mlx)
 {
 	const mlx_ctx_t* mlxctx = mlx->context;
 	const float depth = mlxctx->zdepth;
@@ -43,7 +43,7 @@ void mlx_update_matrix(const t_mlx* mlx)
 
 static void mlx_resize_callback(GLFWwindow* window, int32_t width, int32_t height)
 {
-	const t_mlx* mlx = glfwGetWindowUserPointer(window);
+	const mlx_t* mlx = glfwGetWindowUserPointer(window);
 	const mlx_ctx_t* mlxctx = mlx->context;
 
 	if (mlxctx->resize_hook.func)
@@ -52,7 +52,7 @@ static void mlx_resize_callback(GLFWwindow* window, int32_t width, int32_t heigh
 
 static void mlx_close_callback(GLFWwindow* window)
 {
-	const t_mlx* mlx = glfwGetWindowUserPointer(window);
+	const mlx_t* mlx = glfwGetWindowUserPointer(window);
 	const mlx_close_t close_hook = ((mlx_ctx_t*)mlx->context)->close_hook;
 
 	close_hook.func(close_hook.param);
@@ -60,7 +60,7 @@ static void mlx_close_callback(GLFWwindow* window)
 
 //= Public =//
 
-void mlx_close_hook(t_mlx* mlx, t_mlx_closefunc func, void* param)
+void mlx_close_hook(mlx_t* mlx, mlx_closefunc func, void* param)
 {
 	MLX_NONNULL(mlx);
 	MLX_NONNULL(func);
@@ -71,7 +71,7 @@ void mlx_close_hook(t_mlx* mlx, t_mlx_closefunc func, void* param)
 	glfwSetWindowCloseCallback(mlx->window, mlx_close_callback);
 }
 
-void mlx_resize_hook(t_mlx* mlx, t_mlx_resizefunc func, void* param)
+void mlx_resize_hook(mlx_t* mlx, mlx_resizefunc func, void* param)
 {
 	MLX_NONNULL(mlx);
 	MLX_NONNULL(func);
@@ -82,7 +82,7 @@ void mlx_resize_hook(t_mlx* mlx, t_mlx_resizefunc func, void* param)
 	glfwSetWindowSizeCallback(mlx->window, mlx_resize_callback);
 }
 
-void mlx_set_icon(t_mlx* mlx, t_mlx_texture* image)
+void mlx_set_icon(mlx_t* mlx, mlx_texture_t* image)
 {
 	MLX_NONNULL(mlx);
 	MLX_NONNULL(image);
@@ -96,14 +96,14 @@ void mlx_set_icon(t_mlx* mlx, t_mlx_texture* image)
 	glfwSetWindowIcon(mlx->window, 1, &icon);
 }
 
-void mlx_set_window_pos(t_mlx* mlx, int32_t xpos, int32_t ypos)
+void mlx_set_window_pos(mlx_t* mlx, int32_t xpos, int32_t ypos)
 {
 	MLX_NONNULL(mlx);
 
 	glfwSetWindowPos(mlx->window, xpos, ypos);
 }
 
-void mlx_get_window_pos(t_mlx* mlx, int32_t* xpos, int32_t* ypos)
+void mlx_get_window_pos(mlx_t* mlx, int32_t* xpos, int32_t* ypos)
 {
 	MLX_NONNULL(mlx);
 	MLX_NONNULL(xpos);
@@ -112,7 +112,7 @@ void mlx_get_window_pos(t_mlx* mlx, int32_t* xpos, int32_t* ypos)
 	glfwGetWindowPos(mlx->window, xpos, ypos);
 }
 
-void mlx_set_window_size(t_mlx* mlx, int32_t new_width, int32_t new_height)
+void mlx_set_window_size(mlx_t* mlx, int32_t new_width, int32_t new_height)
 {
 	MLX_NONNULL(mlx);
 
@@ -121,7 +121,14 @@ void mlx_set_window_size(t_mlx* mlx, int32_t new_width, int32_t new_height)
 	glfwSetWindowSize(mlx->window, new_width, new_height);
 }
 
-void mlx_set_window_title(t_mlx* mlx, const char* title)
+void mlx_set_window_limit(mlx_t* mlx, int32_t min_w, int32_t min_h, int32_t max_w, int32_t max_h)
+{
+	MLX_NONNULL(mlx);
+
+	glfwSetWindowSizeLimits(mlx->window, min_w, min_h, max_w, max_h);
+}
+
+void mlx_set_window_title(mlx_t* mlx, const char* title)
 {
 	MLX_NONNULL(mlx);
 	MLX_NONNULL(title);

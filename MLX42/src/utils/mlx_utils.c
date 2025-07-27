@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42/MLX42_Int.hh"
+#include "MLX42/MLX42_Int.h"
 
 //= Private =//
 
@@ -123,7 +123,7 @@ double mlx_get_time(void)
 	return (glfwGetTime());
 }
 
-void mlx_focus(t_mlx* mlx)
+void mlx_focus(mlx_t* mlx)
 {
 	MLX_NONNULL(mlx);
 

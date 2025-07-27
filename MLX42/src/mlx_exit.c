@@ -10,20 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42/MLX42_Int.hh"
+#include "MLX42/MLX42_Int.h"
 
 //= Private =//
 
 static void mlx_free_image(void* content)
 {
-	t_mlx_image* img = content;
+	mlx_image_t* img = content;
 
 	mlx_freen(4, img->context, img->pixels, img->instances, img);
 }
 
 //= Public =//
 
-void mlx_close_window(t_mlx* mlx)
+void mlx_close_window(mlx_t* mlx)
 {
 	MLX_NONNULL(mlx);
 	glfwSetWindowShouldClose(mlx->window, true);
@@ -33,7 +33,7 @@ void mlx_close_window(t_mlx* mlx)
  * All of glfw & glads resources are cleaned up by the terminate function.
  * Now it's time to clean up our own mess.
  */
-void mlx_terminate(t_mlx* mlx)
+void mlx_terminate(mlx_t* mlx)
 {
 	MLX_NONNULL(mlx);
 

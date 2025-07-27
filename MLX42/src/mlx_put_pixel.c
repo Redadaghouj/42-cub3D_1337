@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42/MLX42_Int.hh"
+#include "MLX42/MLX42_Int.h"
 
 // BUG: Linux may experience a red hue instead due to endianness
 void mlx_draw_pixel(uint8_t* pixel, uint32_t color)
@@ -23,7 +23,7 @@ void mlx_draw_pixel(uint8_t* pixel, uint32_t color)
 
 //= Public =//
 
-void mlx_put_pixel(t_mlx_image* image, uint32_t x, uint32_t y, uint32_t color)
+void mlx_put_pixel(mlx_image_t* image, uint32_t x, uint32_t y, uint32_t color)
 {
 	MLX_NONNULL(image);
 	MLX_ASSERT(x < image->width, "Pixel is out of bounds");

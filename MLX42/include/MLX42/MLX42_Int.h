@@ -14,9 +14,9 @@
 # define MLX42_INT_H
 # define LODEPNG_NO_COMPILE_ALLOCATORS
 # include "MLX42/MLX42.h"
-# include "lodepng/lodepng.hh"
-# include "glad/glad.hh"
-# include "KHR/khrplatform.hh"
+# include "lodepng/lodepng.h"
+# include "glad/glad.h"
+# include "KHR/khrplatform.h"
 # if defined(__APPLE__)
 #  define GL_SILENCE_DEPRECATION
 # endif
@@ -114,37 +114,37 @@ typedef struct mlx_list
 typedef struct mlx_srcoll
 {
 	void*			param;
-	t_mlx_scrollfunc	func;
+	mlx_scrollfunc	func;
 }	mlx_scroll_t;
 
 typedef struct mlx_mouse
 {
 	void*			param;
-	t_mlx_mousefunc	func;
+	mlx_mousefunc	func;
 }	mlx_mouse_t;
 
 typedef struct mlx_cursor
 {
 	void*			param;
-	t_mlx_cursorfunc	func;
+	mlx_cursorfunc	func;
 }	mlx_cursor_t;
 
 typedef struct mlx_close
 {
 	void*			param;
-	t_mlx_closefunc	func;
+	mlx_closefunc	func;
 }	mlx_close_t;
 
 typedef struct mlx_resize
 {
 	void*			param;
-	t_mlx_resizefunc	func;
+	mlx_resizefunc	func;
 }	mlx_resize_t;
 
 typedef struct mlx_key
 {
 	void*			param;
-	t_mlx_keyfunc		func;
+	mlx_keyfunc		func;
 }	mlx_key_t;
 
 typedef struct mlx_hook
@@ -198,7 +198,7 @@ typedef struct mlx_ctx
 // Draw call queue entry.
 typedef struct draw_queue
 {
-	t_mlx_image*	image;
+	mlx_image_t*	image;
 	int32_t			instanceid;
 }	draw_queue_t;
 
@@ -234,13 +234,13 @@ void mlx_draw_pixel(uint8_t* pixel, uint32_t color);
 
 //= Error/log Handling Functions =//
 
-bool mlx_error(t_mlx_errno val);
+bool mlx_error(mlx_errno_t val);
 bool mlx_freen(int32_t count, ...);
 
 //= OpenGL Functions =//
 
-void mlx_update_matrix(const t_mlx* mlx);
-void mlx_draw_instance(mlx_ctx_t* mlx, t_mlx_image* img, t_mlx_instance* instance);
+void mlx_update_matrix(const mlx_t* mlx);
+void mlx_draw_instance(mlx_ctx_t* mlx, mlx_image_t* img, mlx_instance_t* instance);
 void mlx_flush_batch(mlx_ctx_t* mlx);
 
 // Utils Functions =//

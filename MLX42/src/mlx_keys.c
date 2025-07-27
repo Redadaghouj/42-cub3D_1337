@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42/MLX42_Int.hh"
+#include "MLX42/MLX42_Int.h"
 
 //= Private =//
 
 static void mlx_key_callback(GLFWwindow* window, int32_t key, int32_t scancode, int32_t action, int32_t mods)
 {
-	const t_mlx* mlx = glfwGetWindowUserPointer(window);
+	const mlx_t* mlx = glfwGetWindowUserPointer(window);
 	const mlx_key_t key_hook = ((mlx_ctx_t*)mlx->context)->key_hook;
-	const t_mlx_key_data callback_data = {
+	const mlx_key_data_t callback_data = {
 		key,
 		action,
 		scancode,
@@ -30,7 +30,7 @@ static void mlx_key_callback(GLFWwindow* window, int32_t key, int32_t scancode, 
 
 //= Public =//
 
-void mlx_key_hook(t_mlx* mlx, t_mlx_keyfunc func, void* param)
+void mlx_key_hook(mlx_t* mlx, mlx_keyfunc func, void* param)
 {
 	MLX_NONNULL(mlx);
 	MLX_NONNULL(func);
@@ -41,7 +41,7 @@ void mlx_key_hook(t_mlx* mlx, t_mlx_keyfunc func, void* param)
 	glfwSetKeyCallback(mlx->window, mlx_key_callback);
 }
 
-bool mlx_is_key_down(t_mlx* mlx, t_keys key)
+bool mlx_is_key_down(mlx_t* mlx, keys_t key)
 {
 	MLX_NONNULL(mlx);
 

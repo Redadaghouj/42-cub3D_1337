@@ -6,12 +6,7 @@
 # CMake specifications
 # -----------------------------------------------------------------------------
 cmake_minimum_required (VERSION 3.16.0)
-
-# Explicitly disable C++ and only enable C
-project(mlx42 VERSION 2.4.1 LANGUAGES C)
-set(CMAKE_CXX_COMPILER_WORKS 0)
-set(CMAKE_CXX_COMPILER_FORCED TRUE)
-
+project(mlx42 VERSION 2.4.1)
 message(STATUS "MLX42 @ ${CMAKE_PROJECT_VERSION}")
 
 # Variables
@@ -20,20 +15,12 @@ set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(TOOLS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/tools)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
-set(CMAKE_C_STANDARD 99)
-set(CMAKE_C_EXTENSIONS ON)
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_EXTENSIONS OFF)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-
-# Force C compilation for all files
-set(CMAKE_C_COMPILER_FORCED TRUE)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
-
-# Force .cc files to be treated as C source files
-set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "")
-set_property(GLOBAL PROPERTY C_COMPILE_OBJECT "<CMAKE_C_COMPILER> <DEFINES> <INCLUDES> <FLAGS> -o <OBJECT> -c <SOURCE>")
-set(CMAKE_CC_COMPILER ${CMAKE_C_COMPILER})
 
 # Options
 set(DEBUG		OFF CACHE BOOL "Build MLX42 in debug mode, enabling assertions")
@@ -51,6 +38,7 @@ if(UNIX AND NOT EMSCRIPTEN)
 	add_compile_options(
 		-Wextra
 		-Wall
+		-Werror
 		-Wunreachable-code
 
 		# Some low priority warnings that are annoying.
@@ -58,10 +46,6 @@ if(UNIX AND NOT EMSCRIPTEN)
 		-Wno-sign-compare
 		-Wno-unused-parameter
 		-Wno-missing-field-initializers
-		
-		# C-specific options
-		-Wno-incompatible-pointer-types
-		-Wno-int-conversion
 	)
 	if(DEBUG)
 		message(STATUS "Building in DEBUG mode")
@@ -69,7 +53,7 @@ if(UNIX AND NOT EMSCRIPTEN)
 	else()
 		message(STATUS "Building in RELEASE mode")
 		add_definitions(-D NDEBUG)
-		add_compile_options(-O2)
+		add_compile_options(-O3)
 	endif(DEBUG)
 else()
 	# TODO: Figure out what we need for windows.
@@ -80,88 +64,74 @@ endif()
 # -----------------------------------------------------------------------------
 
 if (UNIX)
-	set(CCSHADER ${TOOLS_DIR}/compile_shader.sh)
+    set(CCSHADER ${TOOLS_DIR}/compile_shader.sh)
 else()
-	set(CCSHADER ${TOOLS_DIR}/compile_shader.bat)
+    set(CCSHADER ${TOOLS_DIR}/compile_shader.bat)
 endif()
 
 if(EMSCRIPTEN)
-	set(EMSCRIPTEN_VALUE 1)
+    set(EMSCRIPTEN_VALUE 1)
 else()
-	set(EMSCRIPTEN_VALUE 0)
+    set(EMSCRIPTEN_VALUE 0)
 endif()
 
 # Add custom command for fragment shader
 add_custom_command(
-	COMMENT "Building fragment shader"
-	DEPENDS ${PROJECT_SOURCE_DIR}/shaders/default.frag
-	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/mlx_frag_shader.cc
-	COMMAND ${CCSHADER} ${PROJECT_SOURCE_DIR}/shaders/default.frag ${EMSCRIPTEN_VALUE} > ${CMAKE_CURRENT_BINARY_DIR}/mlx_frag_shader.cc
-	VERBATIM
-	USES_TERMINAL
+    COMMENT "Building fragment shader"
+    DEPENDS ${PROJECT_SOURCE_DIR}/shaders/default.frag
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/mlx_frag_shader.c
+    COMMAND ${CCSHADER} ${PROJECT_SOURCE_DIR}/shaders/default.frag ${EMSCRIPTEN_VALUE} > ${CMAKE_CURRENT_BINARY_DIR}/mlx_frag_shader.c
+    VERBATIM
+    PRE_BUILD
+    USES_TERMINAL
 )
 
 # Add custom command for vertex shader
 add_custom_command(
-	COMMENT "Building vertex shader"
-	DEPENDS ${PROJECT_SOURCE_DIR}/shaders/default.vert
-	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/mlx_vert_shader.cc
-	COMMAND ${CCSHADER} ${PROJECT_SOURCE_DIR}/shaders/default.vert ${EMSCRIPTEN_VALUE} > ${CMAKE_CURRENT_BINARY_DIR}/mlx_vert_shader.cc
-	VERBATIM
-	USES_TERMINAL
+    COMMENT "Building vertex shader"
+    DEPENDS ${PROJECT_SOURCE_DIR}/shaders/default.vert
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/mlx_vert_shader.c
+    COMMAND ${CCSHADER} ${PROJECT_SOURCE_DIR}/shaders/default.vert ${EMSCRIPTEN_VALUE} > ${CMAKE_CURRENT_BINARY_DIR}/mlx_vert_shader.c
+    VERBATIM
+    PRE_BUILD
+    USES_TERMINAL
 )
 
 # Sources
 # -----------------------------------------------------------------------------
+add_library(mlx42 STATIC
 
-# Collect all source files
-set(MLX42_SOURCES
 	# Root
-	${SOURCE_DIR}/mlx_cursor.cc
-	${SOURCE_DIR}/mlx_exit.cc
-	${SOURCE_DIR}/mlx_images.cc
-	${SOURCE_DIR}/mlx_init.cc
-	${SOURCE_DIR}/mlx_keys.cc
-	${SOURCE_DIR}/mlx_loop.cc
-	${SOURCE_DIR}/mlx_monitor.cc
-	${SOURCE_DIR}/mlx_mouse.cc
-	${SOURCE_DIR}/mlx_put_pixel.cc
-	${SOURCE_DIR}/mlx_window.cc
+	${SOURCE_DIR}/mlx_cursor.c
+	${SOURCE_DIR}/mlx_exit.c
+	${SOURCE_DIR}/mlx_images.c
+	${SOURCE_DIR}/mlx_init.c
+	${SOURCE_DIR}/mlx_keys.c
+	${SOURCE_DIR}/mlx_loop.c
+	${SOURCE_DIR}/mlx_monitor.c
+	${SOURCE_DIR}/mlx_mouse.c
+	${SOURCE_DIR}/mlx_put_pixel.c
+	${SOURCE_DIR}/mlx_window.c
 
 	# Utils
-	${SOURCE_DIR}/utils/mlx_error.cc
-	${SOURCE_DIR}/utils/mlx_list.cc
-	${SOURCE_DIR}/utils/mlx_utils.cc
-	${SOURCE_DIR}/utils/mlx_compare.cc
+	${SOURCE_DIR}/utils/mlx_error.c
+	${SOURCE_DIR}/utils/mlx_list.c
+	${SOURCE_DIR}/utils/mlx_utils.c
+	${SOURCE_DIR}/utils/mlx_compare.c
 
 	# Textures
-	${SOURCE_DIR}/font/mlx_font.cc
-	${SOURCE_DIR}/textures/mlx_png.cc
-	${SOURCE_DIR}/textures/mlx_texture.cc
-	${SOURCE_DIR}/textures/mlx_xpm42.cc
+	${SOURCE_DIR}/font/mlx_font.c
+	${SOURCE_DIR}/textures/mlx_png.c
+	${SOURCE_DIR}/textures/mlx_texture.c
+	${SOURCE_DIR}/textures/mlx_xpm42.c
 
 	# Libs
-	lib/png/lodepng.cc
-	lib/glad/glad.cc
+	lib/png/lodepng.c
+	lib/glad/glad.c
 
-	# Generated shader files
-	mlx_vert_shader.cc
-	mlx_frag_shader.cc
+	mlx_vert_shader.c
+	mlx_frag_shader.c
 )
-
-add_library(mlx42 STATIC ${MLX42_SOURCES})
-
-# Force all .cc files to be compiled with the C compiler
-foreach(source_file ${MLX42_SOURCES})
-    set_source_files_properties(${source_file} PROPERTIES 
-        LANGUAGE C
-        COMPILE_FLAGS "-x c"
-    )
-endforeach()
-
-# Also set this globally for .cc extension
-set(CMAKE_CC_COMPILE_OBJECT "${CMAKE_C_COMPILE_OBJECT}")
-
 target_include_directories(mlx42 PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # Dependencies
@@ -170,7 +140,7 @@ target_include_directories(mlx42 PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 find_package(OpenGL REQUIRED)
 
 if(EMSCRIPTEN)
-	target_link_libraries(mlx42 "-s USE_GLFW=3" "-s FULL_ES3=1")
+    target_link_libraries(mlx42 "-s USE_GLFW=3" "-s FULL_ES3=1")
 else()
 	target_link_libraries(mlx42 OpenGL::GL)
 	find_package(glfw3)

@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42/MLX42_Int.hh"
+#include "MLX42/MLX42_Int.h"
 
 //= Private =//
 
-static void mlx_exec_loop_hooks(t_mlx* mlx)
+static void mlx_exec_loop_hooks(mlx_t* mlx)
 {
 	const mlx_ctx_t* mlxctx = mlx->context;
 
@@ -27,7 +27,7 @@ static void mlx_exec_loop_hooks(t_mlx* mlx)
 	}
 }
 
-static void mlx_render_images(t_mlx* mlx)
+static void mlx_render_images(mlx_t* mlx)
 {
 	mlx_ctx_t* mlxctx = mlx->context;
 	mlx_list_t* imglst = mlxctx->images;
@@ -41,7 +41,7 @@ static void mlx_render_images(t_mlx* mlx)
 	// Upload image textures to GPU
 	while (imglst)
 	{
-		t_mlx_image* image;
+		mlx_image_t* image;
 		if (!(image = imglst->content)) {
 			mlx_error(MLX_INVIMG);
 			return;
@@ -57,7 +57,7 @@ static void mlx_render_images(t_mlx* mlx)
 	while (render_queue)
 	{
 		draw_queue_t* drawcall = render_queue->content;
-		t_mlx_instance* instance =  &drawcall->image->instances[drawcall->instanceid];
+		mlx_instance_t* instance =  &drawcall->image->instances[drawcall->instanceid];
 
 		if (drawcall && drawcall->image->enabled && instance->enabled)
 			mlx_draw_instance(mlx->context, drawcall->image, instance);
@@ -67,7 +67,7 @@ static void mlx_render_images(t_mlx* mlx)
 
 //= Public =//
 
-bool mlx_loop_hook(t_mlx* mlx, void (*f)(void*), void* param)
+bool mlx_loop_hook(mlx_t* mlx, void (*f)(void*), void* param)
 {
 	MLX_NONNULL(mlx);
 	MLX_NONNULL(f);
@@ -94,7 +94,7 @@ bool mlx_loop_hook(t_mlx* mlx, void (*f)(void*), void* param)
  * In Emscripten the lood is defined differently, there the this function
  * is passed to the while loop instead
  */
-void mlx_loop(t_mlx* mlx)
+void mlx_loop(mlx_t* mlx)
 {
 	MLX_NONNULL(mlx);
 

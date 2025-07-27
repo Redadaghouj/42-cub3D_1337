@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42/MLX42_Int.hh"
+#include "MLX42/MLX42_Int.h"
 
 /**
  * XPM is an obscure image format which can't seem to make up its mind
@@ -61,7 +61,7 @@ static uint8_t mlx_parse_hex_channel(char* channel)
  * @param s Size of the hash table
  * @return True or false depending on if it successfully parsed the line.
  */
-static bool mlx_insert_xpm_entry(t_xpm* xpm, char* line, uint32_t* ctable, size_t s)
+static bool mlx_insert_xpm_entry(xpm_t* xpm, char* line, uint32_t* ctable, size_t s)
 {
 	// NOTE: uintptr because windows likes to complain...
 	// Verify the length of the Pixel string by checking backwards for the first
@@ -93,7 +93,7 @@ static bool mlx_insert_xpm_entry(t_xpm* xpm, char* line, uint32_t* ctable, size_
  * @param s Size of the hash table.
  * @return True or false depending on if it successfully parsed the line.
  */
-static bool mlx_read_data(t_xpm* xpm, FILE* file, uint32_t* ctable, size_t s)
+static bool mlx_read_data(xpm_t* xpm, FILE* file, uint32_t* ctable, size_t s)
 {
 	size_t line_len;
 	char* line = NULL;
@@ -129,7 +129,7 @@ static bool mlx_read_data(t_xpm* xpm, FILE* file, uint32_t* ctable, size_t s)
  * TODO: This buffer might be way to big! Do actual collision checks, 
  * for now just straight up raw dog this.
  */
-static bool mlx_read_table(t_xpm* xpm, FILE* file)
+static bool mlx_read_table(xpm_t* xpm, FILE* file)
 {
 	char* line = NULL;
 	size_t line_len;
@@ -153,7 +153,7 @@ static bool mlx_read_table(t_xpm* xpm, FILE* file)
  * count and finally the color mode. Which is either c for Color or
  * m for Monochrome.
  */
-static bool mlx_read_xpm_header(t_xpm* xpm, FILE *file)
+static bool mlx_read_xpm_header(xpm_t* xpm, FILE *file)
 {
 	int32_t	flagc;
 	char	buffer[64] = {0};
@@ -178,17 +178,17 @@ static bool mlx_read_xpm_header(t_xpm* xpm, FILE *file)
 
 //= Public =//
 
-t_xpm* mlx_load_xpm42(const char* path)
+xpm_t* mlx_load_xpm42(const char* path)
 {
 	FILE* file;
-	t_xpm* xpm = NULL;
+	xpm_t* xpm = NULL;
 
 	MLX_NONNULL(path);
 	if (!strstr(path, ".xpm42"))
 		return ((void*)mlx_error(MLX_INVEXT));
 	if (!(file = fopen(path, "r")))
 		return ((void*)mlx_error(MLX_INVFILE));
-	if (!(xpm = calloc(1, sizeof(t_xpm))))
+	if (!(xpm = calloc(1, sizeof(xpm_t))))
 		return ((void*)mlx_error(MLX_MEMFAIL));
 	if (!mlx_read_xpm_header(xpm, file))
 	{
@@ -200,7 +200,7 @@ t_xpm* mlx_load_xpm42(const char* path)
 	return (xpm);
 }
 
-void mlx_delete_xpm42(t_xpm* xpm)
+void mlx_delete_xpm42(xpm_t* xpm)
 {
 	MLX_NONNULL(xpm);
 	free(xpm->texture.pixels);

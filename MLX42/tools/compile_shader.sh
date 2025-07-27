@@ -27,7 +27,7 @@ echo "// If you wish to modify this file edit the .vert or .frag file!"
 echo ""
 
 # Include the MLX42 header
-echo "#include \"MLX42/MLX42_Int.hh\""
+echo "#include \"MLX42/MLX42_Int.h\""
 echo ""
 
 {

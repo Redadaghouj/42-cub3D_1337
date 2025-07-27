@@ -10,16 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42/MLX42_Int.hh"
+#include "MLX42/MLX42_Int.h"
 
 //= Public =//
 
-t_mlx_texture* mlx_load_png(const char* path)
+mlx_texture_t* mlx_load_png(const char* path)
 {
 	MLX_NONNULL(path);
 
-	t_mlx_texture* image;
-	if (!(image = malloc(sizeof(t_mlx_texture))))
+	mlx_texture_t* image;
+	if (!(image = malloc(sizeof(mlx_texture_t))))
 		return ((void*)mlx_error(MLX_MEMFAIL));
 
 	uint32_t error;

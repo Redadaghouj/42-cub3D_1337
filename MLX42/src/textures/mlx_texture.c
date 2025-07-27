@@ -10,16 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42/MLX42_Int.hh"
+#include "MLX42/MLX42_Int.h"
 
 //= Public =//
 
-t_mlx_image* mlx_texture_to_image(t_mlx* mlx, t_mlx_texture* texture)
+mlx_image_t* mlx_texture_to_image(mlx_t* mlx, mlx_texture_t* texture)
 {
 	MLX_NONNULL(mlx);
 	MLX_NONNULL(texture);
 
-	t_mlx_image* image = mlx_new_image(mlx, texture->width, texture->height);
+	mlx_image_t* image = mlx_new_image(mlx, texture->width, texture->height);
 	if (image == NULL)
 		return (NULL);
 
@@ -34,7 +34,7 @@ t_mlx_image* mlx_texture_to_image(t_mlx* mlx, t_mlx_texture* texture)
 	return (image);
 }
 
-void mlx_delete_texture(t_mlx_texture* texture)
+void mlx_delete_texture(mlx_texture_t* texture)
 {
 	MLX_NONNULL(texture);
 

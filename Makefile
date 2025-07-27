@@ -60,7 +60,7 @@ MLX_DIR := ./MLX42
 MLX_INCLUDE := -I$(MLX_DIR)/include
 MLX_LIB := -L$(MLX_DIR)/build
 AMLX := $(MLX_DIR)/build/libmlx42.a
-QUIET := >/dev/null
+QUIET := >/dev/null 2>&1
 
 ifeq ($(OS),Darwin)
     MLX_FLAGS := -lmlx42 -lglfw -framework Cocoa -framework OpenGL -framework IOKit

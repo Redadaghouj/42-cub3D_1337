@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "font.hh"
-#include "MLX42/MLX42_Int.hh"
+#include "font.h"
+#include "MLX42/MLX42_Int.h"
 
 //= Private =//
 
@@ -26,7 +26,7 @@
  * @param texoffset The character texture X offset.
  * @param imgoffset The image X offset.
  */
-static void mlx_draw_char(t_mlx_image* image, int32_t texoffset, int32_t imgoffset)
+static void mlx_draw_char(mlx_image_t* image, int32_t texoffset, int32_t imgoffset)
 {
 	if (texoffset < 0)
 		return;
@@ -43,9 +43,9 @@ static void mlx_draw_char(t_mlx_image* image, int32_t texoffset, int32_t imgoffs
 
 //= Public =//
 
-const t_mlx_texture* mlx_get_font(void)
+const mlx_texture_t* mlx_get_font(void)
 {
-    return ((const t_mlx_texture*)&font_atlas);
+    return ((const mlx_texture_t*)&font_atlas);
 }
 
 int32_t mlx_get_texoffset(char c)
@@ -57,12 +57,12 @@ int32_t mlx_get_texoffset(char c)
     return (-1 * !_isprint + ((FONT_WIDTH + 2) * (c - 32)) * _isprint);
 }
 
-t_mlx_image* mlx_put_string(t_mlx* mlx, const char* str, int32_t x, int32_t y)
+mlx_image_t* mlx_put_string(mlx_t* mlx, const char* str, int32_t x, int32_t y)
 {
 	MLX_NONNULL(mlx);
 	MLX_NONNULL(str);
 
-	t_mlx_image* strimage;
+	mlx_image_t* strimage;
 	const size_t len = strlen(str);
 	if (len > MLX_MAX_STRING)
 		return ((void*)mlx_error(MLX_STRTOOBIG));	

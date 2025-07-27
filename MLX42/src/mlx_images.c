@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42/MLX42_Int.hh"
+#include "MLX42/MLX42_Int.h"
 
 //= Private =//
 
@@ -27,7 +27,7 @@ void mlx_flush_batch(mlx_ctx_t* mlx)
 	memset(mlx->bound_textures, 0, sizeof(mlx->bound_textures));
 }
 
-static int8_t mlx_bind_texture(mlx_ctx_t* mlx, t_mlx_image* img)
+static int8_t mlx_bind_texture(mlx_ctx_t* mlx, mlx_image_t* img)
 {
 	const GLint handle = (GLint)((mlx_image_ctx_t*)img->context)->texture;
 
@@ -60,7 +60,7 @@ static int8_t mlx_bind_texture(mlx_ctx_t* mlx, t_mlx_image* img)
  * Internal function to draw a single instance of an image
  * to the screen.
  */
-void mlx_draw_instance(mlx_ctx_t* mlx, t_mlx_image* img, t_mlx_instance* instance)
+void mlx_draw_instance(mlx_ctx_t* mlx, mlx_image_t* img, mlx_instance_t* instance)
 {
 	float w = (float) img->width;
 	float h = (float) img->height;
@@ -84,7 +84,7 @@ void mlx_draw_instance(mlx_ctx_t* mlx, t_mlx_image* img, t_mlx_instance* instanc
 		mlx_flush_batch(mlx);
 }
 
-t_mlx_instance* mlx_grow_instances(t_mlx_image* img, bool* did_realloc)
+mlx_instance_t* mlx_grow_instances(mlx_image_t* img, bool* did_realloc)
 {
 	mlx_image_ctx_t* const ctx = img->context;
 	if (img->count >= ctx->instances_capacity)
@@ -94,7 +94,7 @@ t_mlx_instance* mlx_grow_instances(t_mlx_image* img, bool* did_realloc)
 		else
 			ctx->instances_capacity *= 2;
 		*did_realloc = true;
-		return realloc(img->instances, ctx->instances_capacity * sizeof(t_mlx_instance));
+		return realloc(img->instances, ctx->instances_capacity * sizeof(mlx_instance_t));
 	}
 	*did_realloc = false;
 	return img->instances;
@@ -102,7 +102,7 @@ t_mlx_instance* mlx_grow_instances(t_mlx_image* img, bool* did_realloc)
 
 //= Public =//
 
-void mlx_set_instance_depth(t_mlx_instance* instance, int32_t zdepth)
+void mlx_set_instance_depth(mlx_instance_t* instance, int32_t zdepth)
 {
 	MLX_NONNULL(instance);
 
@@ -118,7 +118,7 @@ void mlx_set_instance_depth(t_mlx_instance* instance, int32_t zdepth)
 	sort_queue = true;
 }
 
-int32_t mlx_image_to_window(t_mlx* mlx, t_mlx_image* img, int32_t x, int32_t y)
+int32_t mlx_image_to_window(mlx_t* mlx, mlx_image_t* img, int32_t x, int32_t y)
 {
 	MLX_NONNULL(mlx);
 	MLX_NONNULL(img);
@@ -126,7 +126,7 @@ int32_t mlx_image_to_window(t_mlx* mlx, t_mlx_image* img, int32_t x, int32_t y)
 	// Allocate buffers...
 	img->count++;
 	bool did_realloc;
-	t_mlx_instance* instances = mlx_grow_instances(img, &did_realloc);
+	mlx_instance_t* instances = mlx_grow_instances(img, &did_realloc);
 	draw_queue_t* queue = calloc(1, sizeof(draw_queue_t));
 	if (!instances || !queue)
 	{
@@ -158,7 +158,7 @@ int32_t mlx_image_to_window(t_mlx* mlx, t_mlx_image* img, int32_t x, int32_t y)
 	return (mlx_freen(2, instances, queue), mlx_error(MLX_MEMFAIL), -1);
 }
 
-t_mlx_image* mlx_new_image(t_mlx* mlx, uint32_t width, uint32_t height)
+mlx_image_t* mlx_new_image(mlx_t* mlx, uint32_t width, uint32_t height)
 {
 	MLX_NONNULL(mlx);
 
@@ -166,7 +166,7 @@ t_mlx_image* mlx_new_image(t_mlx* mlx, uint32_t width, uint32_t height)
 		return ((void*)mlx_error(MLX_INVDIM));
 
 	const mlx_ctx_t* mlxctx = mlx->context;
-	t_mlx_image* newimg = calloc(1, sizeof(t_mlx_image));
+	mlx_image_t* newimg = calloc(1, sizeof(mlx_image_t));
 	mlx_image_ctx_t* newctx = calloc(1, sizeof(mlx_image_ctx_t));
 	if (!newimg || !newctx)
 	{
@@ -201,7 +201,7 @@ t_mlx_image* mlx_new_image(t_mlx* mlx, uint32_t width, uint32_t height)
 	return (newimg);
 }
 
-void mlx_delete_image(t_mlx* mlx, t_mlx_image* image)
+void mlx_delete_image(mlx_t* mlx, mlx_image_t* image)
 {
 	MLX_NONNULL(mlx);
 	MLX_NONNULL(image);
@@ -221,7 +221,7 @@ void mlx_delete_image(t_mlx* mlx, t_mlx_image* image)
 	}
 }
 
-bool mlx_resize_image(t_mlx_image* img, uint32_t nwidth, uint32_t nheight)
+bool mlx_resize_image(mlx_image_t* img, uint32_t nwidth, uint32_t nheight)
 {
 	MLX_NONNULL(img);
 
