@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 18:54:37 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/27 02:44:18 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/27 02:59:28 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # define ID_EAST "EA "
 # define ID_FLOOR "F "
 # define ID_CEIL "C "
-# define WALKABLE_CHARS "0"
 # define ORIENTATION_CHARS "NSEW"
 # define VALID_MAP_CHARS "NSEW0"
 # define TILE_CHARS "10 "
