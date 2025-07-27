@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 18:54:37 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/26 21:54:57 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/27 02:44:18 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 
 # define TOTAL_IDS 6
+# define IDENTIFIER_SKIP 3
 # define ID_NORTH "NO "
 # define ID_SOUTH "SO "
 # define ID_WEST "WE "
@@ -93,7 +94,7 @@ bool	is_empty(char *line);
 char	*gnl_non_empty(int fd);
 
 /* PARSE_IDENTIFIERS */
-bool	parse_identifiers(int fd, t_scene *scene, int *total_ids);
+bool	parse_identifiers(int fd, t_scene *scene);
 
 /* PARSE_MAP */
 bool	parse_map(int fd, t_scene *scene, t_player *player);

@@ -6,13 +6,22 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 04:19:39 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/22 04:19:41 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/27 02:20:38 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "../../include/cub3D.h"
+#include "../../include/cub3D.h"
 
-void	render(void)
+int	render(void)
 {
-	
+	// t_mlx *mlx = mlx_init(200, 100, "MLX42 Window", true);
+	// if (!mlx)
+	// {
+	// 	fprintf(stderr, "Failed to initialize MLX\n");
+	// 	return (EXIT_FAILURE);
+	// }
+
+	// mlx_loop(mlx);
+	// mlx_terminate(mlx);
+	return (EXIT_SUCCESS);
 }

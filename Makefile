@@ -60,6 +60,7 @@ MLX_DIR := ./MLX42
 MLX_INCLUDE := -I$(MLX_DIR)/include
 MLX_LIB := -L$(MLX_DIR)/build
 AMLX := $(MLX_DIR)/build/libmlx42.a
+QUIET := >/dev/null
 
 ifeq ($(OS),Darwin)
     MLX_FLAGS := -lmlx42 -lglfw -framework Cocoa -framework OpenGL -framework IOKit
@@ -80,7 +81,7 @@ $(NAME): $(AMLX) $(OBJS)
 $(AMLX):
 	@echo -e "$(GREEN)  Building MLX42 library...$(RESET)"
 	@mkdir -p $(MLX_DIR)/build
-	@cd $(MLX_DIR)/build && cmake .. && make
+	@cd $(MLX_DIR) && cmake -B build $(QUIET) && cmake --build build $(QUIET)
 	@echo -e "$(GREEN)  MLX42 library ready$(RESET)"
 
 %.o: %.c

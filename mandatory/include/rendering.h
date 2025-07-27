@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 04:23:18 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/26 22:15:31 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/27 02:20:34 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 # define RENDERING_H
 
 # include "../../MLX42/include/MLX42/MLX42.h"
+
+// int	render(void);
 
 #endif

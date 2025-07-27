@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:16:35 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/25 18:19:06 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/27 02:31:41 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ bool	check_extension(char *map_path)
 	return (true);
 }
 
-int	init_scene(t_scene *scene)
+void	init_scene(t_scene *scene)
 {
 	scene->texture.north = NULL;
 	scene->texture.south = NULL;
@@ -65,20 +65,18 @@ int	init_scene(t_scene *scene)
 	scene->map = NULL;
 	scene->floor.is_set = 0;
 	scene->ceiling.is_set = 0;
-	return (TOTAL_IDS);
 }
 
 bool	validate_scene(char *map_path, t_scene *scene, t_player *player)
 {
 	int		fd;
-	int		total_ids;
 
-	total_ids = init_scene(scene);
+	init_scene(scene);
 	if (!open_file(map_path, &fd))
 		return (exit_with_error(ERR_SCENE_PATH));
 	if (!check_extension(map_path))
 		return (exit_with_error(ERR_BAD_EXTENSION));
-	if (!parse_identifiers(fd, scene, &total_ids))
+	if (!parse_identifiers(fd, scene))
 		return (exit_with_error(ERR_INVALID_ID));
 	if (!parse_map(fd, scene, player))
 		return (exit_with_error(ERR_INVALID_MAP));
