@@ -56,7 +56,7 @@ SRC := $(UTILS) \
 OBJS := $(SRC:.c=.o)
 
 # MLX42 configuration
-MLX_DIR := ./MLX42
+MLX_DIR := ./libs/MLX42
 MLX_INCLUDE := -I$(MLX_DIR)/include
 MLX_LIB := -L$(MLX_DIR)/build
 AMLX := $(MLX_DIR)/build/libmlx42.a
@@ -97,7 +97,7 @@ fclean: clean
 	@echo -e "$(RED)  Removing executable...$(RESET)"
 	@$(RM) $(NAME)
 	@echo -e "$(RED)  Removing MLX42 build...$(RESET)"
-	@$(RM) -r MLX42/build
+	@$(RM) -r $(MLX_DIR)/build
 	@echo -e "$(GREEN)  Full cleanup complete$(RESET)"
 
 re: fclean

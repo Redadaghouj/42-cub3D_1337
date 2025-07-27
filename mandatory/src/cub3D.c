@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:04:11 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/27 16:58:26 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/27 17:00:33 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ int	main(int argc, char *argv[])
 		return (EXIT_FAILURE);
 	}
 	free_scene(&scene);
-	// render();
+	render();
 	return (EXIT_SUCCESS);
 }
