@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:04:11 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/27 17:00:33 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/29 19:44:20 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char *argv[])
 	t_scene		scene;
 	t_player	player;
 
-	if (argc != 2)
+	if (argc != EXPECTED_ARGC)
 		return (exit_with_error(ERR_USAGE));
 	else if (!validate_scene(argv[1], &scene, &player))
 	{

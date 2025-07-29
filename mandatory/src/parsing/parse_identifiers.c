@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:28:47 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/29 17:29:27 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/29 19:42:37 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ bool	parse_identifiers(int fd, t_scene *scene)
 		if (!line)
 			break ;
 		id_type = is_id(line, &i);
-		i += IDENTIFIER_SKIP;
+		i += ID_LENGTH;
 		if (id_type == ID_INVALID || !fill_id(id_type, scene, line + i))
 		{
 			free(line);

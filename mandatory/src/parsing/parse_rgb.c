@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 03:05:03 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/29 19:37:05 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/29 19:42:52 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ bool	parse_rgb(t_scene *scene, char *line, unsigned int id_type)
 {
 	char	**buffer;
 	int		i;
-	int		rgb[3];
+	int		rgb[RGB_COMPONENTS];
 
 	i = 0;
 	if (is_valid_rgb_format(line))

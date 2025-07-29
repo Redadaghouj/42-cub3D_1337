@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 18:54:37 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/29 19:36:50 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/29 19:44:10 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@
 # include <stdbool.h>
 # include <fcntl.h>
 
+# define EXPECTED_ARGC 2
 # define TOTAL_IDS 6
-# define IDENTIFIER_SKIP 3
+# define ID_LENGTH 3
 # define VALID_COMMAS 2
+# define RGB_COMPONENTS 3
 # define RGB_MIN 0
 # define RGB_MAX 255
 # define ID_NORTH "NO "

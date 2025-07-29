@@ -50,8 +50,7 @@ RENDERING := $(RENDERING_PATH)/rendering.c \
 SRC := $(UTILS) \
        $(PARSING) \
        $(RENDERING) \
-       $(MANDO_SRC)/cub3D.c \
-       $(MANDO_SRC)/cub3D_utils.c
+       $(MANDO_SRC)/cub3D.c
 
 OBJS := $(SRC:.c=.o)
 
