@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 19:58:29 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/26 21:58:30 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/29 19:31:45 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,21 @@ bool	is_in_bounds(char **map, int y, int x)
 	return (true);
 }
 
+bool	is_blank(char **map, int y, int x)
+{
+	return (map[y][x] == ' ');
+}
+
 bool	is_open(char **map, int y, int x, t_direction dir)
 {
 	if (dir == UP)
-		return (!is_in_bounds(map, y - 1, x) || map[y - 1][x] == ' ');
+		return (!is_in_bounds(map, y - 1, x) || is_blank(map, y - 1, x));
 	else if (dir == DOWN)
-		return (!is_in_bounds(map, y + 1, x) || map[y + 1][x] == ' ');
+		return (!is_in_bounds(map, y + 1, x) || is_blank(map, y + 1, x));
 	else if (dir == LEFT)
-		return (!is_in_bounds(map, y, x - 1) || map[y][x - 1] == ' ');
+		return (!is_in_bounds(map, y, x - 1) || is_blank(map, y, x - 1));
 	else if (dir == RIGHT)
-		return (!is_in_bounds(map, y, x + 1) || map[y][x + 1] == ' ');
+		return (!is_in_bounds(map, y, x + 1) || is_blank(map, y, x + 1));
 	else
 		return (false);
 }

@@ -6,13 +6,13 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 03:05:03 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/24 19:57:13 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/29 19:37:05 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-int	create_rgb(int r, int g, int b)
+int	rgb_to_int(int r, int g, int b)
 {
 	return ((r << 16) | (g << 8) | b);
 }
@@ -56,7 +56,7 @@ bool	is_valid_rgb_format(char *line)
 		else
 			return (false);
 	}
-	return (comma_count == 2);
+	return (comma_count == VALID_COMMAS);
 }
 
 bool	parse_rgb(t_scene *scene, char *line, unsigned int id_type)
@@ -74,7 +74,7 @@ bool	parse_rgb(t_scene *scene, char *line, unsigned int id_type)
 		while (buffer[i] != NULL)
 		{
 			rgb[i] = ft_atoi(buffer[i]);
-			if (rgb[i] < 0 || rgb[i] > 255)
+			if (rgb[i] < RGB_MIN || rgb[i] > RGB_MAX)
 				return (clean_exit(buffer, line, false));
 			i++;
 		}

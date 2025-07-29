@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 18:54:37 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/27 02:59:28 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/29 19:36:50 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 
 # define TOTAL_IDS 6
 # define IDENTIFIER_SKIP 3
+# define VALID_COMMAS 2
+# define RGB_MIN 0
+# define RGB_MAX 255
 # define ID_NORTH "NO "
 # define ID_SOUTH "SO "
 # define ID_WEST "WE "
@@ -100,7 +103,7 @@ bool	parse_map(int fd, t_scene *scene, t_player *player);
 
 /* PARSE_RGB */
 bool	parse_rgb(t_scene *scene, char *line, unsigned int id_type);
-int		create_rgb(int r, int g, int b);
+int		rgb_to_int(int r, int g, int b);
 
 /* PARSE_MAP_UTILS */
 bool	is_in_bounds(char **map, int y, int x);
