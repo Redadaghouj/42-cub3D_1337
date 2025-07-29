@@ -6,11 +6,12 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 19:14:37 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/25 04:14:11 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/29 17:31:02 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
+#include <stdlib.h>
 
 int	skip_leading_spaces(char *line)
 {
@@ -42,10 +43,17 @@ int	skip_trailing_spaces(char *line)
 
 char	*ft_strtrim(char *line)
 {
-	int	start;
-	int	end;
+	int		start;
+	int		end;
+	char	*trimmed;
 
 	start = skip_leading_spaces(line);
 	end = skip_trailing_spaces(line);
-	return (ft_substr(line, start, end - start + 1));
+	trimmed = ft_substr(line, start, end - start + 1);
+	if (is_empty(trimmed))
+	{
+		free(trimmed);
+		return (NULL);
+	}
+	return (trimmed);
 }
