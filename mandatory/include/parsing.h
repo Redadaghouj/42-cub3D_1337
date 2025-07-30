@@ -40,14 +40,6 @@ typedef struct s_texture_paths
 	char	*east;
 }				t_texture_paths;
 
-typedef struct s_color
-{
-	int		r;
-	int		g;
-	int		b;
-	int		is_set;
-}				t_color;
-
 typedef struct s_player
 {
 	double	pos_x;
@@ -58,8 +50,8 @@ typedef struct s_player
 typedef struct s_scene
 {
 	t_texture_paths	texture;
-	t_color			floor;
-	t_color			ceiling;
+	int			floor;
+	int			ceiling;
 	char			**map;
 }					t_scene;
 
@@ -81,6 +73,15 @@ typedef enum e_direction
 	LEFT,
 	RIGHT
 }	t_direction;
+
+
+# define COLOR_WHITE   0xFFFFFFFF
+# define COLOR_BLACK   0x000000FF
+# define COLOR_RED     0xFF0000FF
+# define COLOR_GREEN   0x00FF00FF
+# define COLOR_BLUE    0x0000FFFF
+# define COLOR_BROWN   0x8B4513FF
+# define COLOR_BLUE_SKY 0x87CEEBFF 
 
 /* PARSING */
 bool	validate_scene(char *map_path, t_scene *scene, t_player *player);

@@ -12,16 +12,51 @@
 
 #include "../../include/cub3D.h"
 
+void	draw_floor_and_ceiling(mlx_image_t *img, t_scene *scene)
+{
+	int			y;
+	int			x;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			if (y < HEIGHT / 2)
+				mlx_put_pixel(img, x, y, scene->ceiling);
+			else
+				mlx_put_pixel(img, x, y, scene->floor);
+			x++;
+		}
+		y++;
+	}
+}
+
 int	render(void)
 {
-	mlx_t *mlx = mlx_init(200, 100, "MLX42 Window", true);
-	if (!mlx)
+	t_mlxVar	mlx_v;
+	t_scene		scene;
+
+	scene.floor = COLOR_BROWN;
+	scene.ceiling = COLOR_BLUE_SKY;
+	mlx_v.mlx = mlx_init(WIDTH, HEIGHT, "MLX42 Window", true);
+	if (!mlx_v.mlx)
 	{
-		fprintf(stderr, "Failed to initialize MLX\n");
+		ft_putstr_fd("Failed to initialize MLX\n", 2);
 		return (EXIT_FAILURE);
 	}
 
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
+	mlx_v.img = mlx_new_image(mlx_v.mlx, WIDTH, HEIGHT);
+	if (!mlx_v.img)
+	{
+		ft_putstr_fd("Error: Failed to create image\n", 2);
+		mlx_terminate(mlx_v.mlx);
+		exit(EXIT_FAILURE);
+	}
+	draw_floor_and_ceiling(mlx_v.img, &scene);
+	mlx_image_to_window(mlx_v.mlx, mlx_v.img, 0, 0);
+	mlx_loop(mlx_v.mlx);
+	mlx_terminate(mlx_v.mlx);
 	return (EXIT_SUCCESS);
 }

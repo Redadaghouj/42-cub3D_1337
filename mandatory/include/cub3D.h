@@ -24,6 +24,15 @@
 # define EXIT_SUCCESS 0
 # define ERR_USAGE "Error\nUsage: ./cub3D ./path_to_the_scene_file\n"
 
+# define HEIGHT 800
+# define WIDTH 800
+
+typedef struct s_mlxVar
+{
+	mlx_t			*mlx;
+	mlx_image_t		*img;
+}	t_mlxVar;
+
 /* UTILS */
 size_t	ft_strlen(const char *s);
 void	ft_putstr_fd(char *s, int fd);
