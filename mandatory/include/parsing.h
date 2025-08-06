@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "MLX42/MLX42.h"
 #ifndef PARSING_H
 # define PARSING_H
 
@@ -42,16 +43,36 @@ typedef struct s_texture_paths
 
 typedef struct s_player
 {
-	double	pos_x;
-	double	pos_y;
+	double pos_x;
+	double pos_y;
+	double dir_x;
+	double dir_y;
+	double plane_x;
+	double plane_y;
 	char	orientation;			
 }				t_player;
+
+typedef struct s_color
+{
+	int		r;
+	int		g;
+	int		b;
+	int		is_set;
+}				t_color;
 
 typedef struct s_scene
 {
 	t_texture_paths	texture;
-	int			floor;
-	int			ceiling;
+	mlx_texture_t	*tex_north;
+	mlx_texture_t	*tex_south;
+	mlx_texture_t	*tex_west;
+	mlx_texture_t	*tex_east;
+	mlx_image_t		*img_north;
+	mlx_image_t		*img_south;
+	mlx_image_t		*img_west;
+	mlx_image_t		*img_east;
+	t_color			floor;
+	t_color			ceiling;
 	char			**map;
 }					t_scene;
 
@@ -75,13 +96,13 @@ typedef enum e_direction
 }	t_direction;
 
 
-# define COLOR_WHITE   0xFFFFFFFF
-# define COLOR_BLACK   0x000000FF
-# define COLOR_RED     0xFF0000FF
-# define COLOR_GREEN   0x00FF00FF
-# define COLOR_BLUE    0x0000FFFF
-# define COLOR_BROWN   0x8B4513FF
-# define COLOR_BLUE_SKY 0x87CEEBFF 
+typedef struct s_game_data
+{
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	t_scene		*scene;
+	t_player	*player;
+}	t_game_data;
 
 /* PARSING */
 bool	validate_scene(char *map_path, t_scene *scene, t_player *player);

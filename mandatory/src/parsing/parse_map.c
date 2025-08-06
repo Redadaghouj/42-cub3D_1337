@@ -31,7 +31,47 @@ bool	load_map(int fd, t_scene *scene)
 	}
 	return (true);
 }
-
+void set_player_direction(t_player *player, char direction)
+{
+	if (direction == 'N')
+	{
+		player->dir_x = 0.0;
+		player->dir_y = -1.0;
+		player->plane_x = 0.66;
+		player->plane_y = 0.0;
+	}
+	else if (direction == 'S') 
+	{
+		player->dir_x = 0.0;
+		player->dir_y = 1.0;
+		player->plane_x = -0.66;
+		player->plane_y = 0.0;
+	}
+	else if (direction == 'E') 
+	{
+		player->dir_x = 1.0;
+		player->dir_y = 0.0;
+		player->plane_x = 0.0;
+		player->plane_y = 0.66;
+	}
+	else if (direction == 'W') 
+	{
+		player->dir_x = -1.0;
+		player->dir_y = 0.0;
+		player->plane_x = 0.0;
+		player->plane_y = -0.66;
+	}
+	else 
+	{
+		player->dir_x = 0.0;
+		player->dir_y = -1.0;
+		player->plane_x = 0.66;
+		player->plane_y = 0.0;
+	}
+	
+	printf("Set player direction '%c': dir(%.2f,%.2f) plane(%.2f,%.2f)\n", 
+		direction, player->dir_x, player->dir_y, player->plane_x, player->plane_y);
+}
 bool	check_elems_player(char **map, t_player *player, bool seen_player)
 {
 	int		i;
@@ -50,8 +90,11 @@ bool	check_elems_player(char **map, t_player *player, bool seen_player)
 				if (seen_player)
 					return (false);
 				player->orientation = map[i][j];
-				player->pos_y = i;
-				player->pos_x = j;
+				player->pos_y = i + 0.5; 
+				player->pos_x = j + 0.5; 
+
+				set_player_direction(player, map[i][j]);
+				
 				seen_player = true;
 			}
 			else if (!ft_strchr(TILE_CHARS, map[i][j]))

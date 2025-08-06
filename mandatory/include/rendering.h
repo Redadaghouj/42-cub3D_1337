@@ -15,6 +15,6 @@
 
 # include "../../libs/MLX42/include/MLX42/MLX42.h"
 
-int	render(void);
+int render(t_player *player, t_scene *scene, mlx_t *mlx);
 
 #endif

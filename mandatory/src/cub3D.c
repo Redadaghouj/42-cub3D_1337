@@ -12,11 +12,32 @@
 
 #include "../include/cub3D.h"
 
-int	main(int argc, char *argv[])
+bool load_textures(t_scene *scene)
+{
+	scene->tex_north = mlx_load_png(ft_strdup("assets/textures/wall_1.png"));
+	scene->tex_south = mlx_load_png(ft_strdup("assets/textures/wall_1.png"));
+	scene->tex_west = mlx_load_png(ft_strdup("assets/textures/wall_1.png"));
+	scene->tex_east = mlx_load_png(ft_strdup("assets/textures/wall_1.png"));
+
+	if (!scene->tex_north || !scene->tex_south || !scene->tex_west || !scene->tex_east)
+		return false;
+	return true;
+}
+
+void create_images(mlx_t *mlx, t_scene *scene)
+{
+	scene->img_north = mlx_texture_to_image(mlx, scene->tex_north);
+	scene->img_south = mlx_texture_to_image(mlx, scene->tex_south);
+	scene->img_west = mlx_texture_to_image(mlx, scene->tex_west);
+	scene->img_east = mlx_texture_to_image(mlx, scene->tex_east);
+}
+
+int main(int argc, char *argv[])
 {
 	t_scene		scene;
 	t_player	player;
-
+	t_mlxVar	mlx_v;
+	
 	if (argc != 2)
 		return (exit_with_error(ERR_USAGE));
 	else if (!validate_scene(argv[1], &scene, &player))
@@ -24,7 +45,18 @@ int	main(int argc, char *argv[])
 		free_scene(&scene);
 		return (EXIT_FAILURE);
 	}
+	mlx_v.mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", true);
+	if (!mlx_v.mlx)
+	{
+		ft_putstr_fd("Failed to initialize MLX\n", 2);
+		free_scene(&scene);
+		return (EXIT_FAILURE);
+	}
+	if (!load_textures(&scene))
+		ft_putstr_fd("Warning: Failed to load some textures, using fallbacks\n", 2);
+	create_images(mlx_v.mlx, &scene);
+	render(&player, &scene, mlx_v.mlx);
+	mlx_terminate(mlx_v.mlx);
 	free_scene(&scene);
-	render();
 	return (EXIT_SUCCESS);
 }
