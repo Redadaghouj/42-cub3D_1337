@@ -27,7 +27,9 @@
 
 # define HEIGHT 800
 # define WIDTH 800
-
+#define MOVE_SPEED 0.03
+#define ROT_SPEED 0.02
+#define COLLISION_BUFFER 0.1
 typedef struct s_mlxVar
 {
 	mlx_t			*mlx;
@@ -49,5 +51,7 @@ void	*free_buffer(char **buffer); // UTILS -> ft_split
 int		ft_atoi(const char *nptr);
 int		ft_isdigit(int c);
 char	*ft_strchr(const char *s, int c);
+void 	handle_movement_keys(mlx_t *mlx, t_player *player, char **map);
+
 
 #endif

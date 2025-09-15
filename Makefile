@@ -45,7 +45,7 @@ PARSING := $(PARSING_PATH)/parsing.c \
 
 RENDERING := $(RENDERING_PATH)/rendering.c \
              $(RENDERING_PATH)/rendering_utils.c \
-             $(RENDERING_PATH)/raycasting.c
+             $(RENDERING_PATH)/player_movments.c
 
 SRC := $(UTILS) \
        $(PARSING) \
@@ -55,7 +55,6 @@ SRC := $(UTILS) \
 
 OBJS := $(SRC:.c=.o)
 
-# MLX42 configuration
 MLX_DIR := ./libs/MLX42
 MLX_INCLUDE := -I$(MLX_DIR)/include
 MLX_LIB := -L$(MLX_DIR)/build
@@ -70,7 +69,6 @@ else ifeq ($(OS),Linux)
     MLX_FLAGS := -lmlx42 -lglfw -ldl -lpthread -lm -lGL -lX11 -lXrandr -lXinerama -lXi -lXxf86vm -lXcursor
 endif
 
-# Build rules
 all: $(NAME)
 
 $(NAME): $(AMLX) $(OBJS)

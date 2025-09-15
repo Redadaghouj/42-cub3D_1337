@@ -17,39 +17,6 @@ unsigned int color_to_int(t_color c)
 	return (c.r << 24) | (c.g << 16) | (c.b << 8) | 0xFF;
 }
 
-// #include <stdlib.h>
-// #include <string.h>
-
-// // Debug function to check if textures are properly loaded
-// void debug_textures(t_scene *scene)
-// {
-// 	printf("=== TEXTURE DEBUG INFO ===\n");
-// 	printf("North texture: %p", (void*)scene->img_north);
-// 	if (scene->img_north)
-// 		printf(" (size: %dx%d, pixels: %p)\n", scene->img_north->width, scene->img_north->height, (void*)scene->img_north->pixels);
-// 	else
-// 		printf(" (NULL)\n");
-		
-// 	printf("South texture: %p", (void*)scene->img_south);
-// 	if (scene->img_south)
-// 		printf(" (size: %dx%d, pixels: %p)\n", scene->img_south->width, scene->img_south->height, (void*)scene->img_south->pixels);
-// 	else
-// 		printf(" (NULL)\n");
-		
-// 	printf("East texture: %p", (void*)scene->img_east);
-// 	if (scene->img_east)
-// 		printf(" (size: %dx%d, pixels: %p)\n", scene->img_east->width, scene->img_east->height, (void*)scene->img_east->pixels);
-// 	else
-// 		printf(" (NULL)\n");
-		
-// 	printf("West texture: %p", (void*)scene->img_west);
-// 	if (scene->img_west)
-// 		printf(" (size: %dx%d, pixels: %p)\n", scene->img_west->width, scene->img_west->height, (void*)scene->img_west->pixels);
-// 	else
-// 		printf(" (NULL)\n");
-// 	printf("==========================\n");
-// }
-
 void draw_floor_and_ceiling(mlx_image_t *img, t_scene *scene)
 {
 	int y;
@@ -78,15 +45,6 @@ void draw_floor_and_ceiling(mlx_image_t *img, t_scene *scene)
 void draw_walls(mlx_image_t *img, t_scene *scene, t_player *player)
 {
 	int x = 0;
-
-	// if (player->dir_x == 0.0 && player->dir_y == 0.0)
-	// {
-	// 	printf("ERROR: Player direction is zero! Setting default direction.\n");
-	// 	player->dir_x = -1.0;
-	// 	player->dir_y = 0.0;
-	// 	player->plane_x = 0.0;
-	// 	player->plane_y = 0.66;
-	// }
 	while (x < WIDTH)
 	{
 		double camera_x = 2 * x / (double)WIDTH - 1;
@@ -222,6 +180,7 @@ void draw_walls(mlx_image_t *img, t_scene *scene, t_player *player)
 void game_loop(void* param)
 {
 	t_game_data *data = (t_game_data*)param;
+	handle_movement_keys(data->mlx, data->player, data->scene->map);
 	draw_floor_and_ceiling(data->img, data->scene);
 	draw_walls(data->img, data->scene, data->player);
 }
@@ -236,7 +195,6 @@ void key_hook(mlx_key_data_t keydata, void* param)
 int render(t_player *player, t_scene *scene, mlx_t *mlx)
 {
 	static t_game_data game_data;
-	// debug_textures(scene);
 	if (!mlx)
 	{
 		ft_putstr_fd("MLX not initialized\n", 2);
@@ -255,7 +213,7 @@ int render(t_player *player, t_scene *scene, mlx_t *mlx)
 	game_data.player = player;
 	draw_floor_and_ceiling(img, scene);
 	draw_walls(img, scene, player);
-	if (mlx_image_to_window(mlx, img, 0, 0) < 0)
+	if (mlx_image_to_window(game_data.mlx, game_data.img , 0, 0) < 0)
 	{
 		ft_putstr_fd("Error: Failed to display image\n", 2);
 		return (EXIT_FAILURE);
