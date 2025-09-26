@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:16:35 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/25 00:13:57 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/09/25 18:01:56 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	free_scene(t_scene *scene)
 		free(scene->texture.west);
 	if (scene->texture.east)
 		free(scene->texture.east);
+	if (scene->texture.door)
+		free(scene->texture.door);
 	if (scene->map)
 		free_buffer(scene->map);
 }

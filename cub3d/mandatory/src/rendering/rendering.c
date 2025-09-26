@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 04:19:39 by redadgh           #+#    #+#             */
-/*   Updated: 2025/09/25 15:34:41 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/09/26 11:39:08 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,8 +174,8 @@ void	calculate_texture_x(t_player *player, double ray_dir_x,
 		tex_data->tex_x = 0;
 	if (tex_data->tex_x >= tex_data->tex_width)
 		tex_data->tex_x = tex_data->tex_width - 1;
-	if ((tex_data->side == 0 && ray_dir_x > 0) 
-		|| (tex_data->side == 1 && ray_dir_y < 0))
+	if ((tex_data->side == 0 && ray_dir_x < 0) 
+		|| (tex_data->side == 1 && ray_dir_y > 0))
 		tex_data->tex_x = tex_data->tex_width - tex_data->tex_x - 1;
 }
 
@@ -193,7 +193,7 @@ void	draw_textured_wall_column(mlx_image_t *img, mlx_image_t *tex_img,
 			+ tex_data->line_height / 2) * step;
 	while (tex_data->draw_start < tex_data->draw_end)
 	{
-		tex_y = (int)tex_pos & (tex_data->tex_height - 1); 
+		tex_y = (int)tex_pos % (tex_data->tex_height); 
 		tex_pos += step;
 		if (tex_y < 0)
 			tex_y = 0;

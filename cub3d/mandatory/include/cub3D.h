@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:04:34 by redadgh           #+#    #+#             */
-/*   Updated: 2025/09/24 13:25:50 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/09/25 17:34:05 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@
 # define EXIT_SUCCESS 0
 # define ERR_USAGE "Error\nUsage: ./cub3D ./path_to_the_scene_file\n"
 
-# define HEIGHT 800
-# define WIDTH 800
-#define MOVE_SPEED 0.5
+# define HEIGHT 720
+# define WIDTH 1280
+#define MOVE_SPEED 0.05
 #define ROT_SPEED 0.05
 #define COLLISION_BUFFER 0.1
 typedef struct s_mlxVar
