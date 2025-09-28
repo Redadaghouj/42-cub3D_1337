@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 19:58:29 by redadgh           #+#    #+#             */
-/*   Updated: 2025/09/24 20:58:09 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/09/28 13:10:17 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,10 @@ bool	check_elems_player(char **map, t_player *player, bool seen_player)
 {
 	int		i;
 	int		j;
+	int		seen_door;
 
 	i = -1;
+	seen_door = false;
 	while (map[++i])
 	{
 		if (map[i][0] == '\0')
@@ -101,8 +103,12 @@ bool	check_elems_player(char **map, t_player *player, bool seen_player)
 			}
 			else if (!ft_strchr(TILE_CHARS, map[i][j]))
 				return (false);
+			else if (map[i][j] == 'D')
+				seen_door = true;
 		}
 	}
+	if (!seen_door)
+		return (false);
 	return (seen_player);
 }
 
@@ -135,6 +141,33 @@ bool	is_map_enclosed(char **map)
 	return (true);
 }
 
+bool	door_between_walls(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'D')
+			{
+				if (map[i + 1][j] == '1' && map[i - 1][j] == '1')
+					return (true);
+				else if (map[i][j + 1] == '1' && map[i][j - 1] == '1')
+					return (true);
+				else
+					return (false);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (true);
+}
+
 bool	parse_map(int fd, t_scene *scene, t_player *player)
 {
 	if (!load_map(fd, scene))
@@ -142,6 +175,8 @@ bool	parse_map(int fd, t_scene *scene, t_player *player)
 	else if (!check_elems_player(scene->map, player, false))
 		return (false);
 	else if (!is_map_enclosed(scene->map))
+		return (false);
+	else if (!door_between_walls(scene->map))
 		return (false);
 	return (true);
 }
