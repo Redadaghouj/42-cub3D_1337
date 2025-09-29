@@ -120,18 +120,26 @@ void rotate_player_right(t_player *player)
 
 }
 
-void handle_movement_keys(mlx_t *mlx, t_player *player, char **map)
+int	handle_movement_keys(mlx_t *mlx, t_player *player, char **map)
 {
+	int i = 0;
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
+	{
 		move_player_forward(player, map);
+		i = 1;
+	}
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
+	{
 		move_player_backward(player, map);
+		i = 1;
+	}
 	if (mlx_is_key_down(mlx, MLX_KEY_A))
 		move_player_left(player, map);
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
 		move_player_right(player, map);
-		if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
+	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 		rotate_player_left(player);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		rotate_player_right(player);
+		return (i);
 }

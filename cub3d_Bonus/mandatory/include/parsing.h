@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 18:54:37 by redadgh           #+#    #+#             */
-/*   Updated: 2025/09/25 15:50:05 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/09/28 20:33:37 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,18 @@
 # include <stdbool.h>
 # include <fcntl.h>
 
-# define TOTAL_IDS 6
+# define TOTAL_IDS 7
 # define IDENTIFIER_SKIP 3
 # define ID_NORTH "NO "
 # define ID_SOUTH "SO "
 # define ID_WEST "WE "
 # define ID_EAST "EA "
+# define ID_DOOR "DO "
 # define ID_FLOOR "F "
 # define ID_CEIL "C "
 # define ORIENTATION_CHARS "NSEW"
-# define VALID_MAP_CHARS "NSEW0"
-# define TILE_CHARS "10 "
+# define VALID_MAP_CHARS "NSEW0D"
+# define TILE_CHARS "10D "
 # define ERR_BAD_EXTENSION "Error\nBad extension\n"
 # define ERR_SCENE_PATH "Error\nInvalid or inaccessible scene file path\n"
 # define ERR_INVALID_ID "Error\nInvalid identifier in scene\n"
@@ -39,6 +40,7 @@ typedef struct s_texture_paths
 	char	*south;
 	char	*west;
 	char	*east;
+	char	*door;
 }				t_texture_paths;
 
 typedef struct s_player
@@ -68,6 +70,8 @@ typedef struct s_scene
 	mlx_texture_t	*tex_west;
 	mlx_texture_t	*tex_east;
 	mlx_texture_t	*door_tex;
+	mlx_texture_t	*hands[5];
+	mlx_image_t		*last_hands;
 	mlx_image_t		*img_north;
 	mlx_image_t		*img_south;
 	mlx_image_t		*img_west;
@@ -84,6 +88,7 @@ typedef enum e_identifier_type
 	ID_SO,
 	ID_WE,
 	ID_EA,
+	ID_DO,
 	ID_F,
 	ID_C,
 	ID_INVALID

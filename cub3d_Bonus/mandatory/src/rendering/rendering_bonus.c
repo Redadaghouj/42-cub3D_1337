@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 04:19:39 by redadgh           #+#    #+#             */
-/*   Updated: 2025/09/25 15:51:13 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/09/28 20:33:22 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,15 +281,37 @@ void	draw_walls(mlx_image_t *img, t_scene *scene, t_player *player)
 		x++;
 	}
 }
+void	draw_hands(t_game_data *game_data)
+{
+	static int	frame_counter;
+	static int last_hand_index;
 
+	if (last_hand_index % HAND_SPEED == 0)
+	{
+		if (game_data->scene->last_hands)
+		{
+			mlx_delete_image(game_data->mlx, game_data->scene->last_hands);
+			game_data->scene->last_hands = NULL;
+		}
+		game_data->scene->last_hands = mlx_texture_to_image(game_data->mlx, game_data->scene->hands[frame_counter]);
+		mlx_image_to_window(game_data->mlx, game_data->scene->last_hands, 0, 0);
+		frame_counter = (frame_counter +1) % 5;
+	}
+		last_hand_index++;
+}
 void	game_loop(void *param)
 {
 	t_game_data	*data;
 
 	data = (t_game_data *) param;
 	handle_movement_keys(data->mlx, data->player, data->scene->map);
-	draw_floor_and_ceiling(data->img, data->scene);
-	draw_walls(data->img, data->scene, data->player);
+		draw_floor_and_ceiling(data->img, data->scene);
+		draw_walls(data->img, data->scene, data->player);
+	if (handle_movement_keys(data->mlx, data->player, data->scene->map))
+	{
+		draw_hands(data);
+	}
+
 }
 
 void	key_hook(mlx_key_data_t keydata, void *param)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_identifiers.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:28:47 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/29 17:29:27 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/09/25 18:03:50 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ unsigned int	is_id(char *line, int *i)
 		return (ID_WE);
 	else if (!ft_strncmp(line + *i, ID_EAST, ft_strlen(ID_EAST)))
 		return (ID_EA);
+	else if (!ft_strncmp(line + *i, ID_DOOR, ft_strlen(ID_DOOR)))
+		return (ID_DO);
 	else if (!ft_strncmp(line + *i, ID_FLOOR, ft_strlen(ID_FLOOR)))
 		return (ID_F);
 	else if (!ft_strncmp(line + *i, ID_CEIL, ft_strlen(ID_CEIL)))
@@ -46,6 +48,8 @@ bool	fill_id(unsigned int id_type, t_scene *scene, char *line)
 		scene->texture.west = trimmed;
 	else if (id_type == ID_EA && !scene->texture.east)
 		scene->texture.east = trimmed;
+	else if (id_type == ID_DO && !scene->texture.door)
+		scene->texture.door = trimmed;
 	else if (id_type == ID_F && !scene->floor.is_set)
 		return (parse_rgb(scene, trimmed, id_type));
 	else if (id_type == ID_C && !scene->ceiling.is_set)

@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:04:11 by redadgh           #+#    #+#             */
-/*   Updated: 2025/09/24 20:57:39 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/09/26 17:25:07 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 bool load_textures(t_scene *scene)
 {
 	scene->tex_north = mlx_load_png(ft_strdup("assets/textures/wall_1.png"));
-	scene->tex_south = mlx_load_png(ft_strdup("assets/textures/wall_1.png"));
+	scene->tex_south = mlx_load_png(ft_strdup("assets/textures/wall_111.png"));
 	scene->tex_west = mlx_load_png(ft_strdup("assets/textures/wall_1.png"));
-	scene->tex_east = mlx_load_png(ft_strdup("assets/textures/wall_1.png"));
+	scene->tex_east = mlx_load_png(ft_strdup("assets/textures/wall_111.png"));
 
 	if (!scene->tex_north || !scene->tex_south || !scene->tex_west || !scene->tex_east)
 		return false;

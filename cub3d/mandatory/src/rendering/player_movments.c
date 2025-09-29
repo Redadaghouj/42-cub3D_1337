@@ -11,7 +11,7 @@ bool	can_move_to(char **map, double new_x, double new_y)
 	int		map_x;
 	int		map_y;
 	double	buffer;
-
+	int i = 0;
 	map_y = (int)new_y;
 	map_x = (int)new_x;
 	if (map_y < 0 || map_x < 0 || !map[map_y])
@@ -27,7 +27,7 @@ bool	can_move_to(char **map, double new_x, double new_y)
 		{(int)(new_x - buffer), (int)(new_y + buffer)},
 		{(int)(new_x + buffer), (int)(new_y + buffer)}
 	};
-	for (int i = 0; i < 4; i++)
+	while (i < 4)
 	{
 		int cx = corners[i][0];
 		int cy = corners[i][1];
@@ -37,6 +37,7 @@ bool	can_move_to(char **map, double new_x, double new_y)
 			return false;
 		if (map[cy][cx] == '1')
 			return false;
+		i++;
 	}
 	return (true);
 }

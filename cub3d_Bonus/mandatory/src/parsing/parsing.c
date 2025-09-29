@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:16:35 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/27 02:31:41 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/09/25 18:01:33 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	init_scene(t_scene *scene)
 	scene->texture.south = NULL;
 	scene->texture.west = NULL;
 	scene->texture.east = NULL;
+	scene->texture.door = NULL;
     scene->map = NULL;
 	scene->floor.is_set = 0;
 	scene->ceiling.is_set = 0;
