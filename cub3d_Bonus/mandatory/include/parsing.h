@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 18:54:37 by redadgh           #+#    #+#             */
-/*   Updated: 2025/09/28 20:33:37 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/09/29 13:03:54 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ typedef struct s_scene
 	mlx_texture_t	*tex_west;
 	mlx_texture_t	*tex_east;
 	mlx_texture_t	*door_tex;
-	mlx_texture_t	*hands[5];
-	mlx_image_t		*last_hands;
+	mlx_texture_t	*gun_texture;	
+	mlx_image_t		*gun_image;
 	mlx_image_t		*img_north;
 	mlx_image_t		*img_south;
 	mlx_image_t		*img_west;

@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 04:19:39 by redadgh           #+#    #+#             */
-/*   Updated: 2025/09/28 20:33:22 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/09/29 15:50:28 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,19 @@
 
 unsigned int	color_to_int(t_color c)
 {
-	return ((c.r << 24) | (c.g << 16) | (c.b << 8) | 0xFF);
+
+    return ((c.r << 24) | (c.g << 16) | (c.b << 8) | 0xFF);
 }
 
-void	draw_floor_and_ceiling(mlx_image_t *img, t_scene *scene)
+void	draw_floor_and_ceiling(t_game_data *game_data)
 {
 	int				y;
 	int				x;
 	unsigned int	ceil_color;
 	unsigned int	floor_color;
 
-	ceil_color = color_to_int(scene->ceiling);
-	floor_color = color_to_int(scene->floor);
+	ceil_color = color_to_int(game_data->scene->ceiling);
+	floor_color = color_to_int(game_data->scene->floor);
 	y = 0;
 	while (y < HEIGHT)
 	{
@@ -33,9 +34,9 @@ void	draw_floor_and_ceiling(mlx_image_t *img, t_scene *scene)
 		while (x < WIDTH)
 		{
 			if (y < HEIGHT / 2)
-				mlx_put_pixel(img, x, y, ceil_color);
+				mlx_put_pixel(game_data->img, x, y, ceil_color);
 			else
-				mlx_put_pixel(img, x, y, floor_color);
+				mlx_put_pixel(game_data->img, x, y, floor_color);
 			x++;
 		}
 		y++;
@@ -87,7 +88,7 @@ void	calculate_step_and_side_dist(t_player *player, t_wall_data *wall_data,
 	}
 }
 
-void	perform_dda(t_scene *scene, t_dda_data *dda, t_player *player)
+void	perform_dda(t_scene *scene, t_dda_data *dda)
 {
 	int	hit;
 
@@ -112,19 +113,54 @@ void	perform_dda(t_scene *scene, t_dda_data *dda, t_player *player)
 			hit = 1;
 		else if (scene->map[dda->map_y][dda->map_x] == '1')
 			hit = 1;
-
 		else if (scene->map[dda->map_y][dda->map_x] == 'D')
 		{
-			double dx = player->pos_x - (dda->map_x + 0.5);
-			double dy = player->pos_y - (dda->map_y + 0.5);
-			double dist = sqrt(dx * dx + dy * dy);
+			// double dx = player->pos_x - (dda->map_x + 0.5);
+			// double dy = player->pos_y - (dda->map_y + 0.5);
+			// double dist = sqrt(dx * dx + dy * dy);
 
-		if (dist < 1.5)
-			hit = 0;
-		else
+		// if (dist < 1.5)
+		// 	hit = 0;
+		// else
 			hit = 1;
 		}
 	}
+}
+void	interact_with_door(t_scene *scene, t_player *player, mlx_t *mlx)
+{
+	double	dir_x = player->dir_x;
+	double	dir_y = player->dir_y;
+	int		check_x = (int)(player->pos_x + dir_x);
+	int		check_y = (int)(player->pos_y + dir_y);
+	int		y =-1;
+	int		x =-1;
+
+	if (mlx_is_key_down(mlx, MLX_KEY_E))
+	{
+		if (check_x < 0 || check_y < 0 || scene->map[check_y] == NULL)
+			return;
+		if (check_x >= (int)ft_strlen(scene->map[check_y]))
+			return;
+
+		if (scene->map[check_y][check_x] == 'D')
+		{
+			// Optional: check distance before allowing
+			double dx = player->pos_x - (check_x + 0.5);
+			double dy = player->pos_y - (check_y + 0.5);
+			double dist = sqrt(dx * dx + dy * dy);
+
+			if (dist < 1.5)
+			{
+				scene->map[check_y][check_x] = 'o'; // Open the door
+				// Optional: play sound or animation here
+			}
+		}
+	}
+	else
+		while (scene->map[++y] != NULL)
+			while (x < (int)ft_strlen(scene->map[y]))
+				if (scene->map[y][x] == 'o')
+					scene->map[y][x] = 'D';
 }
 
 void	calculate_wall_distance(t_player *player, t_wall_data *wall_data,
@@ -209,7 +245,7 @@ void	draw_textured_wall_column(mlx_image_t *img, mlx_image_t *tex_img,
 			+ tex_data->line_height / 2) * step;
 	while (tex_data->draw_start < tex_data->draw_end)
 	{
-		tex_y = (int)tex_pos & (tex_data->tex_height - 1); 
+		tex_y = (int)tex_pos; 
 		tex_pos += step;
 		if (tex_y < 0)
 			tex_y = 0;
@@ -256,7 +292,7 @@ void	draw_single_wall_column(mlx_image_t *img, t_scene *scene,
 
 	calculate_ray_direction(x, player, &wall_data);
 	calculate_step_and_side_dist(player, &wall_data, &dda);
-	perform_dda(scene, &dda, player);
+	perform_dda(scene, &dda);
 	calculate_wall_distance(player, &wall_data, &dda);
 	calculate_draw_bounds(dda.perp_wall_dist, &draw_start, 
 		&draw_end, &line_height);
@@ -269,6 +305,18 @@ void	draw_single_wall_column(mlx_image_t *img, t_scene *scene,
 	wall_data.line_height = line_height;
 	draw_textured_wall(img, tex_img, x, &wall_data);
 }
+// Constants
+#define BASE_GUN_X 250
+#define BASE_GUN_Y 420
+
+// Running animation
+#define RUN_FREQ     0.25f   // frequency of bobbing when running
+#define RUN_AMP_X    5       // sway left-right
+#define RUN_AMP_Y    10       // up-down bounce
+
+// Idle breathing animation
+#define IDLE_FREQ    0.1f   // slower breathing
+#define IDLE_AMP_Y   2       // subtle up-down motion
 
 void	draw_walls(mlx_image_t *img, t_scene *scene, t_player *player)
 {
@@ -281,36 +329,65 @@ void	draw_walls(mlx_image_t *img, t_scene *scene, t_player *player)
 		x++;
 	}
 }
-void	draw_hands(t_game_data *game_data)
-{
-	static int	frame_counter;
-	static int last_hand_index;
 
-	if (last_hand_index % HAND_SPEED == 0)
-	{
-		if (game_data->scene->last_hands)
-		{
-			mlx_delete_image(game_data->mlx, game_data->scene->last_hands);
-			game_data->scene->last_hands = NULL;
-		}
-		game_data->scene->last_hands = mlx_texture_to_image(game_data->mlx, game_data->scene->hands[frame_counter]);
-		mlx_image_to_window(game_data->mlx, game_data->scene->last_hands, 0, 0);
-		frame_counter = (frame_counter +1) % 5;
-	}
-		last_hand_index++;
+#include <math.h>
+
+void draw_gun(t_game_data *game_data, bool is_moving)
+{
+    static int frame_counter = 0;
+    float bob_phase;
+    int offset_x = BASE_GUN_X;
+    int offset_y = BASE_GUN_Y;
+
+    if (is_moving)
+    {
+        // Running motion: faster & bouncy
+        bob_phase = frame_counter * RUN_FREQ;
+        offset_x += (int)(sinf(bob_phase) * RUN_AMP_X);                    // Side-to-side
+        offset_y += (int)(fabsf(sinf(bob_phase)) * RUN_AMP_Y);            // Bounce up/down
+    }
+    else
+    {
+        // Idle breathing: slow up-down only
+        bob_phase = frame_counter * IDLE_FREQ;
+        offset_y += (int)(sinf(bob_phase) * IDLE_AMP_Y);                  // Subtle breathing
+    }
+
+    // Delete previous gun image if it exists
+    if (game_data->scene->gun_image)
+    {
+        mlx_delete_image(game_data->mlx, game_data->scene->gun_image);
+        game_data->scene->gun_image = NULL;
+    }
+
+    // Create new gun image
+    game_data->scene->gun_image = mlx_texture_to_image(
+        game_data->mlx, game_data->scene->gun_texture);
+
+    // Draw to screen
+    mlx_image_to_window(game_data->mlx, game_data->scene->gun_image, offset_x, offset_y);
+
+    // Advance frame counter
+    frame_counter++;
 }
+
+
+
 void	game_loop(void *param)
 {
 	t_game_data	*data;
 
 	data = (t_game_data *) param;
 	handle_movement_keys(data->mlx, data->player, data->scene->map);
-		draw_floor_and_ceiling(data->img, data->scene);
-		draw_walls(data->img, data->scene, data->player);
+	draw_floor_and_ceiling(data);
+	draw_walls(data->img, data->scene, data->player);
+	interact_with_door(data->scene, data->player, data->mlx);
 	if (handle_movement_keys(data->mlx, data->player, data->scene->map))
 	{
-		draw_hands(data);
+		draw_gun(data, true);
 	}
+	else
+		draw_gun(data, false);
 
 }
 
@@ -338,8 +415,8 @@ int	render(t_player *player, t_scene *scene, mlx_t *mlx)
 	game_data.img = img;
 	game_data.scene = scene;
 	game_data.player = player;
-	draw_floor_and_ceiling(img, scene);
-	draw_walls(img, scene, player);
+	draw_floor_and_ceiling(&game_data);
+	draw_walls(game_data.img, scene, player);
 	if (mlx_image_to_window(game_data.mlx, game_data.img, 0, 0) < 0)
 	{
 		ft_putstr_fd("Error: Failed to display image\n", 2);

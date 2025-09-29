@@ -18,7 +18,7 @@ bool	can_move_to(char **map, double new_x, double new_y)
 		return false;
 	if ((size_t)map_x >= ft_strlen(map[map_y]))
 		return false;
-	if (map[map_y][map_x] == '1')
+	if (map[map_y][map_x] == '1' || map[map_y][map_x] == 'D' )
 		return false;
 	buffer = COLLISION_BUFFER;
 	int corners[4][2] = {
@@ -35,7 +35,7 @@ bool	can_move_to(char **map, double new_x, double new_y)
 			return false;
 		if ((size_t)cx >= ft_strlen(map[cy]))
 			return false;
-		if (map[cy][cx] == '1')
+		if (map[cy][cx] == '1' || map[cy][cx] == 'D')
 			return false;
 	}
 	return (true);
@@ -134,9 +134,15 @@ int	handle_movement_keys(mlx_t *mlx, t_player *player, char **map)
 		i = 1;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_A))
+	{
 		move_player_left(player, map);
+		i = 1;
+	}
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
+	{
 		move_player_right(player, map);
+		i = 1;
+	}
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 		rotate_player_left(player);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))

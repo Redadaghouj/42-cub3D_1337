@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:04:34 by redadgh           #+#    #+#             */
-/*   Updated: 2025/09/28 20:41:29 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/09/29 15:44:44 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # define EXIT_SUCCESS 0
 # define ERR_USAGE "Error\nUsage: ./cub3D ./path_to_the_scene_file\n"
 
-# define HEIGHT 1080
-# define WIDTH 2000
+# define HEIGHT 800
+# define WIDTH 1100
 #define MOVE_SPEED 0.02
 #define ROT_SPEED 0.05
 #define HAND_SPEED 4
@@ -92,6 +92,6 @@ int		ft_atoi(const char *nptr);
 int		ft_isdigit(int c);
 char	*ft_strchr(const char *s, int c);
 int 	handle_movement_keys(mlx_t *mlx, t_player *player, char **map);
-
+// void	interact_with_door(t_scene *scene, t_player *player);
 
 #endif
