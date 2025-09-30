@@ -3,7 +3,7 @@ CFLAGS := -Wall -Wextra -Werror -fsanitize=address -g
 RM := rm -rf
 NAME := cub3D
 
-MANDO := mandatory
+MANDO := bonus
 MANDO_SRC := $(MANDO)/src
 MANDO_INC := $(MANDO)/include
 UTILS_PATH := $(MANDO_SRC)/utils
@@ -31,9 +31,14 @@ PARSING := $(PARSING_PATH)/parsing.c \
            $(PARSING_PATH)/parse_map.c \
            $(PARSING_PATH)/parse_map_utils.c
 
-RENDERING := $(RENDERING_PATH)/rendering_bonus.c \
-             $(RENDERING_PATH)/rendering_utils_bonus.c \
-             $(RENDERING_PATH)/player_movments_bonus.c
+RENDERING := $(RENDERING_PATH)/doors_and_animation_bonus.c \
+             $(RENDERING_PATH)/draw_walls_bonus.c \
+             $(RENDERING_PATH)/draw_walls_utils_bonus.c \
+             $(RENDERING_PATH)/player_movments_bonus.c \
+             $(RENDERING_PATH)/player_movments_utils_bonus.c \
+             $(RENDERING_PATH)/raycast_bonus.c \
+             $(RENDERING_PATH)/rendering_bonus.c \
+             $(RENDERING_PATH)/rendering_utils_bonus.c
 
 SRC := $(UTILS) \
        $(PARSING) \

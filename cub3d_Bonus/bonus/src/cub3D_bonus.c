@@ -6,13 +6,13 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:04:11 by redadgh           #+#    #+#             */
-/*   Updated: 2025/09/29 13:04:24 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/09/30 20:33:33 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-bool load_textures(t_scene *scene)
+bool	load_textures(t_scene *scene)
 {
 	scene->tex_north = mlx_load_png(ft_strdup("assets/textures/wall_1.png"));
 	scene->tex_south = mlx_load_png(ft_strdup("assets/textures/wall_1.png"));
@@ -20,28 +20,27 @@ bool load_textures(t_scene *scene)
 	scene->tex_east = mlx_load_png(ft_strdup("assets/textures/wall_1.png"));
 	scene->door_tex = mlx_load_png(ft_strdup("assets/textures/door.png"));
 	scene->gun_texture = mlx_load_png(ft_strdup("assets/textures/gun.png"));
-	if (!scene->tex_north || !scene->tex_south
-		|| !scene->tex_west || !scene->tex_east || !scene->door_tex || !scene->gun_texture)
-		return false;
-	return true;
+	if (!scene->tex_north || !scene->tex_south || !scene->tex_west
+		|| !scene->tex_east || !scene->door_tex || !scene->gun_texture)
+		return (false);
+	return (true);
 }
 
-void create_images(mlx_t *mlx, t_scene *scene)
+void	create_images(mlx_t *mlx, t_scene *scene)
 {
 	scene->img_north = mlx_texture_to_image(mlx, scene->tex_north);
 	scene->img_south = mlx_texture_to_image(mlx, scene->tex_south);
 	scene->img_west = mlx_texture_to_image(mlx, scene->tex_west);
 	scene->img_east = mlx_texture_to_image(mlx, scene->tex_east);
-	scene->door_img =  mlx_texture_to_image(mlx, scene->door_tex);
-
+	scene->door_img = mlx_texture_to_image(mlx, scene->door_tex);
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_scene		scene;
 	t_player	player;
 	t_mlxVar	mlx_v;
-	
+
 	if (argc != 2)
 		return (exit_with_error(ERR_USAGE));
 	else if (!validate_scene(argv[1], &scene, &player))
@@ -57,7 +56,7 @@ int main(int argc, char *argv[])
 		return (EXIT_FAILURE);
 	}
 	if (!load_textures(&scene))
-		ft_putstr_fd("Warning: Failed to load some textures, using fallbacks\n", 2);
+		ft_putstr_fd("Warning: Failed to load some textures\n", 2);
 	create_images(mlx_v.mlx, &scene);
 	render(&player, &scene, mlx_v.mlx);
 	mlx_terminate(mlx_v.mlx);

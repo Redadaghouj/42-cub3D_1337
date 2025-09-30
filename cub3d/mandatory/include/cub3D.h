@@ -6,7 +6,11 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:04:34 by redadgh           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/09/26 17:23:15 by mboutahi         ###   ########.fr       */
+=======
+/*   Updated: 2025/09/25 17:34:05 by mboutahi         ###   ########.fr       */
+>>>>>>> 16c821c493d95bc3d390b10226e48eb46d4566aa
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +33,11 @@
 
 # define HEIGHT 720
 # define WIDTH 1280
+<<<<<<< HEAD
 #define MOVE_SPEED 0.03
+=======
+#define MOVE_SPEED 0.05
+>>>>>>> 16c821c493d95bc3d390b10226e48eb46d4566aa
 #define ROT_SPEED 0.05
 #define COLLISION_BUFFER 0.1
 typedef struct s_mlxVar
