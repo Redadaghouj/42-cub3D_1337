@@ -1,127 +1,99 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*   Player movement system with collision detection                         */
+/*                                                        :::      ::::::::   */
+/*   player_movments.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/30 20:18:17 by mboutahi          #+#    #+#             */
+/*   Updated: 2025/10/02 13:08:31 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
+#include "../include/rendering.h"
 
-bool	can_move_to(char **map, double new_x, double new_y)
+bool	corner_check(char **map, int corners[4][2])
 {
-	int		map_x;
-	int		map_y;
-	double	buffer;
-	int i = 0;
-	map_y = (int)new_y;
-	map_x = (int)new_x;
-	if (map_y < 0 || map_x < 0 || !map[map_y])
-		return false;
-	if ((size_t)map_x >= ft_strlen(map[map_y]))
-		return false;
-	if (map[map_y][map_x] == '1')
-		return false;
-	buffer = COLLISION_BUFFER;
-	int corners[4][2] = {
-		{(int)(new_x - buffer), (int)(new_y - buffer)},
-		{(int)(new_x + buffer), (int)(new_y - buffer)},
-		{(int)(new_x - buffer), (int)(new_y + buffer)},
-		{(int)(new_x + buffer), (int)(new_y + buffer)}
-	};
+	int	i;
+	int	cx;
+	int	cy;
+
+	i = 0;
 	while (i < 4)
 	{
-		int cx = corners[i][0];
-		int cy = corners[i][1];
+		cx = corners[i][0];
+		cy = corners[i][1];
 		if (cy < 0 || cx < 0 || !map[cy])
-			return false;
+			return (false);
 		if ((size_t)cx >= ft_strlen(map[cy]))
-			return false;
-		if (map[cy][cx] == '1')
-			return false;
+			return (false);
+		if (map[cy][cx] == '1' || map[cy][cx] == 'D')
+			return (false);
 		i++;
 	}
 	return (true);
 }
 
-void move_player_forward(t_player *player, char **map)
+bool	can_move_to(char **map, double new_x, double new_y)
 {
-	double	new_x;
-	double	new_y;
+	int	corners[4][2];
+	int	map_x;
+	int	map_y;
 
-	new_x = player->pos_x + player->dir_x * MOVE_SPEED;
-	new_y = player->pos_y + player->dir_y * MOVE_SPEED;
-	if (can_move_to(map, new_x, player->pos_y))
-		player->pos_x = new_x;
-	if (can_move_to(map, player->pos_x, new_y))
-		player->pos_y = new_y;
+	map_y = (int)new_y;
+	map_x = (int)new_x;
+	if (map_y < 0 || map_x < 0 || !map[map_y])
+		return (false);
+	if ((size_t)map_x >= ft_strlen(map[map_y]))
+		return (false);
+	if (map[map_y][map_x] == '1' || map[map_y][map_x] == 'D')
+		return (false);
+	corners[0][0] = (int)(new_x - COLLISION_BUFFER);
+	corners[0][1] = (int)(new_y - COLLISION_BUFFER);
+	corners[1][0] = (int)(new_x - COLLISION_BUFFER);
+	corners[1][1] = (int)(new_y + COLLISION_BUFFER);
+	corners[2][0] = (int)(new_x + COLLISION_BUFFER);
+	corners[2][1] = (int)(new_y - COLLISION_BUFFER);
+	corners[3][0] = (int)(new_x + COLLISION_BUFFER);
+	corners[3][1] = (int)(new_y + COLLISION_BUFFER);
+	return (corner_check(map, corners));
 }
 
-void move_player_backward(t_player *player, char **map)
-{
-	double	new_x;
-	double	new_y;
-
-	new_x = player->pos_x - player->dir_x * MOVE_SPEED;
-	new_y = player->pos_y - player->dir_y * MOVE_SPEED;
-	if (can_move_to(map, new_x, player->pos_y))
-		player->pos_x = new_x;
-	if (can_move_to(map, player->pos_x, new_y))
-		player->pos_y = new_y;
-}
-
-void move_player_left(t_player *player, char **map)
-{
-	double	new_x;
-	double	new_y;
-
-	new_y = player->pos_y - player->plane_y * MOVE_SPEED;
-	new_x = player->pos_x - player->plane_x * MOVE_SPEED;
-	if (can_move_to(map, new_x, player->pos_y))
-		player->pos_x = new_x;
-	if (can_move_to(map, player->pos_x, new_y))
-		player->pos_y = new_y;
-}
-
-void move_player_right(t_player *player, char **map)
-{
-	double	new_x;
-	double	new_y;
-
-	new_y = player->pos_y + player->plane_y * MOVE_SPEED;
-	new_x = player->pos_x + player->plane_x * MOVE_SPEED;
-	if (can_move_to(map, new_x, player->pos_y))
-		player->pos_x = new_x;
-	if (can_move_to(map, player->pos_x, new_y))
-		player->pos_y = new_y;
-}
-
-void rotate_player_left(t_player *player)
+void	rotate_player_left(t_player *player)
 {
 	double	old_dir_x;
 	double	old_plane_x;
 
 	old_dir_x = player->dir_x;
-	player->dir_x = player->dir_x * cos(-ROT_SPEED) - player->dir_y * sin(-ROT_SPEED);
-	player->dir_y = old_dir_x * sin(-ROT_SPEED) + player->dir_y * cos(-ROT_SPEED);
+	player->dir_x = player->dir_x * cos(-ROT_SPEED) - player->dir_y
+		* sin(-ROT_SPEED);
+	player->dir_y = old_dir_x * sin(-ROT_SPEED) + player->dir_y
+		* cos(-ROT_SPEED);
 	old_plane_x = player->plane_x;
-	player->plane_x = player->plane_x * cos(-ROT_SPEED) - player->plane_y * sin(-ROT_SPEED);
-	player->plane_y = old_plane_x * sin(-ROT_SPEED) + player->plane_y * cos(-ROT_SPEED);
+	player->plane_x = player->plane_x * cos(-ROT_SPEED) - player->plane_y
+		* sin(-ROT_SPEED);
+	player->plane_y = old_plane_x * sin(-ROT_SPEED) + player->plane_y
+		* cos(-ROT_SPEED);
 }
 
-void rotate_player_right(t_player *player)
+void	rotate_player_right(t_player *player)
 {
 	double	old_dir_x;
-	double	old_plane_x; 
+	double	old_plane_x;
 
 	old_dir_x = player->dir_x;
-	player->dir_x = player->dir_x * cos(ROT_SPEED) - player->dir_y * sin(ROT_SPEED);
+	player->dir_x = player->dir_x * cos(ROT_SPEED) - player->dir_y
+		* sin(ROT_SPEED);
 	player->dir_y = old_dir_x * sin(ROT_SPEED) + player->dir_y * cos(ROT_SPEED);
 	old_plane_x = player->plane_x;
-	player->plane_x = player->plane_x * cos(ROT_SPEED) - player->plane_y * sin(ROT_SPEED);
-	player->plane_y = old_plane_x * sin(ROT_SPEED) + player->plane_y * cos(ROT_SPEED);
-
+	player->plane_x = player->plane_x * cos(ROT_SPEED) - player->plane_y
+		* sin(ROT_SPEED);
+	player->plane_y = old_plane_x * sin(ROT_SPEED) + player->plane_y
+		* cos(ROT_SPEED);
 }
 
-void handle_movement_keys(mlx_t *mlx, t_player *player, char **map)
+void	handle_movement_keys(mlx_t *mlx, t_player *player, char **map)
 {
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
 		move_player_forward(player, map);
@@ -131,7 +103,7 @@ void handle_movement_keys(mlx_t *mlx, t_player *player, char **map)
 		move_player_left(player, map);
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
 		move_player_right(player, map);
-		if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
+	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 		rotate_player_left(player);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		rotate_player_right(player);

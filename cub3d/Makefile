@@ -31,9 +31,12 @@ PARSING := $(PARSING_PATH)/parsing.c \
            $(PARSING_PATH)/parse_map.c \
            $(PARSING_PATH)/parse_map_utils.c
 
-RENDERING := $(RENDERING_PATH)/rendering.c \
-             $(RENDERING_PATH)/rendering_utils.c \
-             $(RENDERING_PATH)/player_movments.c
+RENDERING := $(RENDERING_PATH)/draw_walls.c \
+             $(RENDERING_PATH)/draw_walls_utils.c \
+             $(RENDERING_PATH)/player_movments.c \
+             $(RENDERING_PATH)/player_movments_utils.c \
+             $(RENDERING_PATH)/raycast.c \
+             $(RENDERING_PATH)/rendering.c \
 
 SRC := $(UTILS) \
        $(PARSING) \

@@ -6,24 +6,37 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 20:32:01 by mboutahi          #+#    #+#             */
-/*   Updated: 2025/09/30 20:32:09 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/02 13:00:41 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 #include "../../include/rendering_bonus.h"
-
+int	map_size(char **map)
+{
+	int	i;
+	
+	i = 0;
+	
+	while (map[i] != NULL)
+	{
+		i++;
+	}
+	return (i);
+}
 void	close_doors(t_scene *scene, t_player *player)
 {
 	int	y;
 	int	x;
 	int	dx;
 	int	dy;
-
+	int size;
+	
+	size = map_size(scene->map);
 	y = (int)player->pos_y - 6;
 	while (++y <= (int)player->pos_y + 6)
 	{
-		if (y < 0 || y > 11)
+		if (y < 0 || y >= size)
 			continue ;
 		x = (int)player->pos_x - 6;
 		while (++x <= (int)player->pos_x + 6)

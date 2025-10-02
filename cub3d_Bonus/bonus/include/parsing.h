@@ -7,7 +7,7 @@
 # include <stdbool.h>
 
 # define TOTAL_IDS 7
-# define IDENTIFIER_SKIP 3
+# define IDENTIFIER_SKIP 2
 # define ID_NORTH "NO "
 # define ID_SOUTH "SO "
 # define ID_WEST "WE "

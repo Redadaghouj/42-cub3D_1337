@@ -3,31 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/21 18:54:37 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/27 02:59:28 by redadgh          ###   ########.fr       */
+/*   Created: 2025/10/02 14:17:45 by mboutahi          #+#    #+#             */
+/*   Updated: 2025/10/02 14:17:52 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42/MLX42.h"
 #ifndef PARSING_H
 # define PARSING_H
 
-# include <stdbool.h>
+# include "MLX42/MLX42.h"
 # include <fcntl.h>
+# include <stdbool.h>
 
-# define TOTAL_IDS 6
-# define IDENTIFIER_SKIP 3
+# define TOTAL_IDS 7
+# define IDENTIFIER_SKIP 2
 # define ID_NORTH "NO "
 # define ID_SOUTH "SO "
 # define ID_WEST "WE "
 # define ID_EAST "EA "
+# define ID_DOOR "DO "
 # define ID_FLOOR "F "
 # define ID_CEIL "C "
 # define ORIENTATION_CHARS "NSEW"
-# define VALID_MAP_CHARS "NSEW0"
-# define TILE_CHARS "10 "
+# define VALID_MAP_CHARS "NSEW0D"
+# define TILE_CHARS "10D "
 # define ERR_BAD_EXTENSION "Error\nBad extension\n"
 # define ERR_SCENE_PATH "Error\nInvalid or inaccessible scene file path\n"
 # define ERR_INVALID_ID "Error\nInvalid identifier in scene\n"
@@ -35,30 +36,31 @@
 
 typedef struct s_texture_paths
 {
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
-}				t_texture_paths;
+	char			*north;
+	char			*south;
+	char			*west;
+	char			*east;
+	char			*door;
+}					t_texture_paths;
 
 typedef struct s_player
 {
-	double pos_x;
-	double pos_y;
-	double dir_x;
-	double dir_y;
-	double plane_x;
-	double plane_y;
-	char	orientation;			
-}				t_player;
+	double			pos_x;
+	double			pos_y;
+	double			dir_x;
+	double			dir_y;
+	double			plane_x;
+	double			plane_y;
+	char			orientation;
+}					t_player;
 
 typedef struct s_color
 {
-	int		r;
-	int		g;
-	int		b;
-	int		is_set;
-}				t_color;
+	int				r;
+	int				g;
+	int				b;
+	int				is_set;
+}					t_color;
 
 typedef struct s_scene
 {
@@ -67,10 +69,14 @@ typedef struct s_scene
 	mlx_texture_t	*tex_south;
 	mlx_texture_t	*tex_west;
 	mlx_texture_t	*tex_east;
+	mlx_texture_t	*door_tex;
+	mlx_texture_t	*gun_texture;
+	mlx_image_t		*gun_image;
 	mlx_image_t		*img_north;
 	mlx_image_t		*img_south;
 	mlx_image_t		*img_west;
 	mlx_image_t		*img_east;
+	mlx_image_t		*door_img;
 	t_color			floor;
 	t_color			ceiling;
 	char			**map;
@@ -82,10 +88,11 @@ typedef enum e_identifier_type
 	ID_SO,
 	ID_WE,
 	ID_EA,
+	ID_DO,
 	ID_F,
 	ID_C,
 	ID_INVALID
-}	t_id_type;
+}					t_id_type;
 
 typedef enum e_direction
 {
@@ -93,40 +100,41 @@ typedef enum e_direction
 	DOWN,
 	LEFT,
 	RIGHT
-}	t_direction;
-
+}					t_direction;
 
 typedef struct s_game_data
 {
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-	t_scene		*scene;
-	t_player	*player;
-}	t_game_data;
+	mlx_t			*mlx;
+	mlx_image_t		*img;
+	t_scene			*scene;
+	t_player		*player;
+}					t_game_data;
 
 /* PARSING */
-bool	validate_scene(char *map_path, t_scene *scene, t_player *player);
+bool				validate_scene(char *map_path, t_scene *scene,
+						t_player *player);
 
 /* PARSING_UTILS */
-bool	exit_with_error(char *error_msg);
-bool	open_file(char *file_name, int *fd);
-void	free_scene(t_scene *scene);
-bool	is_empty(char *line);
-char	*gnl_non_empty(int fd);
+bool				exit_with_error(char *error_msg);
+bool				open_file(char *file_name, int *fd);
+void				free_scene(t_scene *scene);
+bool				is_empty(char *line);
+char				*gnl_non_empty(int fd);
 
 /* PARSE_IDENTIFIERS */
-bool	parse_identifiers(int fd, t_scene *scene);
+bool				parse_identifiers(int fd, t_scene *scene);
 
 /* PARSE_MAP */
-bool	parse_map(int fd, t_scene *scene, t_player *player);
+bool				parse_map(int fd, t_scene *scene, t_player *player);
 
 /* PARSE_RGB */
-bool	parse_rgb(t_scene *scene, char *line, unsigned int id_type);
-int		create_rgb(int r, int g, int b);
+bool				parse_rgb(t_scene *scene, char *line, unsigned int id_type);
+int					create_rgb(int r, int g, int b);
 
 /* PARSE_MAP_UTILS */
-bool	is_in_bounds(char **map, int y, int x);
-bool	is_open(char **map, int y, int x, t_direction dir);
-char	**append_line_to_map(char **old_map, char *line, int old_len);
+bool				is_in_bounds(char **map, int y, int x);
+bool				is_open(char **map, int y, int x, t_direction dir);
+char				**append_line_to_map(char **old_map, char *line,
+						int old_len);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_identifiers.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:28:47 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/29 17:29:27 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/10/02 13:25:53 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ unsigned int	is_id(char *line, int *i)
 	else if (!ft_strncmp(line + *i, ID_CEIL, ft_strlen(ID_CEIL)))
 		return (ID_C);
 	else
-		return (ID_INVALID);
+		return printf("%s\n", line + *i);
+		// return (ID_INVALID);
+
 }
 
 bool	fill_id(unsigned int id_type, t_scene *scene, char *line)
