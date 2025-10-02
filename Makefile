@@ -1,29 +1,34 @@
-# ============ Color Definitions ============
+# ==========================================
+# ============ Color Definitions ===========
+# ==========================================
 RED     := \033[0;31m
 GRN     := \033[0;32m
 YEL     := \033[0;33m
-BLUE 	:= \033[38;2;35;177;239m
+BLUE    := \033[38;2;35;177;239m
 RESET   := \033[0m
 
-CC := cc
-CFLAGS := -Wall -Wextra -Werror -fsanitize=address -g
+# ==========================================
+# ============ Compiler Settings ===========
+# ==========================================
+CC      := cc
+CFLAGS  := -Wall -Wextra -Werror -fsanitize=address -g
+RM      := rm -rf
+NAME    := cub3D
 
-RM := rm -rf
-NAME := cub3D
+# ==========================================
+# ============ Mandatory Paths =============
+# ==========================================
+MANDO       := mandatory
+MANDO_SRC   := $(MANDO)/src
+MANDO_INC   := $(MANDO)/include
 
-MANDO := mandatory
-MANDO_SRC := $(MANDO)/src
-MANDO_INC := $(MANDO)/include
+UTILS_PATH      := $(MANDO_SRC)/utils
+PARSING_PATH    := $(MANDO_SRC)/parsing
+RENDERING_PATH  := $(MANDO_SRC)/rendering
 
-BONUS := bonus
-BONUS_SRC := $(BONUS)/src
-BONUS_INC := $(BONUS)/include
-
-# ============ MANDATORY SOURCES ============
-UTILS_PATH := $(MANDO_SRC)/utils
-PARSING_PATH := $(MANDO_SRC)/parsing
-RENDERING_PATH := $(MANDO_SRC)/rendering
-
+# ==========================================
+# ============ Mandatory Sources ===========
+# ==========================================
 UTILS := $(UTILS_PATH)/ft_strcmp.c \
          $(UTILS_PATH)/ft_strncmp.c \
          $(UTILS_PATH)/ft_putstr_fd.c \
@@ -50,20 +55,25 @@ RENDERING := $(RENDERING_PATH)/draw_walls.c \
              $(RENDERING_PATH)/player_movements.c \
              $(RENDERING_PATH)/player_movements_utils.c \
              $(RENDERING_PATH)/raycast.c \
-             $(RENDERING_PATH)/rendering.c \
+             $(RENDERING_PATH)/rendering.c
 
-SRC := $(UTILS) \
-       $(PARSING) \
-       $(RENDERING) \
-       $(MANDO_SRC)/cub3D.c
-
+SRC  := $(UTILS) $(PARSING) $(RENDERING) $(MANDO_SRC)/cub3D.c
 OBJS := $(SRC:.c=.o)
 
-# ============ BONUS SOURCES ============
-BONUS_UTILS_PATH := $(BONUS_SRC)/utils
-BONUS_PARSING_PATH := $(BONUS_SRC)/parsing
+# ==========================================
+# ============== Bonus Paths ===============
+# ==========================================
+BONUS       := bonus
+BONUS_SRC   := $(BONUS)/src
+BONUS_INC   := $(BONUS)/include
+
+BONUS_UTILS_PATH     := $(BONUS_SRC)/utils
+BONUS_PARSING_PATH   := $(BONUS_SRC)/parsing
 BONUS_RENDERING_PATH := $(BONUS_SRC)/rendering
 
+# ==========================================
+# ============== Bonus Sources =============
+# ==========================================
 BONUS_UTILS := $(BONUS_UTILS_PATH)/ft_strcmp_bonus.c \
          $(BONUS_UTILS_PATH)/ft_strncmp_bonus.c \
          $(BONUS_UTILS_PATH)/ft_putstr_fd_bonus.c \
@@ -93,26 +103,28 @@ BONUS_RENDERING := $(BONUS_RENDERING_PATH)/draw_walls_bonus.c \
              $(BONUS_RENDERING_PATH)/rendering_bonus.c \
              $(BONUS_RENDERING_PATH)/doors_and_animation_bonus.c
 
-BONUS_SRC := $(BONUS_UTILS) \
-       $(BONUS_PARSING) \
-       $(BONUS_RENDERING) \
-       $(BONUS_SRC)/cub3D_bonus.c
-
+BONUS_SRC  := $(BONUS_UTILS) $(BONUS_PARSING) $(BONUS_RENDERING) $(BONUS_SRC)/cub3D_bonus.c
 BONUS_OBJS := $(BONUS_SRC:.c=.o)
 
+# ==========================================
+# ============== MLX Settings ==============
+# ==========================================
 OS := $(shell uname -s)
 
-MLX_DIR := assets/MLX42
-MLX_BUILD := $(MLX_DIR)/build
-MLX_LIB := $(MLX_BUILD)/libmlx42.a
+MLX_DIR     := assets/MLX42
+MLX_BUILD   := $(MLX_DIR)/build
+MLX_LIB     := $(MLX_BUILD)/libmlx42.a
 MLX_INCLUDE := -I$(MLX_DIR)/include
+
 ifeq ($(OS),Darwin)
 	LFLAGS := -framework Cocoa -framework OpenGL -framework IOKit -L ~/.brew/opt/glfw/lib -lglfw
 else
 	LFLAGS := -lglfw -lm -ldl -lGL
 endif
 
-# ============ RULES ============
+# ==========================================
+# =============== Rules ====================
+# ==========================================
 all: mlx $(NAME)
 
 mlx:
@@ -126,23 +138,24 @@ mlx:
 		echo -e "$(GRN)  MLX42 already built$(RESET)"; \
 	fi
 
-$(NAME): $(OBJS) $(MLX_LIB) ${MANDO_INC}/cub3D.h
+$(NAME): $(OBJS) $(MLX_LIB) $(MANDO_INC)/cub3D.h
 	@echo -e "$(GRN)  Linking $(NAME)...$(RESET)"
 	@$(CC) $(CFLAGS) $(OBJS) $(MLX_LIB) $(MLX_INCLUDE) $(LFLAGS) -o $(NAME)
 	@$(RM) $(BONUS_OBJS)
 	@echo -e "$(GRN)  Successfully built $(NAME)$(RESET)"
 
-bonus: .bonus
+bonus: mlx .bonus
 
-.bonus: $(BONUS_OBJS) $(MLX_LIB) ${BONUS_INC}/cub3D_bonus.h
+.bonus: $(BONUS_OBJS) $(MLX_LIB) $(BONUS_INC)/cub3D_bonus.h
 	@echo -e "$(GRN)  Linking bonus $(NAME)...$(RESET)"
 	@$(CC) $(CFLAGS) $(BONUS_OBJS) $(MLX_LIB) $(MLX_INCLUDE) $(LFLAGS) -o $(NAME)
 	@touch .bonus
 	@$(RM) $(OBJS)
 	@echo -e "$(GRN)  Successfully built $(NAME)$(RESET)"
 
+# Generic compile rule
 %.o: %.c
-	@echo -e "$(BLUE)  Compiling bonus $<...$(RESET)"
+	@echo -e "$(BLUE)  Compiling $<...$(RESET)"
 	@$(CC) $(CFLAGS) $(MLX_INCLUDE) -I$(MANDO_INC) -c $< -o $@
 
 clean:
@@ -158,6 +171,9 @@ fclean: clean
 	@echo -e "$(GRN)  Full cleanup complete$(RESET)"
 
 re: fclean all
+	@echo -e "$(YEL)  Rebuilding project...$(RESET)"
+
+re_bonus: fclean bonus
 	@echo -e "$(YEL)  Rebuilding project...$(RESET)"
 
 .PHONY: all clean fclean re bonus mlx
