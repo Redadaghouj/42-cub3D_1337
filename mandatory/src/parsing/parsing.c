@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:16:35 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/27 02:31:41 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/10/03 10:48:09 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,13 @@ bool	check_extension(char *map_path)
 
 void	init_scene(t_scene *scene)
 {
-
 	scene->texture.north = NULL;
 	scene->texture.south = NULL;
 	scene->texture.west = NULL;
 	scene->texture.east = NULL;
-    scene->map = NULL;
+	scene->map = NULL;
 	scene->floor.is_set = 0;
 	scene->ceiling.is_set = 0;
-
 }
 
 bool	validate_scene(char *map_path, t_scene *scene, t_player *player)

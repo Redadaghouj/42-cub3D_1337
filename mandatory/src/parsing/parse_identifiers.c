@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_identifiers.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:28:47 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/02 21:22:06 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/10/03 10:46:34 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ unsigned int	is_id(char *line, int *i)
 		return (ID_C);
 	else
 		return (ID_INVALID);
-
 }
 
 bool	fill_id(unsigned int id_type, t_scene *scene, char *line)

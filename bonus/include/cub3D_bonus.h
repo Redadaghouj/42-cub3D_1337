@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:04:34 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/02 22:05:16 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/10/03 10:49:13 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 
 # include "parsing_bonus.h"
 # include "rendering_bonus.h"
-
 
 # define EXIT_FAILURE 1
 # define EXIT_SUCCESS 0

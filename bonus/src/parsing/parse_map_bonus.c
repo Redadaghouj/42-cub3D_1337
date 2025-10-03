@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 19:58:29 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/02 22:07:03 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/10/03 10:50:33 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D_bonus.h"
+#include <stdbool.h>
 
 bool	load_map(int fd, t_scene *scene)
 {
@@ -32,7 +33,7 @@ bool	load_map(int fd, t_scene *scene)
 	return (true);
 }
 
-void set_player_direction(t_player *player, char direction)
+void	set_player_direction(t_player *player, char direction)
 {
 	if (direction == 'N')
 	{
@@ -93,9 +94,7 @@ bool	check_elems_player(char **map, t_player *player, bool seen_player)
 				player->orientation = map[i][j];
 				player->pos_y = i + 0.5; 
 				player->pos_x = j + 0.5; 
-
 				set_player_direction(player, map[i][j]);
-				
 				seen_player = true;
 			}
 			else if (!ft_strchr(TILE_CHARS, map[i][j]))
@@ -151,11 +150,7 @@ bool	door_between_walls(char **map)
 		{
 			if (map[i][j] == 'D')
 			{
-				if (map[i + 1][j] == '1' && map[i - 1][j] == '1')
-					return (true);
-				else if (map[i][j + 1] == '1' && map[i][j - 1] == '1')
-					return (true);
-				else
+				if ((map[i + 1][j] != '1' && map[i - 1][j] != '1') && map[i][j + 1] != '1' && map[i][j - 1] != '1')
 					return (false);
 			}
 			j++;

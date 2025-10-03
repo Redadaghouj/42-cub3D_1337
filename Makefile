@@ -117,7 +117,7 @@ MLX_LIB     := $(MLX_BUILD)/libmlx42.a
 MLX_INCLUDE := -I$(MLX_DIR)/include
 
 ifeq ($(OS),Darwin)
-	LFLAGS := -framework Cocoa -framework OpenGL -framework IOKit -L ~/.brew/opt/glfw/lib -lglfw
+	LFLAGS := -framework Cocoa -framework OpenGL -framework IOKit -L /goinfre/$(shell basename $(HOME))/homebrew/opt/glfw/lib -lglfw
 else
 	LFLAGS := -lglfw -lm -ldl -lGL
 endif
@@ -128,52 +128,52 @@ endif
 all: mlx $(NAME)
 
 mlx:
-	@echo -e "$(YEL)  Checking for MLX42...$(RESET)"
+	@printf "$(YEL)  Checking for MLX42...$(RESET)\n"
 	@if [ ! -f $(MLX_LIB) ]; then \
-		echo -e "$(YEL)  MLX42 not found, cloning and building...$(RESET)"; \
+		printf "$(YEL)  MLX42 not found, cloning and building...$(RESET)\n"; \
 		$(RM) $(MLX_DIR); \
 		git clone https://github.com/codam-coding-college/MLX42.git $(MLX_DIR); \
 		cd $(MLX_DIR) && cmake -B build && cmake --build build; \
 	else \
-		echo -e "$(GRN)  MLX42 already built$(RESET)"; \
+		printf "$(GRN)  MLX42 already built$(RESET)\n"; \
 	fi
 
 $(NAME): $(OBJS) $(MLX_LIB) $(MANDO_INC)/cub3D.h
-	@echo -e "$(GRN)  Linking $(NAME)...$(RESET)"
+	@printf "$(GRN)  Linking $(NAME)...$(RESET)\n"
 	@$(CC) $(CFLAGS) $(OBJS) $(MLX_LIB) $(MLX_INCLUDE) $(LFLAGS) -o $(NAME)
 	@$(RM) $(BONUS_OBJS)
-	@echo -e "$(GRN)  Successfully built $(NAME)$(RESET)"
+	@printf "$(GRN)  Successfully built $(NAME)$(RESET)\n"
 
 bonus: mlx .bonus
 
 .bonus: $(BONUS_OBJS) $(MLX_LIB) $(BONUS_INC)/cub3D_bonus.h
-	@echo -e "$(GRN)  Linking bonus $(NAME)...$(RESET)"
+	@printf "$(GRN)  Linking bonus $(NAME)...$(RESET)\n"
 	@$(CC) $(CFLAGS) $(BONUS_OBJS) $(MLX_LIB) $(MLX_INCLUDE) $(LFLAGS) -o $(NAME)
 	@touch .bonus
 	@$(RM) $(OBJS)
-	@echo -e "$(GRN)  Successfully built $(NAME)$(RESET)"
+	@printf "$(GRN)  Successfully built $(NAME)$(RESET)\n"
 
 # Generic compile rule
 %.o: %.c
-	@echo -e "$(BLUE)  Compiling $<...$(RESET)"
+	@printf "$(BLUE)  Compiling $<...$(RESET)\n"
 	@$(CC) $(CFLAGS) $(MLX_INCLUDE) -I$(MANDO_INC) -c $< -o $@
 
 clean:
-	@echo -e "$(RED)  Cleaning object files...$(RESET)"
+	@printf "$(RED)  Cleaning object files...$(RESET)\n"
 	@$(RM) $(OBJS) $(BONUS_OBJS) .bonus
-	@echo -e "$(GRN)  Object files removed$(RESET)"
+	@printf "$(GRN)  Object files removed$(RESET)\n"
 
 fclean: clean
-	@echo -e "$(RED)  Removing executable...$(RESET)"
+	@printf "$(RED)  Removing executable...$(RESET)\n"
 	@$(RM) $(NAME)
-	@echo -e "$(RED)  Removing MLX42...$(RESET)"
+	@printf "$(RED)  Removing MLX42...$(RESET)\n"
 	@$(RM) $(MLX_DIR)
-	@echo -e "$(GRN)  Full cleanup complete$(RESET)"
+	@printf "$(GRN)  Full cleanup complete$(RESET)\n"
 
 re: fclean all
-	@echo -e "$(YEL)  Rebuilding project...$(RESET)"
+	@printf "$(YEL)  Rebuilding project...$(RESET)\n"
 
 re_bonus: fclean bonus
-	@echo -e "$(YEL)  Rebuilding project...$(RESET)"
+	@printf "$(YEL)  Rebuilding project...$(RESET)\n"
 
 .PHONY: all clean fclean re bonus mlx

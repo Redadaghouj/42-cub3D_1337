@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doors_and_animation_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 20:32:01 by mboutahi          #+#    #+#             */
-/*   Updated: 2025/10/02 22:07:47 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/10/03 11:03:28 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,23 @@
 int	map_size(char **map)
 {
 	int	i;
-	
+
 	i = 0;
-	
 	while (map[i] != NULL)
 	{
 		i++;
 	}
 	return (i);
 }
+
 void	close_doors(t_scene *scene, t_player *player)
 {
 	int	y;
 	int	x;
 	int	dx;
 	int	dy;
-	int size;
-	
+	int	size;
+
 	size = map_size(scene->map);
 	y = (int)player->pos_y - 6;
 	while (++y <= (int)player->pos_y + 6)
