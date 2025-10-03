@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:04:11 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/02 22:52:43 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/10/03 13:05:49 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ void	create_images(mlx_t *mlx, t_scene *scene)
 	scene->img_west = mlx_texture_to_image(mlx, scene->tex_west);
 	scene->img_east = mlx_texture_to_image(mlx, scene->tex_east);
 	scene->door_img = mlx_texture_to_image(mlx, scene->door_tex);
+	mlx_delete_texture(scene->tex_north);
+	mlx_delete_texture(scene->tex_south);
+	mlx_delete_texture(scene->tex_west);
+	mlx_delete_texture(scene->tex_east);
+	mlx_delete_texture(scene->door_tex);
+	// mlx_delete_texture(scene->gun_texture);
 }
 
 int	main(int argc, char *argv[])
@@ -44,16 +50,12 @@ int	main(int argc, char *argv[])
 	if (argc != 2)
 		return (exit_with_error(ERR_USAGE));
 	else if (!validate_scene(argv[1], &scene, &player))
-	{
-		free_scene(&scene);
-		return (EXIT_FAILURE);
-	}
+		return (free_scene(&scene), EXIT_FAILURE);
 	mlx_v.mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", true);
 	if (!mlx_v.mlx)
 	{
 		ft_putstr_fd("Failed to initialize MLX\n", 2);
-		free_scene(&scene);
-		return (EXIT_FAILURE);
+		return (free_scene(&scene), EXIT_FAILURE);
 	}
 	if (!load_textures(&scene))
 	{

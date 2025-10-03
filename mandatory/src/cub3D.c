@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:04:11 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/02 22:10:53 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/10/03 13:01:12 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ void	create_images(mlx_t *mlx, t_scene *scene)
 	scene->img_south = mlx_texture_to_image(mlx, scene->tex_south);
 	scene->img_west = mlx_texture_to_image(mlx, scene->tex_west);
 	scene->img_east = mlx_texture_to_image(mlx, scene->tex_east);
+	mlx_delete_texture(scene->tex_north);
+	mlx_delete_texture(scene->tex_south);
+	mlx_delete_texture(scene->tex_west);
+	mlx_delete_texture(scene->tex_east);
 }
 
 int	main(int argc, char *argv[])

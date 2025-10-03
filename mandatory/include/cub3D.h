@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:04:34 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/02 22:08:57 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/10/03 12:51:25 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 # define HEIGHT 800
 # define WIDTH 1100
-# define MOVE_SPEED 0.02
+# define MOVE_SPEED 0.03
 # define ROT_SPEED 0.05
 # define HAND_SPEED 4
 # define COLLISION_BUFFER 0.1
