@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw_walls_utils_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 20:30:33 by mboutahi          #+#    #+#             */
-/*   Updated: 2025/10/02 22:07:58 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/10/04 15:58:01 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D_bonus.h"
 
-void	calculate_draw_bounds(double perp_wall_dist, int *draw_start,
+void	center_wall(double perp_wall_dist, int *draw_start,
 		int *draw_end, int *line_height)
 {
 	*line_height = (int)(HEIGHT / perp_wall_dist);

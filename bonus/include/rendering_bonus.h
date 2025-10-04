@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 04:23:18 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/04 15:40:38 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/04 16:01:11 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ unsigned int	color_to_int(t_color c);
 void			draw_floor_and_ceiling(mlx_image_t *img, t_scene *scene);
 void			calculate_ray_direction(double x, t_player *player,
 					t_wall_data *wall_data);
-void			calculate_step_and_side_dist(t_player *player,
+void			calculate_step_and_ray_mov(t_player *player,
 					t_wall_data *wall_data, t_dda_data *dda);
 void			perform_dda(t_scene *scene, t_dda_data *dda);
 void			close_doors(t_scene *scene, t_player *player);
@@ -66,7 +66,7 @@ void			interact_with_door(t_scene *scene, t_player *player,
 					mlx_t *mlx);
 void			calculate_wall_distance(t_player *player,
 					t_wall_data *wall_data, t_dda_data *dda);
-void			calculate_draw_bounds(double perp_wall_dist, int *draw_start,
+void			center_wall(double perp_wall_dist, int *draw_start,
 					int *draw_end, int *line_height);
 mlx_image_t		*select_texture(t_scene *scene, t_dda_data *dda,
 					t_wall_data *wall_data);

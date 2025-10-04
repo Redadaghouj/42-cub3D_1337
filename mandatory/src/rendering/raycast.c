@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 20:16:09 by mboutahi          #+#    #+#             */
-/*   Updated: 2025/10/04 15:43:48 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/04 16:01:37 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	calculate_ray_direction(double x, t_player *player,
 		wall_data->ray_dir_y = 1e-30;
 }
 
-void	calculate_step_and_side_dist(t_player *player, t_wall_data *wall_data, 
+void	calculate_step_and_ray_mov(t_player *player, t_wall_data *wall_data, 
 									t_dda_data *dda)
 {
 	dda->map_x = (int)player->pos_x;

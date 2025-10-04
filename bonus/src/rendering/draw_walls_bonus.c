@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 20:31:40 by mboutahi          #+#    #+#             */
-/*   Updated: 2025/10/04 15:41:10 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/04 16:02:23 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,23 +83,17 @@ void	draw_single_wall_column(mlx_image_t *img, t_scene *scene,
 								t_player *player, int x)
 {
 	t_dda_data	dda;
-	int			draw_start;
-	int			draw_end;
-	int			line_height;
 	t_wall_data	wall_data;
 
 	calculate_ray_direction(x, player, &wall_data);
-	calculate_step_and_side_dist(player, &wall_data, &dda);
+	calculate_step_and_ray_mov(player, &wall_data, &dda);
 	perform_dda(scene, &dda);
 	calculate_wall_distance(player, &wall_data, &dda);
-	calculate_draw_bounds(dda.ray_wall_dist, &draw_start, 
-		&draw_end, &line_height);
+	center_wall(dda.ray_wall_dist, &wall_data.draw_start, 
+		&wall_data.draw_end, &wall_data.line_height);
 	wall_data.player = player;
 	wall_data.side = dda.side;
 	wall_data.ray_wall_dist = dda.ray_wall_dist;
-	wall_data.draw_start = draw_start;
-	wall_data.draw_end = draw_end;
-	wall_data.line_height = line_height;
 	draw_textured_wall(img, select_texture(scene, &dda, &wall_data),
 		x, &wall_data);
 }

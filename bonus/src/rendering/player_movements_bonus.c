@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 20:18:17 by mboutahi          #+#    #+#             */
-/*   Updated: 2025/10/04 13:08:29 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/04 16:15:17 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,42 +59,47 @@ bool	can_move_to(char **map, double new_x, double new_y)
 	return (corner_check(map, corners));
 }
 
-void	rotate_player_right(t_player *player)
+void	rotate_player(t_player *player, double speed)
 {
-	player->angle += ROT_SPEED;
+	player->angle += speed;
 	player->dir_x = cos(player->angle);
 	player->dir_y = sin(player->angle);
 	player->plane_x = -sin(player->angle) * 0.66;
 	player->plane_y = cos(player->angle) * 0.66;
 }
 
-void	rotate_player_left(t_player *player)
+void	rotate(mlx_t *mlx, t_player *player)
 {
-	player->angle -= ROT_SPEED;
-	player->dir_x = cos(player->angle);
-	player->dir_y = sin(player->angle);
-	player->plane_x = -sin(player->angle) * 0.66;
-	player->plane_y = cos(player->angle) * 0.66;
+	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
+		rotate_player(player, -ROT_SPEED);
+	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
+		rotate_player(player, ROT_SPEED);
 }
-
 int	handle_movement_keys(mlx_t *mlx, t_player *player, char **map)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
+	{
 		move_player_forward(player, map);
-	else if (mlx_is_key_down(mlx, MLX_KEY_S))
+		i = 1;
+	}
+	if (mlx_is_key_down(mlx, MLX_KEY_S))
+	{
 		move_player_backward(player, map);
-	else if (mlx_is_key_down(mlx, MLX_KEY_A))
+		i = 1;
+	}
+	if (mlx_is_key_down(mlx, MLX_KEY_A))
+	{
 		move_player_left(player, map);
-	else if (mlx_is_key_down(mlx, MLX_KEY_D))
+		i = 1;
+	}
+	if (mlx_is_key_down(mlx, MLX_KEY_D))
+	{
 		move_player_right(player, map);
-	else
-		i = 0;
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		rotate_player_left(player);
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		rotate_player_right(player);
+		i = 1;
+	}
+	rotate(mlx, player);
 	return (i);
 }
