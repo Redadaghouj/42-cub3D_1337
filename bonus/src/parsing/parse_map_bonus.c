@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 19:58:29 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/03 10:50:33 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/10/04 13:05:29 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,47 +36,24 @@ bool	load_map(int fd, t_scene *scene)
 void	set_player_direction(t_player *player, char direction)
 {
 	if (direction == 'N')
-	{
-		player->dir_x = 0.0;
-		player->dir_y = -1.0;
-		player->plane_x = 0.66;
-		player->plane_y = 0.0;
-	}
-	else if (direction == 'S') 
-	{
-		player->dir_x = 0.0;
-		player->dir_y = 1.0;
-		player->plane_x = -0.66;
-		player->plane_y = 0.0;
-	}
-	else if (direction == 'E') 
-	{
-		player->dir_x = 1.0;
-		player->dir_y = 0.0;
-		player->plane_x = 0.0;
-		player->plane_y = 0.66;
-	}
-	else if (direction == 'W') 
-	{
-		player->dir_x = -1.0;
-		player->dir_y = 0.0;
-		player->plane_x = 0.0;
-		player->plane_y = -0.66;
-	}
-	else
-	{
-		player->dir_x = 0.0;
-		player->dir_y = -1.0;
-		player->plane_x = 0.66;
-		player->plane_y = 0.0;
-	}
+		player->angle = -M_PI / 2;
+	else if (direction == 'S')
+		player->angle = M_PI / 2;
+	else if (direction == 'E')
+		player->angle = 0;
+	else if (direction == 'W')
+		player->angle = M_PI;
+	player->dir_x = cos(player->angle);
+	player->dir_y = sin(player->angle);
+	player->plane_x = sin(player->angle) * 0.66;
+	player->plane_y = -cos(player->angle) * 0.66;
 }
 
 bool	check_elems_player(char **map, t_player *player, bool seen_player)
 {
-	int		i;
-	int		j;
-	int		seen_door;
+	int	i;
+	int	j;
+	int	seen_door;
 
 	i = -1;
 	seen_door = false;
@@ -92,8 +69,8 @@ bool	check_elems_player(char **map, t_player *player, bool seen_player)
 				if (seen_player)
 					return (false);
 				player->orientation = map[i][j];
-				player->pos_y = i + 0.5; 
-				player->pos_x = j + 0.5; 
+				player->pos_y = i + 0.5;
+				player->pos_x = j + 0.5;
 				set_player_direction(player, map[i][j]);
 				seen_player = true;
 			}
@@ -150,7 +127,8 @@ bool	door_between_walls(char **map)
 		{
 			if (map[i][j] == 'D')
 			{
-				if ((map[i + 1][j] != '1' && map[i - 1][j] != '1') && map[i][j + 1] != '1' && map[i][j - 1] != '1')
+				if ((map[i + 1][j] != '1' && map[i - 1][j] != '1') && map[i][j
+					+ 1] != '1' && map[i][j - 1] != '1')
 					return (false);
 			}
 			j++;

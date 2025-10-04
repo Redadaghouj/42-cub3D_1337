@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:04:11 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/03 13:05:49 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/04 13:07:22 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,22 @@ bool	load_textures(t_scene *scene)
 	scene->tex_west = mlx_load_png(scene->texture.west);
 	scene->tex_east = mlx_load_png(scene->texture.east);
 	scene->door_tex = mlx_load_png(scene->texture.door);
-	scene->gun_texture = mlx_load_png(ft_strdup("assets/textures/gun.png"));
+	scene->hands[0] = mlx_load_png("assets/textures/frame_00.png");
+	scene->hands[1] = mlx_load_png("assets/textures/frame_01.png");
+	scene->hands[2] = mlx_load_png("assets/textures/frame_02.png");
+	scene->hands[3] = mlx_load_png("assets/textures/frame_03.png");
+	scene->hands[4] = mlx_load_png("assets/textures/frame_04.png");
+	scene->hands[5] = mlx_load_png("assets/textures/frame_05.png");
+	scene->hands[6] = mlx_load_png("assets/textures/frame_06.png");
+	scene->hands[7] = mlx_load_png("assets/textures/frame_07.png");
+	scene->hands[8] = mlx_load_png("assets/textures/frame_08.png");
+	scene->hands[9] = mlx_load_png("assets/textures/frame_09.png");
+	scene->hands[10] = mlx_load_png("assets/textures/frame_10.png");
+	scene->hands[11] = mlx_load_png("assets/textures/frame_11.png");
+	scene->hands[12] = mlx_load_png("assets/textures/frame_12.png");
+	scene->hands[13] = mlx_load_png("assets/textures/frame_13.png");
+	scene->hands[14] = mlx_load_png("assets/textures/frame_14.png");
+	scene->hands[15] = mlx_load_png("assets/textures/frame_15.png");
 	if (!scene->tex_north || !scene->tex_south || !scene->tex_west
 		|| !scene->tex_east || !scene->door_tex || !scene->gun_texture)
 		return (false);
@@ -28,6 +43,9 @@ bool	load_textures(t_scene *scene)
 
 void	create_images(mlx_t *mlx, t_scene *scene)
 {
+	int	i;
+
+	i = 0;
 	scene->img_north = mlx_texture_to_image(mlx, scene->tex_north);
 	scene->img_south = mlx_texture_to_image(mlx, scene->tex_south);
 	scene->img_west = mlx_texture_to_image(mlx, scene->tex_west);
@@ -38,7 +56,6 @@ void	create_images(mlx_t *mlx, t_scene *scene)
 	mlx_delete_texture(scene->tex_west);
 	mlx_delete_texture(scene->tex_east);
 	mlx_delete_texture(scene->door_tex);
-	// mlx_delete_texture(scene->gun_texture);
 }
 
 int	main(int argc, char *argv[])

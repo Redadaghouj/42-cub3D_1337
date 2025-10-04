@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:17:45 by mboutahi          #+#    #+#             */
-/*   Updated: 2025/10/02 22:13:00 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/10/04 13:11:18 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_player
 	double			plane_x;
 	double			plane_y;
 	char			orientation;
+	double			angle;
 }					t_player;
 
 typedef struct s_color

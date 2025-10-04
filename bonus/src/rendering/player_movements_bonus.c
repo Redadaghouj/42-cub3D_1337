@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movements_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 20:18:17 by mboutahi          #+#    #+#             */
-/*   Updated: 2025/10/02 22:35:48 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/10/04 13:08:29 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,37 +59,22 @@ bool	can_move_to(char **map, double new_x, double new_y)
 	return (corner_check(map, corners));
 }
 
-void	rotate_player_left(t_player *player)
-{
-	double	old_dir_x;
-	double	old_plane_x;
-
-	old_dir_x = player->dir_x;
-	player->dir_x = player->dir_x * cos(-ROT_SPEED) - player->dir_y
-		* sin(-ROT_SPEED);
-	player->dir_y = old_dir_x * sin(-ROT_SPEED) + player->dir_y
-		* cos(-ROT_SPEED);
-	old_plane_x = player->plane_x;
-	player->plane_x = player->plane_x * cos(-ROT_SPEED) - player->plane_y
-		* sin(-ROT_SPEED);
-	player->plane_y = old_plane_x * sin(-ROT_SPEED) + player->plane_y
-		* cos(-ROT_SPEED);
-}
-
 void	rotate_player_right(t_player *player)
 {
-	double	old_dir_x;
-	double	old_plane_x;
+	player->angle += ROT_SPEED;
+	player->dir_x = cos(player->angle);
+	player->dir_y = sin(player->angle);
+	player->plane_x = -sin(player->angle) * 0.66;
+	player->plane_y = cos(player->angle) * 0.66;
+}
 
-	old_dir_x = player->dir_x;
-	player->dir_x = player->dir_x * cos(ROT_SPEED) - player->dir_y
-		* sin(ROT_SPEED);
-	player->dir_y = old_dir_x * sin(ROT_SPEED) + player->dir_y * cos(ROT_SPEED);
-	old_plane_x = player->plane_x;
-	player->plane_x = player->plane_x * cos(ROT_SPEED) - player->plane_y
-		* sin(ROT_SPEED);
-	player->plane_y = old_plane_x * sin(ROT_SPEED) + player->plane_y
-		* cos(ROT_SPEED);
+void	rotate_player_left(t_player *player)
+{
+	player->angle -= ROT_SPEED;
+	player->dir_x = cos(player->angle);
+	player->dir_y = sin(player->angle);
+	player->plane_x = -sin(player->angle) * 0.66;
+	player->plane_y = cos(player->angle) * 0.66;
 }
 
 int	handle_movement_keys(mlx_t *mlx, t_player *player, char **map)

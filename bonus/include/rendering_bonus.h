@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 04:23:18 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/02 22:16:46 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/10/04 15:40:38 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,15 @@
 
 # include "parsing_bonus.h"
 
-# define BASE_GUN_X 250
-# define BASE_GUN_Y 420
-
-# define RUN_FREQ 0.20f
-# define RUN_AMP_X 5
-# define RUN_AMP_Y 10
-
-# define IDLE_FREQ 0.1f
-# define IDLE_AMP_Y 2
-
 typedef struct s_dda_data
 {
 	int			map_x;
 	int			map_y;
-	double		side_dist_x;
-	double		side_dist_y;
-	double		delta_dist_x;
-	double		delta_dist_y;
-	double		perp_wall_dist;
+	double		ray_mov_x;
+	double		ray_mov_y;
+	double		ray_unit_x;
+	double		ray_unit_y;
+	double		ray_wall_dist;
 	int			step_x;
 	int			step_y;
 	int			side;
@@ -45,7 +35,7 @@ typedef struct s_texture_data
 	int			tex_height;
 	int			tex_x;
 	int			side;
-	double		perp_wall_dist;
+	double		ray_wall_dist;
 	int			draw_start;
 	int			draw_end;
 	int			line_height;
@@ -54,10 +44,11 @@ typedef struct s_texture_data
 typedef struct s_wall_data
 {
 	t_player	*player;
+	double		ray_angle;
 	double		ray_dir_x;
 	double		ray_dir_y;
 	int			side;
-	double		perp_wall_dist;
+	double		ray_wall_dist;
 	int			draw_start;
 	int			draw_end;
 	int			line_height;

@@ -11,7 +11,7 @@ RESET   := \033[0m
 # ============ Compiler Settings ===========
 # ==========================================
 CC      := cc
-CFLAGS  := -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS  := -Wall -Wextra -Werror #-fsanitize=address -g
 RM      := rm -rf
 NAME    := cub3D
 

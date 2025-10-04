@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_walls.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 20:31:40 by mboutahi          #+#    #+#             */
-/*   Updated: 2025/10/02 22:11:20 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/10/04 15:43:02 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	calculate_texture_x(t_player *player, double ray_dir_x,
 	double	wall_x;
 
 	if (tex_data->side == 0)
-		wall_x = player->pos_y + tex_data->perp_wall_dist * ray_dir_y;
+		wall_x = player->pos_y + tex_data->ray_wall_dist * ray_dir_y;
 	else
-		wall_x = player->pos_x + tex_data->perp_wall_dist * ray_dir_x;
+		wall_x = player->pos_x + tex_data->ray_wall_dist * ray_dir_x;
 	wall_x -= floor(wall_x);
 	tex_data->tex_x = (int)(wall_x * (double)tex_data->tex_width);
 	if (tex_data->tex_x < 0)
@@ -70,7 +70,7 @@ void	draw_textured_wall(mlx_image_t *img, mlx_image_t *tex_img,
 	tex_data.tex_width = tex_img->width;
 	tex_data.tex_height = tex_img->height;
 	tex_data.side = wall_data->side;
-	tex_data.perp_wall_dist = wall_data->perp_wall_dist;
+	tex_data.ray_wall_dist = wall_data->ray_wall_dist;
 	tex_data.draw_start = wall_data->draw_start;
 	tex_data.draw_end = wall_data->draw_end;
 	tex_data.line_height = wall_data->line_height;
@@ -92,11 +92,11 @@ void	draw_single_wall_column(mlx_image_t *img, t_scene *scene,
 	calculate_step_and_side_dist(player, &wall_data, &dda);
 	perform_dda(scene, &dda);
 	calculate_wall_distance(player, &wall_data, &dda);
-	calculate_draw_bounds(dda.perp_wall_dist, &draw_start, 
+	calculate_draw_bounds(dda.ray_wall_dist, &draw_start, 
 		&draw_end, &line_height);
 	wall_data.player = player;
 	wall_data.side = dda.side;
-	wall_data.perp_wall_dist = dda.perp_wall_dist;
+	wall_data.ray_wall_dist = dda.ray_wall_dist;
 	wall_data.draw_start = draw_start;
 	wall_data.draw_end = draw_end;
 	wall_data.line_height = line_height;

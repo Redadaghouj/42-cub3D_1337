@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 04:19:39 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/02 22:48:09 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/10/04 13:00:40 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,20 @@ void	game_loop(void *param)
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
 	t_game_data	*data;
+	int			i;
 
+	i = 0;
 	data = (t_game_data *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+	{
+		while (i < 16)
+		{
+			if (data->scene->hands[i])
+				mlx_delete_texture(data->scene->hands[i]);
+			i++;
+		}
 		mlx_close_window(data->mlx);
+	}
 }
 
 int	render(t_player *player, t_scene *scene, mlx_t *mlx)

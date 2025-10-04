@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 22:06:11 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/02 22:16:21 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/10/03 18:02:35 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PARSING_BONUS_H
 
 # include "../../assets/MLX42/include/MLX42/MLX42.h"
-
 # include <fcntl.h>
 # include <stdbool.h>
 
@@ -53,6 +52,7 @@ typedef struct s_player
 	double			plane_x;
 	double			plane_y;
 	char			orientation;
+	double			angle;
 }					t_player;
 
 typedef struct s_color
@@ -72,6 +72,8 @@ typedef struct s_scene
 	mlx_texture_t	*tex_east;
 	mlx_texture_t	*door_tex;
 	mlx_texture_t	*gun_texture;
+	mlx_texture_t	*hands[16];
+	mlx_image_t		*last_hands;
 	mlx_image_t		*gun_image;
 	mlx_image_t		*img_north;
 	mlx_image_t		*img_south;

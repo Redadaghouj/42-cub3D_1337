@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 20:32:01 by mboutahi          #+#    #+#             */
-/*   Updated: 2025/10/03 13:12:55 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/03 16:51:03 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,24 @@
 int	map_size(char **map)
 {
 	int	i;
-	
+
 	i = 0;
-	
 	while (map[i] != NULL)
 	{
 		i++;
 	}
 	return (i);
 }
+
 void	close_doors(t_scene *scene, t_player *player)
 {
 	int	y;
 	int	x;
 	int	dx;
 	int	dy;
-	int size;
-	
-	size = (y = (int)player->pos_y - 6, map_size(scene->map));
+	int	size;
+
+	size = ((y = (int)player->pos_y - 6), map_size(scene->map));
 	while (++y <= (int)player->pos_y + 6)
 	{
 		if (y < 0 || y >= size)
@@ -76,27 +76,24 @@ void	interact_with_door(t_scene *scene, t_player *player, mlx_t *mlx)
 
 void	draw_gun(t_game_data *game_data, bool is_moving)
 {
-	static int	frame_counter = 0;
-	int			offset_x;
-	int			offset_y;	
+	static int	frame_counter;
+	static int	last_hand_index;
+	int			hand_speed;
 
-	offset_x = BASE_GUN_X;
-	offset_y = BASE_GUN_Y;
+	hand_speed = HAND_SPEED;
 	if (is_moving)
+		hand_speed = HAND_SPEED / 2;
+	if (last_hand_index % hand_speed == 0)
 	{
-		offset_x += (int)(sinf(frame_counter * RUN_FREQ) * RUN_AMP_X);
-		offset_y += (int)(fabsf(sinf(frame_counter * RUN_FREQ)) * RUN_AMP_Y);
+		if (game_data->scene->last_hands)
+		{
+			mlx_delete_image(game_data->mlx, game_data->scene->last_hands);
+			game_data->scene->last_hands = NULL;
+		}
+		game_data->scene->last_hands = mlx_texture_to_image(game_data->mlx,
+				game_data->scene->hands[frame_counter]);
+		mlx_image_to_window(game_data->mlx, game_data->scene->last_hands, 0, 0);
+		frame_counter = (frame_counter + 1) % 16;
 	}
-	else
-		offset_y += (int)(sinf(frame_counter * IDLE_FREQ) * IDLE_AMP_Y);
-	if (game_data->scene->gun_image)
-	{
-		mlx_delete_image(game_data->mlx, game_data->scene->gun_image);
-		game_data->scene->gun_image = NULL;
-	}
-	game_data->scene->gun_image = mlx_texture_to_image(
-			game_data->mlx, game_data->scene->gun_texture);
-	mlx_image_to_window(game_data->mlx, game_data->scene->gun_image,
-		offset_x, offset_y);
-	frame_counter++;
+	last_hand_index++;
 }

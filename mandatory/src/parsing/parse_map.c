@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 19:58:29 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/03 10:47:24 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/10/04 13:05:38 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,42 +35,17 @@ bool	load_map(int fd, t_scene *scene)
 void	set_player_direction(t_player *player, char direction)
 {
 	if (direction == 'N')
-	{
-		player->dir_x = 0.0;
-		player->dir_y = -1.0;
-		player->plane_x = 0.66;
-		player->plane_y = 0.0;
-	}
-	else if (direction == 'S') 
-	{
-		player->dir_x = 0.0;
-		player->dir_y = 1.0;
-		player->plane_x = -0.66;
-		player->plane_y = 0.0;
-	}
-	else if (direction == 'E') 
-	{
-		player->dir_x = 1.0;
-		player->dir_y = 0.0;
-		player->plane_x = 0.0;
-		player->plane_y = 0.66;
-	}
-	else if (direction == 'W') 
-	{
-		player->dir_x = -1.0;
-		player->dir_y = 0.0;
-		player->plane_x = 0.0;
-		player->plane_y = -0.66;
-	}
-	else 
-	{
-		player->dir_x = 0.0;
-		player->dir_y = -1.0;
-		player->plane_x = 0.66;
-		player->plane_y = 0.0;
-	}
-	printf("Set player direction '%c': dir(%.2f,%.2f) plane(%.2f,%.2f)\n", 
-		direction, player->dir_x, player->dir_y, player->plane_x, player->plane_y);
+		player->angle = -M_PI / 2;
+	else if (direction == 'S')
+		player->angle = M_PI / 2;
+	else if (direction == 'E')
+		player->angle = 0;
+	else if (direction == 'W')
+		player->angle = M_PI;
+	player->dir_x = cos(player->angle);
+	player->dir_y = sin(player->angle);
+	player->plane_x = sin(player->angle) * 0.66;
+	player->plane_y = -cos(player->angle) * 0.66;
 }
 
 bool	check_elems_player(char **map, t_player *player, bool seen_player)
