@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 19:58:29 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/04 13:05:38 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/05 18:15:15 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,7 @@ bool	check_elems_player(char **map, t_player *player, bool seen_player)
 			{
 				if (seen_player)
 					return (false);
-				player->orientation = map[i][j];
-				player->pos_y = i + 0.5; 
-				player->pos_x = j + 0.5; 
-				set_player_direction(player, map[i][j]);
+				init_player_data(map, player, i, j);
 				seen_player = true;
 			}
 			else if (!ft_strchr(TILE_CHARS, map[i][j]))

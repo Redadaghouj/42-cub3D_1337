@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 19:58:29 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/04 13:05:29 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/05 18:17:15 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,20 +68,13 @@ bool	check_elems_player(char **map, t_player *player, bool seen_player)
 			{
 				if (seen_player)
 					return (false);
-				player->orientation = map[i][j];
-				player->pos_y = i + 0.5;
-				player->pos_x = j + 0.5;
-				set_player_direction(player, map[i][j]);
+				init_player_data(map, player, i, j);
 				seen_player = true;
 			}
 			else if (!ft_strchr(TILE_CHARS, map[i][j]))
 				return (false);
-			else if (map[i][j] == 'D')
-				seen_door = true;
 		}
 	}
-	if (!seen_door)
-		return (false);
 	return (seen_player);
 }
 
@@ -105,30 +98,6 @@ bool	is_map_enclosed(char **map)
 				if (is_open(map, i, j, RIGHT))
 					return (false);
 				if (is_open(map, i, j, LEFT))
-					return (false);
-			}
-			j++;
-		}
-		i++;
-	}
-	return (true);
-}
-
-bool	door_between_walls(char **map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == 'D')
-			{
-				if ((map[i + 1][j] != '1' && map[i - 1][j] != '1') && map[i][j
-					+ 1] != '1' && map[i][j - 1] != '1')
 					return (false);
 			}
 			j++;

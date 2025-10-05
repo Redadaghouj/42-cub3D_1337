@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 20:32:01 by mboutahi          #+#    #+#             */
-/*   Updated: 2025/10/05 13:01:36 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/05 18:06:49 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,14 @@ void	draw_gun(t_game_data *game_data, bool is_moving)
 	last_hand_index++;
 }
 
- void	mouse_move_handler(double x, double y, void *param)
- {
-	t_game_data *game;
-	double center;
+void	mouse_move_handler(double x, double y, void *param)
+{
+	t_game_data	*game;
+	double		center;
 
 	game = (t_game_data *)param;
 	(void)y;
-	center = x - WIDTH/2.0;
+	center = x - WIDTH / 2.0;
 	if (center < -1.0)
 	{
 		rotate_player(game->player, -ROT_SPEED * 3);
@@ -115,4 +115,3 @@ void	draw_gun(t_game_data *game_data, bool is_moving)
 	mlx_set_mouse_pos(game->mlx, WIDTH / 2, HEIGHT / 2);
 	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
 }
-

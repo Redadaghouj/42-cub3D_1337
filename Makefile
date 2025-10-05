@@ -11,7 +11,7 @@ RESET   := \033[0m
 # ============ Compiler Settings ===========
 # ==========================================
 CC      := cc
-CFLAGS  := -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS  := -Wall -Wextra -Werror #-fsanitize=address -g
 RM      := rm -rf
 NAME    := cub3D
 
@@ -140,7 +140,7 @@ mlx:
 		printf "$(GRN)  MLX42 already built$(RESET)\n"; \
 	fi
 
-$(NAME): $(OBJS) $(MLX_LIB) $(MANDO_INC)/cub3D.h
+$(NAME): $(OBJS) $(MLX_LIB) $(MANDO_INC)/cub3D.h $(MANDO_INC)/rendering.h $(MANDO_INC)/parsing.h
 	@printf "$(GRN)  Linking $(NAME)...$(RESET)\n"
 	@$(CC) $(CFLAGS) $(OBJS) $(MLX_LIB) $(MLX_INCLUDE) $(LFLAGS) -o $(NAME)
 	@$(RM) $(BONUS_OBJS)
@@ -148,7 +148,7 @@ $(NAME): $(OBJS) $(MLX_LIB) $(MANDO_INC)/cub3D.h
 
 bonus: mlx .bonus
 
-.bonus: $(BONUS_OBJS) $(MLX_LIB) $(BONUS_INC)/cub3D_bonus.h
+.bonus: $(BONUS_OBJS) $(MLX_LIB) $(BONUS_INC)/cub3D_bonus.h $(MANDO_INC)/rendering_bonus.h $(MANDO_INC)/parsing_bonus.h
 	@printf "$(GRN)  Linking bonus $(NAME)...$(RESET)\n"
 	@$(CC) $(CFLAGS) $(BONUS_OBJS) $(MLX_LIB) $(MLX_INCLUDE) $(LFLAGS) -o $(NAME)
 	@touch .bonus

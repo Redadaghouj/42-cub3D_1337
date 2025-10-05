@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:17:45 by mboutahi          #+#    #+#             */
-/*   Updated: 2025/10/04 13:11:18 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/05 18:26:00 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,30 +112,32 @@ typedef struct s_game_data
 }					t_game_data;
 
 /* PARSING */
-bool				validate_scene(char *map_path, t_scene *scene,
-						t_player *player);
+bool	validate_scene(char *map_path, t_scene *scene,
+			t_player *player);
 
 /* PARSING_UTILS */
-bool				exit_with_error(char *error_msg);
-bool				open_file(char *file_name, int *fd);
-void				free_scene(t_scene *scene);
-bool				is_empty(char *line);
-char				*gnl_non_empty(int fd);
+bool	exit_with_error(char *error_msg);
+bool	open_file(char *file_name, int *fd);
+void	free_scene(t_scene *scene);
+bool	is_empty(char *line);
+char	*gnl_non_empty(int fd);
 
 /* PARSE_IDENTIFIERS */
-bool				parse_identifiers(int fd, t_scene *scene);
+bool	parse_identifiers(int fd, t_scene *scene);
 
 /* PARSE_MAP */
-bool				parse_map(int fd, t_scene *scene, t_player *player);
+bool	parse_map(int fd, t_scene *scene, t_player *player);
+void	set_player_direction(t_player *player, char direction);
 
 /* PARSE_RGB */
-bool				parse_rgb(t_scene *scene, char *line, unsigned int id_type);
-int					create_rgb(int r, int g, int b);
+bool	parse_rgb(t_scene *scene, char *line, unsigned int id_type);
+int		create_rgb(int r, int g, int b);
 
 /* PARSE_MAP_UTILS */
-bool				is_in_bounds(char **map, int y, int x);
-bool				is_open(char **map, int y, int x, t_direction dir);
-char				**append_line_to_map(char **old_map, char *line,
-						int old_len);
+bool	is_in_bounds(char **map, int y, int x);
+bool	is_open(char **map, int y, int x, t_direction dir);
+char	**append_line_to_map(char **old_map, char *line,
+			int old_len);
+void	init_player_data(char **map, t_player *player, int i, int j);
 
 #endif

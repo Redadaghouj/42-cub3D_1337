@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 04:23:18 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/05 17:48:05 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/10/05 18:04:57 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,8 @@ void			rotate_player(t_player *player, double speed);
 void			mouse_move_handler(double x, double y, void *param);
 void			minimap_skip(t_minimap_data *minimap);
 void			minimap_row(t_game_data *game, t_minimap_data *minimap);
-void			init_minimap_data(t_game_data *game_data, t_minimap_data *minimap_data);
+void			init_minimap_data(t_game_data *game_data, 
+					t_minimap_data *minimap_data);
 void			draw_minimap(t_game_data *game_data);
 
 #endif

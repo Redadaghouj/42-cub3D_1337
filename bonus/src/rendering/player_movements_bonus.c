@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 20:18:17 by mboutahi          #+#    #+#             */
-/*   Updated: 2025/10/04 16:15:17 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/05 18:05:23 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	rotate(mlx_t *mlx, t_player *player)
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		rotate_player(player, ROT_SPEED);
 }
+
 int	handle_movement_keys(mlx_t *mlx, t_player *player, char **map)
 {
 	int	i;
