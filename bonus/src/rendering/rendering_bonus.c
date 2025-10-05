@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 04:19:39 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/05 12:42:32 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/05 17:52:28 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	game_loop(void *param)
 	}
 	else
 		draw_gun(data, false);
+	draw_minimap(data);
 }
 
 void	key_hook(mlx_key_data_t keydata, void *param)

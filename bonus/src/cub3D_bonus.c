@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:04:11 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/04 13:07:22 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/05 17:48:33 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,6 @@ bool	load_textures(t_scene *scene)
 
 void	create_images(mlx_t *mlx, t_scene *scene)
 {
-	int	i;
-
-	i = 0;
 	scene->img_north = mlx_texture_to_image(mlx, scene->tex_north);
 	scene->img_south = mlx_texture_to_image(mlx, scene->tex_south);
 	scene->img_west = mlx_texture_to_image(mlx, scene->tex_west);

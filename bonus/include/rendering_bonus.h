@@ -3,15 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   rendering_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 04:23:18 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/05 12:37:30 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/05 17:48:05 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDERING_BONUS_H
 # define RENDERING_BONUS_H
+
+# define MINIMAP_HEIGHT 220
+# define MINIMAP_WIDTH 220
+# define MINIMAP_START 20
+# define BLOCK_SIZE 20
+# define MINIMAP_RADIUS 5
+# define MINIMAP_BG_COLOR 0x0F0F0FFF
+# define MINIMAP_WALL_COLOR 0xADADADFF
+# define MINIMAP_PLAYER_COLOR 0x800080FF
+# define MINIMAP_DOOR_COLOR 0x851729FF
 
 # include "parsing_bonus.h"
 
@@ -54,6 +64,19 @@ typedef struct s_wall_data
 	int			line_height;
 }				t_wall_data;
 
+typedef struct s_minimap_data
+{
+	int	map_y;
+	int	map_x;
+	int	screen_y;
+	int	screen_x;
+	int	start_y;
+	int	end_y;
+	int	start_x;
+	int	end_x;
+	int	map_height;
+}	t_minimap_data;
+
 unsigned int	color_to_int(t_color c);
 void			draw_floor_and_ceiling(mlx_image_t *img, t_scene *scene);
 void			calculate_ray_direction(double x, t_player *player,
@@ -89,5 +112,10 @@ void			move_player_left(t_player *player, char **map);
 void			move_player_right(t_player *player, char **map);
 bool			can_move_to(char **map, double new_x, double new_y);
 void			rotate_player(t_player *player, double speed);
- void			mouse_move_handler(double x, double y, void *param);
+void			mouse_move_handler(double x, double y, void *param);
+void			minimap_skip(t_minimap_data *minimap);
+void			minimap_row(t_game_data *game, t_minimap_data *minimap);
+void			init_minimap_data(t_game_data *game_data, t_minimap_data *minimap_data);
+void			draw_minimap(t_game_data *game_data);
+
 #endif

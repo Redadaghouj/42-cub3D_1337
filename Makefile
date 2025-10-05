@@ -11,7 +11,7 @@ RESET   := \033[0m
 # ============ Compiler Settings ===========
 # ==========================================
 CC      := cc
-CFLAGS  := -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS  := -Wall -Wextra -Werror -fsanitize=address -g
 RM      := rm -rf
 NAME    := cub3D
 
@@ -101,7 +101,9 @@ BONUS_RENDERING := $(BONUS_RENDERING_PATH)/draw_walls_bonus.c \
              $(BONUS_RENDERING_PATH)/player_movements_utils_bonus.c \
              $(BONUS_RENDERING_PATH)/raycast_bonus.c \
              $(BONUS_RENDERING_PATH)/rendering_bonus.c \
-             $(BONUS_RENDERING_PATH)/doors_and_animation_bonus.c
+             $(BONUS_RENDERING_PATH)/doors_and_animation_bonus.c \
+             $(BONUS_RENDERING_PATH)/draw_minimap_bonus.c \
+             $(BONUS_RENDERING_PATH)/draw_minimap_utils_bonus.c
 
 BONUS_SRC  := $(BONUS_UTILS) $(BONUS_PARSING) $(BONUS_RENDERING) $(BONUS_SRC)/cub3D_bonus.c
 BONUS_OBJS := $(BONUS_SRC:.c=.o)
