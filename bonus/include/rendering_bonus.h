@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 04:23:18 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/04 16:01:11 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/05 12:37:30 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,6 @@ void			move_player_backward(t_player *player, char **map);
 void			move_player_left(t_player *player, char **map);
 void			move_player_right(t_player *player, char **map);
 bool			can_move_to(char **map, double new_x, double new_y);
+void			rotate_player(t_player *player, double speed);
+ void			mouse_move_handler(double x, double y, void *param);
 #endif

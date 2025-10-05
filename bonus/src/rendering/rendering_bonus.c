@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 04:19:39 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/04 13:00:40 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/05 12:42:32 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int	render(t_player *player, t_scene *scene, mlx_t *mlx)
 	}
 	mlx_loop_hook(mlx, game_loop, &game_data);
 	mlx_key_hook(mlx, key_hook, &game_data);
+	mlx_cursor_hook(mlx, mouse_move_handler, &game_data);
 	mlx_loop(mlx);
 	return (EXIT_SUCCESS);
 }

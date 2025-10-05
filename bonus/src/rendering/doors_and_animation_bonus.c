@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 20:32:01 by mboutahi          #+#    #+#             */
-/*   Updated: 2025/10/03 16:51:03 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/05 13:01:36 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	interact_with_door(t_scene *scene, t_player *player, mlx_t *mlx)
 		return ;
 	dx = player->pos_x - (check_x_open + 0.5);
 	dy = player->pos_y - (check_y_open + 0.5);
-	if (sqrt(dx * dx + dy * dy) < 1.5
+	if ((dx < 1.5 || dy < 1.5)
 		&& mlx_is_key_down(mlx, MLX_KEY_E)
 		&& scene->map[check_y_open][check_x_open] == 'D')
 		scene->map[check_y_open][check_x_open] = 'O';
@@ -97,3 +97,22 @@ void	draw_gun(t_game_data *game_data, bool is_moving)
 	}
 	last_hand_index++;
 }
+
+ void	mouse_move_handler(double x, double y, void *param)
+ {
+	t_game_data *game;
+	double center;
+
+	game = (t_game_data *)param;
+	(void)y;
+	center = x - WIDTH/2.0;
+	if (center < -1.0)
+	{
+		rotate_player(game->player, -ROT_SPEED * 3);
+	}
+	else if (center > 1.0)
+		rotate_player(game->player, ROT_SPEED * 3);
+	mlx_set_mouse_pos(game->mlx, WIDTH / 2, HEIGHT / 2);
+	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
+}
+
