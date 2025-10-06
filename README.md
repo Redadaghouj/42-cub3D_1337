@@ -32,6 +32,10 @@ Cub3D is a 42 Network project that involves creating a 3D graphical representati
 - **Animated Sprites**: Moving elements within the game world
 - **Mouse Control**: Rotate viewpoint using mouse movement
 
+### ➕ Bonus
+
+![Game Screenshot](assets/video.gif)  
+
 ## 🗺️ Map File Format (`.cub`)
 
 The scene description file must contain:
