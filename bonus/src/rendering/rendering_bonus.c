@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 04:19:39 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/05 17:52:28 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/10/06 10:46:21 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,12 @@ int	render(t_player *player, t_scene *scene, mlx_t *mlx)
 	mlx_image_t			*img;
 
 	if (!mlx)
-		return (ft_putstr_fd("Error\nMLX not initialized\n", 2), EXIT_FAILURE);
+		return (free_tex(scene), ft_putstr_fd("Error\nMLX not initialized\n", 2),
+			EXIT_FAILURE);
 	img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	if (!img)
-		return (ft_putstr_fd("Error\nFailed to create image\n", 2),
-			EXIT_FAILURE);
+		return (free_tex(scene),
+			ft_putstr_fd("Error\nFailed to create image\n", 2), EXIT_FAILURE);
 	game_data.mlx = mlx;
 	game_data.img = img;
 	game_data.scene = scene;
@@ -97,10 +98,9 @@ int	render(t_player *player, t_scene *scene, mlx_t *mlx)
 	draw_floor_and_ceiling(img, scene);
 	draw_walls(img, scene, player);
 	if (mlx_image_to_window(game_data.mlx, game_data.img, 0, 0) < 0)
-	{
-		ft_putstr_fd("Error\nFailed to display image\n", 2);
-		return (EXIT_FAILURE);
-	}
+		return (free_tex(scene),
+			ft_putstr_fd("Error\nFailed to display image\n", 2),
+			free_tex(scene), EXIT_FAILURE);
 	mlx_loop_hook(mlx, game_loop, &game_data);
 	mlx_key_hook(mlx, key_hook, &game_data);
 	mlx_cursor_hook(mlx, mouse_move_handler, &game_data);

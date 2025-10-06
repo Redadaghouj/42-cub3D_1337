@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:04:34 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/04 13:10:52 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/05 18:43:49 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,5 @@ int				ft_atoi(const char *nptr);
 int				ft_isdigit(int c);
 char			*ft_strchr(const char *s, int c);
 int				handle_movement_keys(mlx_t *mlx, t_player *player, char **map);
-// void	interact_with_door(t_scene *scene, t_player *player);
 
 #endif

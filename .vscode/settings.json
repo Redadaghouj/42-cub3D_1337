@@ -1,7 +1,0 @@
-{
-    "C_Cpp.errorSquiggles": "disabled",
-    "files.associations": {
-        "complex": "c",
-        "cub3d_bonus.h": "c"
-    }
-}

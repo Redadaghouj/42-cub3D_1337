@@ -148,7 +148,7 @@ $(NAME): $(OBJS) $(MLX_LIB) $(MANDO_INC)/cub3D.h $(MANDO_INC)/rendering.h $(MAND
 
 bonus: mlx .bonus
 
-.bonus: $(BONUS_OBJS) $(MLX_LIB) $(BONUS_INC)/cub3D_bonus.h $(MANDO_INC)/rendering_bonus.h $(MANDO_INC)/parsing_bonus.h
+.bonus: $(BONUS_OBJS) $(MLX_LIB) $(BONUS_INC)/cub3D_bonus.h $(BONUS_INC)/rendering_bonus.h $(BONUS_INC)/parsing_bonus.h
 	@printf "$(GRN)  Linking bonus $(NAME)...$(RESET)\n"
 	@$(CC) $(CFLAGS) $(BONUS_OBJS) $(MLX_LIB) $(MLX_INCLUDE) $(LFLAGS) -o $(NAME)
 	@touch .bonus

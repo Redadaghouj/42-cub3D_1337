@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 20:16:09 by mboutahi          #+#    #+#             */
-/*   Updated: 2025/10/04 16:00:51 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/06 10:42:58 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,17 @@ void	calculate_wall_distance(t_player *player, t_wall_data *wall_data,
 	else
 		dda->ray_wall_dist = (dda->map_y - player->pos_y 
 				+ (1 - dda->step_y) / 2) / wall_data->ray_dir_y;
+}
+
+void	free_tex(t_scene *scene)
+{
+	int	i;
+
+	i = 0;
+	while (i < 16)
+	{
+		if (scene->hands[i])
+			mlx_delete_texture(scene->hands[i]);
+		i++;
+	}
 }

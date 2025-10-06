@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 20:30:33 by mboutahi          #+#    #+#             */
-/*   Updated: 2025/10/04 15:58:01 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/06 10:43:20 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,16 @@ mlx_image_t	*select_texture(t_scene *scene, t_dda_data *dda,
 			tex_img = scene->img_north;
 	}
 	return (tex_img);
+}
+
+void	free_textures(t_scene *scene)
+{
+	if (scene->tex_east)
+		mlx_delete_texture(scene->tex_east);
+	if (scene->tex_west)
+		mlx_delete_texture(scene->tex_west);
+	if (scene->tex_north)
+		mlx_delete_texture(scene->tex_north);
+	if (scene->tex_south)
+		mlx_delete_texture(scene->tex_south);
 }

@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 04:23:18 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/04 16:01:19 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/06 10:36:08 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,5 @@ void			move_player_backward(t_player *player, char **map);
 void			move_player_left(t_player *player, char **map);
 void			move_player_right(t_player *player, char **map);
 bool			can_move_to(char **map, double new_x, double new_y);
+void			free_texures(t_scene *scene);
 #endif

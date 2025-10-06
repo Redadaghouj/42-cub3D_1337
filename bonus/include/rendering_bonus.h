@@ -6,7 +6,7 @@
 /*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 04:23:18 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/05 18:04:57 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/06 10:41:17 by mboutahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,6 @@ void			minimap_row(t_game_data *game, t_minimap_data *minimap);
 void			init_minimap_data(t_game_data *game_data, 
 					t_minimap_data *minimap_data);
 void			draw_minimap(t_game_data *game_data);
-
+void			free_tex(t_scene *data);
+void			free_textures(t_scene *scene);
 #endif

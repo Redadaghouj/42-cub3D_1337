@@ -2,7 +2,7 @@ NO ./assets/textures/wall_1.png
 SO ./assets/textures/wall_1.png
 WE ./assets/textures/wall_1.png
 EA ./assets/textures/wall_1.png
-DO ./assets/textures/door.png
+DO ./assets/textures/door.pn
 
 F 12,30,12
 C 10,10,40
