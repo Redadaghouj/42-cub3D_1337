@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_walls_utils_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 20:30:33 by mboutahi          #+#    #+#             */
-/*   Updated: 2025/10/06 10:43:20 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/06 12:32:22 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,6 @@ void	free_textures(t_scene *scene)
 		mlx_delete_texture(scene->tex_north);
 	if (scene->tex_south)
 		mlx_delete_texture(scene->tex_south);
+	if (scene->door_tex)
+		mlx_delete_texture(scene->door_tex);
 }

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 19:58:29 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/05 18:17:15 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/06 12:18:45 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D_bonus.h"
-#include <stdbool.h>
 
 bool	load_map(int fd, t_scene *scene)
 {
@@ -53,10 +52,8 @@ bool	check_elems_player(char **map, t_player *player, bool seen_player)
 {
 	int	i;
 	int	j;
-	int	seen_door;
 
 	i = -1;
-	seen_door = false;
 	while (map[++i])
 	{
 		if (map[i][0] == '\0')
