@@ -119,8 +119,8 @@ MLX_LIB     := $(MLX_BUILD)/libmlx42.a
 MLX_INCLUDE := -I$(MLX_DIR)/include
 
 ifeq ($(OS),Darwin)
-	# LFLAGS := -framework Cocoa -framework OpenGL -framework IOKit -L /Users/$(shell basename $(HOME))/.brew/opt/glfw/lib -lglfw
-    LFLAGS := -framework Cocoa -framework OpenGL -framework IOKit -L /goinfre/$(shell basename $(HOME))/homebrew/opt/glfw/lib -lglfw
+	LFLAGS := -framework Cocoa -framework OpenGL -framework IOKit -L /Users/$(shell basename $(HOME))/.brew/opt/glfw/lib -lglfw
+    # LFLAGS := -framework Cocoa -framework OpenGL -framework IOKit -L /goinfre/$(shell basename $(HOME))/homebrew/opt/glfw/lib -lglfw
 else
 	LFLAGS := -lglfw -lm -ldl -lGL
 endif
