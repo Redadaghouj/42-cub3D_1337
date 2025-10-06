@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rgb.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 03:05:03 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/24 19:57:13 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/10/06 11:31:16 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
-
-int	create_rgb(int r, int g, int b)
-{
-	return ((r << 16) | (g << 8) | b);
-}
 
 bool	clean_exit(char **buffer, char *line, bool exit_status)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 20:16:09 by mboutahi          #+#    #+#             */
-/*   Updated: 2025/10/06 10:42:29 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/06 11:17:41 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	calculate_wall_distance(t_player *player, t_wall_data *wall_data,
 				+ (1 - dda->step_y) / 2) / wall_data->ray_dir_y;
 }
 
-void	free_texures(t_scene *scene)
+void	free_textures(t_scene *scene)
 {
 	if (scene->tex_east)
 		mlx_delete_texture(scene->tex_east);

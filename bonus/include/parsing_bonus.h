@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 22:06:11 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/05 18:20:09 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/06 11:31:05 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,8 @@ typedef struct s_scene
 	mlx_texture_t	*tex_west;
 	mlx_texture_t	*tex_east;
 	mlx_texture_t	*door_tex;
-	mlx_texture_t	*gun_texture;
 	mlx_texture_t	*hands[16];
 	mlx_image_t		*last_hands;
-	mlx_image_t		*gun_image;
 	mlx_image_t		*img_north;
 	mlx_image_t		*img_south;
 	mlx_image_t		*img_west;
@@ -133,7 +131,6 @@ void	set_player_direction(t_player *player, char direction);
 
 /* PARSE_RGB */
 bool	parse_rgb(t_scene *scene, char *line, unsigned int id_type);
-int		create_rgb(int r, int g, int b);
 
 /* PARSE_MAP_UTILS */
 bool	is_in_bounds(char **map, int y, int x);

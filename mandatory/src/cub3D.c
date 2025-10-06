@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:04:11 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/06 10:44:47 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/06 11:27:06 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	main(int argc, char *argv[])
 		return (free_scene(&scene), EXIT_FAILURE);
 	}
 	if (!load_textures(&scene))
-		return (free_texures(&scene), 
+		return (free_textures(&scene), free_scene(&scene),
 			ft_putstr_fd("Error\nFailed to load some textures\n", 2),
 			EXIT_FAILURE);
 	create_images(mlx_v.mlx, &scene);

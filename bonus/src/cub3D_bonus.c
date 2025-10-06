@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:04:11 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/06 10:46:58 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/06 11:28:09 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool	load_textures(t_scene *scene)
 	scene->hands[14] = mlx_load_png("assets/textures/frame_14.png");
 	scene->hands[15] = mlx_load_png("assets/textures/frame_15.png");
 	if (!scene->tex_north || !scene->tex_south || !scene->tex_west
-		|| !scene->tex_east || !scene->door_tex || !scene->gun_texture)
+		|| !scene->tex_east || !scene->door_tex)
 		return (false);
 	return (true);
 }
@@ -60,18 +60,12 @@ void	create_images(mlx_t *mlx, t_scene *scene)
 		mlx_delete_texture(scene->door_tex);
 }
 
-void	ll()
-{
-	system("leaks -q cub3D");
-}
-
 int	main(int argc, char *argv[])
 {
 	t_scene		scene;
 	t_player	player;
 	t_mlxVar	mlx_v;
 
-	atexit(ll);
 	if (argc != 2)
 		return (exit_with_error(ERR_USAGE));
 	else if (!validate_scene(argv[1], &scene, &player))

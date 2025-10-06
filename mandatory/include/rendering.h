@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mboutahi <mboutahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 04:23:18 by redadgh           #+#    #+#             */
-/*   Updated: 2025/10/06 10:36:08 by mboutahi         ###   ########.fr       */
+/*   Updated: 2025/10/06 11:29:28 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,6 @@
 # define RENDERING_H
 
 # include "parsing.h"
-
-# define BASE_GUN_X 250
-# define BASE_GUN_Y 420
-
-# define RUN_FREQ 0.20f
-# define RUN_AMP_X 5
-# define RUN_AMP_Y 10
-
-# define IDLE_FREQ 0.1f
-# define IDLE_AMP_Y 2
 
 typedef struct s_dda_data
 {
@@ -70,7 +60,6 @@ void			calculate_ray_direction(double x, t_player *player,
 void			calculate_step_and_ray_mov(t_player *player,
 					t_wall_data *wall_data, t_dda_data *dda);
 void			perform_dda(t_scene *scene, t_dda_data *dda);
-void			close_doors(t_scene *scene, t_player *player);
 void			interact_with_door(t_scene *scene, t_player *player,
 					mlx_t *mlx);
 void			calculate_wall_distance(t_player *player,
@@ -88,7 +77,6 @@ void			draw_textured_wall(mlx_image_t *img, mlx_image_t *tex_img,
 void			draw_single_wall_column(mlx_image_t *img, t_scene *scene,
 					t_player *player, int x);
 void			draw_walls(mlx_image_t *img, t_scene *scene, t_player *player);
-void			draw_gun(t_game_data *game_data, bool is_moving);
 void			game_loop(void *param);
 void			key_hook(mlx_key_data_t keydata, void *param);
 int				render(t_player *player, t_scene *scene, mlx_t *mlx);
@@ -97,5 +85,5 @@ void			move_player_backward(t_player *player, char **map);
 void			move_player_left(t_player *player, char **map);
 void			move_player_right(t_player *player, char **map);
 bool			can_move_to(char **map, double new_x, double new_y);
-void			free_texures(t_scene *scene);
+void			free_textures(t_scene *scene);
 #endif
